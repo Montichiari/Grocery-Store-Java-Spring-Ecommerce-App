@@ -1,0 +1,10 @@
+services:
+  db:
+    image: 'mysql:latest'
+    env_file: './database/.env'
+    ports:
+      - '3306:3306'
+    volumes:
+      - commercedb:/data/db
+volumes:
+  commercedb:
