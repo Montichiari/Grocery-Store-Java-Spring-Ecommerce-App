@@ -3,7 +3,7 @@ Team 3's shopping cart CA
 
 ## Test Pull Requests
 1. Jared OK 
-2. Thina 
+2. Thina OK
 3. Hiroyo 
 4. Dion 
 5. Shengyi 
