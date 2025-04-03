@@ -7,4 +7,4 @@ Team 3's shopping cart CA
 3. Hiroyo 
 4. Dion 
 5. Shengyi 
-6. Ma Li
+6. Ma Li ok
