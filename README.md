@@ -8,4 +8,4 @@ Team 3's shopping cart CA
 3. Hiroyo 
 4. Dion OK
 5. Shengyi CHANGES
-6. Ma Li
+6. Ma Li ok
