@@ -8,6 +8,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+/**
+@author diony
+*/
+
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
 

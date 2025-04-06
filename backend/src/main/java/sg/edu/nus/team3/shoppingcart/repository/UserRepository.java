@@ -8,6 +8,12 @@ import org.springframework.data.repository.query.Param;
 
 import sg.edu.nus.team3.shoppingcart.model.User;
 
+/**
+@author diony
+*/
+
+
+
 public interface UserRepository extends JpaRepository<User, Integer> {
 
 	// Method to retrieve User from database where the input email matches a database entry

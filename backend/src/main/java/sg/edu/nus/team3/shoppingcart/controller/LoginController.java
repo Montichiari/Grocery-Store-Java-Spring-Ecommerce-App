@@ -11,6 +11,10 @@ import jakarta.servlet.http.HttpSession;
 import sg.edu.nus.team3.shoppingcart.model.User;
 import sg.edu.nus.team3.shoppingcart.service.UserService;
 
+/**
+@author diony
+*/
+
 @Controller
 public class LoginController {
 	

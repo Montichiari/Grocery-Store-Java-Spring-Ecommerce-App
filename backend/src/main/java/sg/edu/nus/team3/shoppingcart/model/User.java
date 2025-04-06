@@ -13,6 +13,10 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+/**
+@author diony
+*/
+
 @Entity
 @Table(name = "user")
 public class User {
