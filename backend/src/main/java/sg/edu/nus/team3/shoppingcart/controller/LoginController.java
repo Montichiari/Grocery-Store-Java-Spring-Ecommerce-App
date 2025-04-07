@@ -1,12 +1,14 @@
 package sg.edu.nus.team3.shoppingcart.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.servlet.http.HttpSession;
 import sg.edu.nus.team3.shoppingcart.model.User;
@@ -16,7 +18,7 @@ import sg.edu.nus.team3.shoppingcart.service.UserService;
 @author diony
 */
 
-@RestController
+@Controller
 @RequestMapping("/")
 public class LoginController {
 	
@@ -25,7 +27,7 @@ public class LoginController {
 
 	@GetMapping("/login")
 	public String login() {
-		//To insert: return view;
+		return "view";
 	}
 	
 	
@@ -35,11 +37,11 @@ public class LoginController {
 		// Log users in if email exists in database, and associated password matches
 		// on successful login, updates session with "username" and "role" attributes
 		
-		User user = userService.findUserByEmail("email");
-				
-		if (user != null && user.getPassword().equals(password)) {
+		Optional<User> user = userService.findUserByEmail("email");
+		
+		if (user != null && user.get().getPassword().equals(password)) {
 			session.setAttribute("username", username);
-			session.setAttribute("role", user.getRole());
+			session.setAttribute("role", user.get().getRole());
 			
 			return "redirect:/";
 		}
@@ -54,7 +56,7 @@ public class LoginController {
 		session.invalidate();
 		
 		
-		// To insert: return view;
+		return "view";
 	}
 	
 }

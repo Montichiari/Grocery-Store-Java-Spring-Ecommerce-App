@@ -1,5 +1,7 @@
 package sg.edu.nus.team3.shoppingcart.service;
 
+import java.util.Optional;
+
 import sg.edu.nus.team3.shoppingcart.model.User;
 
 /**
@@ -8,6 +10,6 @@ import sg.edu.nus.team3.shoppingcart.model.User;
 
 public interface UserService {
 	
-	public User findUserByEmail(String email);
+	public Optional<User> findUserByEmail(String email);
 
 }
