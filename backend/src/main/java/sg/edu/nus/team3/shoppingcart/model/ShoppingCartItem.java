@@ -44,4 +44,19 @@ public class ShoppingCartItem {
     public ShoppingCartItem viewItem() {
         return this;
     }
+
+	public Object getShoppingCart() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object getProduct() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Integer getQuantity() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
