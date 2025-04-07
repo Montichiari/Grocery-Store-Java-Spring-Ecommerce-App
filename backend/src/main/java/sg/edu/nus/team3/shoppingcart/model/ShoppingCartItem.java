@@ -29,6 +29,15 @@ public class ShoppingCartItem {
 
     private int quantity;
 
-    // 构造方法、Getter/Setter、toString() 等
-    // ...
+    public void addItemToCart(ShoppingCart cart, Product product, int quantity) {
+        this.shoppingCart = cart;
+        this.product = product;
+        this.quantity = quantity;
+        // 这里可能有额外的业务逻辑，如库存检查等
+    }
+
+    public ShoppingCartItem viewItem() {
+        return this;
+        // 或者返回一个包含必要信息的DTO
+    }
 }
