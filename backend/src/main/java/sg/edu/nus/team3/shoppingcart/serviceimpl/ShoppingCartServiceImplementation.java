@@ -9,7 +9,6 @@ import jakarta.transaction.Transactional;
 import sg.edu.nus.team3.shoppingcart.model.ShoppingCart;
 import sg.edu.nus.team3.shoppingcart.model.User;
 
-import sg.edu.nus.team3.shoppingcart.service.Product;
 import sg.edu.nus.team3.shoppingcart.service.ShoppingCartService;
 
 @Service
