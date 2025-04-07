@@ -9,73 +9,71 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-import sg.nus.iss.testshop.model.Product;
 
 @Entity
 @Table(name = "order")
 public class Order {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Getter @Setter
+	@Getter
+	@Setter
 	private int id;
-	
-	//ManyToOne(mappedBy = "order")
-	//@Getter @Setter
-	//private int customerId;
+
+	// ManyToOne(mappedBy = "order")
+	// @Getter @Setter
+	// private int customerId;
 	@ManyToOne
-	@Getter @Setter
+	@Getter
+	@Setter
 	private User user;
-	
-	@Getter @Setter
+	@Getter
+	@Setter
 	private LocalDateTime createAt;
-	@Getter @Setter
+	@Getter
+	@Setter
 	private LocalDate fulfilmentDate;
-	@Getter @Setter
+	@Getter
+	@Setter
 	private String status;
-	@Getter @Setter
+	@Getter
+	@Setter
 	private String paymentMethod;
-	
-	//@ManyToMany
-	//@JoinTable(name = "order_product", joinColumns = @JoinColumn(name = "order_id"), 
-	//	inverseJoinColumns = @JoinColumn(name = "product_id"))
+
+	// @ManyToMany
+	// @JoinTable(name = "order_product", joinColumns = @JoinColumn(name =
+	// "order_id"),
+	// inverseJoinColumns = @JoinColumn(name = "product_id"))
 	@OneToMany(mappedBy = "order")
-	@Getter @Setter
+	@Getter
+	@Setter
 	private List<OrderItem> orderItems;
 
-	//Empty constructor required by JPA
+	// Empty constructor required by JPA
 	public Order() {
-		this.orderItems = new ArrayList<>();//Initialize with an empty list
+		this.orderItems = new ArrayList<>();// Initialize with an empty list
 	}
-	
-	//Constructors
-	public Order(User user, LocalDateTime createAt, LocalDate fulfilmentDate, 
+
+	// Constructors
+	public Order(User user, LocalDateTime createAt, LocalDate fulfilmentDate,
 			String status, String paymentMethod, List<OrderItem> orderItems) {
-		
 		this.user = user;
 		this.createAt = createAt;
 		this.fulfilmentDate = fulfilmentDate;
 		this.status = status;
 		this.paymentMethod = paymentMethod;
 		this.orderItems = orderItems;
+	}
 
-	}
-	
 	public void setOrderItem(List<OrderItem> orderItems) {
-		this.orderItems= orderItems;
+		this.orderItems = orderItems;
 	}
-	
-	
-	//methods
-	
-	
+
+	// methods
 
 }

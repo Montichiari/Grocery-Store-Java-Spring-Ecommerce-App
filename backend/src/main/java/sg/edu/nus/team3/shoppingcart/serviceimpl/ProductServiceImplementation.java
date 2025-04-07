@@ -46,4 +46,9 @@ public class ProductServiceImplementation implements ProductService {
   public void deleteProductById(int product_id) {
     // TODO: Finish implementation of deleteProductById()
   }
+
+  public List<Product> searchProductByName(String product_name) {
+    // TODO: Finish implementation of searchProductByName
+    return new ArrayList<Product>();
+  }
 }

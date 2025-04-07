@@ -26,4 +26,20 @@ public class Product {
   @Setter
   private String category;
 
+  public Product(int id, String name, double unitPrice, int stock, String category) {
+    this.name = name;
+    this.unitPrice = unitPrice;
+    this.stock = stock;
+    this.category = category;
+  }
+
+  @Override
+  public boolean equals(Object comparator) {
+    if (!(comparator instanceof Product))
+      return false;
+    Product that = (Product) comparator;
+
+    return this.id == that.id && this.name == that.name && this.unitPrice == that.unitPrice && this.stock == that.stock
+        && this.category == that.category;
+  }
 }
