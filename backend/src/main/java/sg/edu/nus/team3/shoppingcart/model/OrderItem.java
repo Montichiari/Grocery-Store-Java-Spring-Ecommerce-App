@@ -1,7 +1,6 @@
-package OrderItem;
+package sg.edu.nus.team3.shoppingcart.model;
 
 import jakarta.persistence.*;
-import org.springframework.core.annotation.Order;
 
 @Entity
 @Table(name = "order_items")
