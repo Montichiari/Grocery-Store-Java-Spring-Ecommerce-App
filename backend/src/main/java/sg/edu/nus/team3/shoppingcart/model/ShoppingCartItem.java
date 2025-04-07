@@ -19,6 +19,8 @@ public class ShoppingCartItem {
     @Setter
     private int id;
 
+   
+    // shopping cart items is the owning side 
     @ManyToOne
     private ShoppingCart shoppingCart;
 
