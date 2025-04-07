@@ -1,7 +1,7 @@
 -- Delete any existing tables (to reset the database from scratch)
-DROP TABLE IF EXISTS OrderItem;
+DROP TABLE IF EXISTS Order_Item;
 DROP TABLE IF EXISTS `Order`;
-DROP TABLE IF EXISTS ShoppingCartItems;
+DROP TABLE IF EXISTS ShoppingCart_Item;
 DROP TABLE IF EXISTS ShoppingCart;
 DROP TABLE IF EXISTS Product;
 DROP TABLE IF EXISTS User;
@@ -33,15 +33,15 @@ CREATE TABLE Product (
 CREATE TABLE `Order` (
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT,
-    fulfillment_date DATETIME,
+    fulfilment_date DATETIME,
     status VARCHAR(50),
     payment_method VARCHAR(50),
     order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES User(id)
 );
 
--- Create OrderItem table (junction table for Order and Product)
-CREATE TABLE OrderItem (
+-- Create Order_Item table (junction table for Order and Product)
+CREATE TABLE Order_Item (
     id INT PRIMARY KEY AUTO_INCREMENT,
     order_id INT,
     product_id INT,
@@ -60,8 +60,8 @@ CREATE TABLE ShoppingCart (
     FOREIGN KEY (user_id) REFERENCES User(id)
 );
 
--- Create ShoppingCartItems table (junction table for ShoppingCart and Product)
-CREATE TABLE ShoppingCartItems (
+-- Create ShoppingCart_Item table (junction table for ShoppingCart and Product)
+CREATE TABLE ShoppingCart_Item (
     shopping_cart_id INT,
     product_id INT,
     quantity INT NOT NULL,
@@ -131,16 +131,16 @@ INSERT INTO ShoppingCart (user_id) VALUES
 UPDATE User SET cart_id = 1 WHERE id = 1;
 UPDATE User SET cart_id = 2 WHERE id = 2;
 
-INSERT INTO ShoppingCartItems (shopping_cart_id, product_id, quantity) VALUES
+INSERT INTO ShoppingCart_Item (shopping_cart_id, product_id, quantity) VALUES
 (1, 1, 1),
 (1, 2, 2),
 (2, 3, 3);
 
-INSERT INTO `Order` (user_id, fulfillment_date, status, payment_method) VALUES
+INSERT INTO `Order` (user_id, fulfilment_date, status, payment_method) VALUES
 (1, '2025-04-15 10:00:00', 'Processing', 'Credit Card'),
 (2, '2025-04-18 14:30:00', 'Shipped', 'PayPal');
 
-INSERT INTO OrderItem (order_id, product_id, quantity, unit_price) VALUES
+INSERT INTO Order_Item (order_id, product_id, quantity, unit_price) VALUES
 (1, 1, 1, 1200.00),
 (1, 2, 2, 25.00),
 (2, 3, 3, 20.00);
