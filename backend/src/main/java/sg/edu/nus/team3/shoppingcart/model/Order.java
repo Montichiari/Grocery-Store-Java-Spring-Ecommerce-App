@@ -13,6 +13,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 import sg.nus.iss.testshop.model.Product;
 
 @Entity
@@ -21,19 +23,26 @@ public class Order {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Getter @Setter
 	private int id;
 	
 	//ManyToOne(mappedBy = "order")
+	@Getter @Setter
 	private int customerId;
 	
+	@Getter @Setter
 	private LocalDateTime createAt;
+	@Getter @Setter
 	private LocalDate fulfillmentDate;
+	@Getter @Setter
 	private String status;
+	@Getter @Setter
 	private String paymentMethod;
 	
 	@ManyToMany
 	@JoinTable(name = "order_product", joinColumns = @JoinColumn(name = "order_id"), 
 		inverseJoinColumns = @JoinColumn(name = "product_id"))
+	@Getter @Setter
 	private List<Product> products;
 
 	//Empty constructor required by JPA
@@ -54,62 +63,8 @@ public class Order {
 
 	}
 	
-	//Getters and setters
-
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	
-	
-	public int getCustomerId() {
-		return customerId;
-	}
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
-	}
-
-	
-	public LocalDateTime getCreateAt() {
-		return createAt;
-	}
-	public void setCreateAt(LocalDateTime createAt) {
-		this.createAt = createAt;
-	}
-	
-	
-	public LocalDate getFulfillmentDate() {
-		return fulfillmentDate;
-	}
-	public void setFulfillmentDate(LocalDate fulfillmentDate) {
-		this.fulfillmentDate = fulfillmentDate;
-	}
-
-	
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	
-	
-	public String getPaymentMethod() {
-		return paymentMethod;
-	}
-	public void setPaymentMethod(String paymentMethod) {
-		this.paymentMethod = paymentMethod;
-	}
-	
-	
-	public List<Product> getProducts() {
-		return products;
-	}
-	public void setProducts(List<Product> products) {
-		this.products = products;
-	}
+	//methods
 	
 	
 
