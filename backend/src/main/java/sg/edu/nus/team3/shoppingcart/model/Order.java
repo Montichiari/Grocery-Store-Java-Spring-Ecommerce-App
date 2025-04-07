@@ -13,9 +13,11 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import sg.nus.iss.testshop.model.Product;
 
 @Entity
 @Table(name = "order")
@@ -42,28 +44,33 @@ public class Order {
 	@Getter @Setter
 	private String paymentMethod;
 	
-	@ManyToMany
-	@JoinTable(name = "order_product", joinColumns = @JoinColumn(name = "order_id"), 
-		inverseJoinColumns = @JoinColumn(name = "product_id"))
+	//@ManyToMany
+	//@JoinTable(name = "order_product", joinColumns = @JoinColumn(name = "order_id"), 
+	//	inverseJoinColumns = @JoinColumn(name = "product_id"))
+	@OneToMany(mappedBy = "order")
 	@Getter @Setter
-	private List<Product> products;
+	private List<OrderItem> orderItems;
 
 	//Empty constructor required by JPA
 	public Order() {
-		this.products = new ArrayList<>();//Initialize with an empty list
+		this.orderItems = new ArrayList<>();//Initialize with an empty list
 	}
 	
 	//Constructors
 	public Order(User user, LocalDateTime createAt, LocalDate fulfilmentDate, 
-			String status, String paymentMethod, List<Product> products) {
+			String status, String paymentMethod, List<OrderItem> orderItems) {
 		
 		this.user = user;
 		this.createAt = createAt;
 		this.fulfilmentDate = fulfilmentDate;
 		this.status = status;
 		this.paymentMethod = paymentMethod;
-		this.products = products;
+		this.orderItems = orderItems;
 
+	}
+	
+	public void setOrderItem(List<OrderItem> orderItems) {
+		this.orderItems= orderItems;
 	}
 	
 	
