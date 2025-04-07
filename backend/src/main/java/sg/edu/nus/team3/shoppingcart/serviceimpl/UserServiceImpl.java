@@ -1,5 +1,7 @@
 package sg.edu.nus.team3.shoppingcart.serviceimpl;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,11 +22,10 @@ public class UserServiceImpl implements UserService {
 	private UserRepository userRepo;
 	
 	@Override
-	public User findUserByEmail(String email) {
+	public Optional<User> findUserByEmail(String email) {
 		// TODO Auto-generated method stub
-		
-		
 		return userRepo.findUserByEmail(email);
+
 	}
 
 }
