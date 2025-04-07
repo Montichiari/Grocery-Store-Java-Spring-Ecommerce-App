@@ -15,18 +15,22 @@ public class ShoppingCartItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter @Setter
+    @Getter
+    @Setter
     private int id;
 
     @ManyToOne
-    @Getter @Setter
+    @Getter
+    @Setter
     private ShoppingCart shoppingCart;
 
     @ManyToOne
-    @Getter @Setter
+    @Getter
+    @Setter
     private Product product;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private int quantity;
 
     public void addItemToCart(ShoppingCart cart, Product product, int quantity) {
@@ -45,18 +49,18 @@ public class ShoppingCartItem {
         return this;
     }
 
-	public Object getShoppingCart() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public Object getShoppingCart() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	public Object getProduct() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public Object getProduct() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	public Integer getQuantity() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public Integer getQuantity() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }
