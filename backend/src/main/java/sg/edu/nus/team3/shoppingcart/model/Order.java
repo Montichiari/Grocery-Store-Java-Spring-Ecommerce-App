@@ -12,12 +12,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "orders")
+@Table(name = "order")
 public class Order {
 	
 	@Id
@@ -26,13 +27,16 @@ public class Order {
 	private int id;
 	
 	//ManyToOne(mappedBy = "order")
+	//@Getter @Setter
+	//private int customerId;
+	@ManyToOne
 	@Getter @Setter
-	private int customerId;
+	private User user;
 	
 	@Getter @Setter
 	private LocalDateTime createAt;
 	@Getter @Setter
-	private LocalDate fulfillmentDate;
+	private LocalDate fulfilmentDate;
 	@Getter @Setter
 	private String status;
 	@Getter @Setter
@@ -50,12 +54,12 @@ public class Order {
 	}
 	
 	//Constructors
-	public Order(int customerId, LocalDateTime createAt, LocalDate fulfillmentDate, 
+	public Order(User user, LocalDateTime createAt, LocalDate fulfilmentDate, 
 			String status, String paymentMethod, List<Product> products) {
 		
-		this.customerId = customerId;
+		this.user = user;
 		this.createAt = createAt;
-		this.fulfillmentDate = fulfillmentDate;
+		this.fulfilmentDate = fulfilmentDate;
 		this.status = status;
 		this.paymentMethod = paymentMethod;
 		this.products = products;
