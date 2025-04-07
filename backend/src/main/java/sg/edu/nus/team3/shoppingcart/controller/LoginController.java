@@ -32,16 +32,15 @@ public class LoginController {
 	
 	
 	@PostMapping("/login")
-	public String handleLogin(@RequestParam("email") String username, @RequestParam("password") String password, Model model, HttpSession session) {
+	public String handleLogin(@RequestParam("email") String email, @RequestParam("password") String password, Model model, HttpSession session) {
 		
 		// Log users in if email exists in database, and associated password matches
-		// on successful login, updates session with "username" and "role" attributes
+		// on successful login, updates session with "email" and "role" attributes
 		
-		Optional<User> user = userService.findUserByEmail("email");
-		
-		if (user != null && user.get().getPassword().equals(password)) {
-			session.setAttribute("username", username);
-			session.setAttribute("role", user.get().getRole());
+		if (userService.loginAttempt(email, password)) {
+			
+			session.setAttribute("email", email);
+			session.setAttribute("role", userService.findUserByEmail(email).get().getRole());
 			
 			return "redirect:/";
 		}
