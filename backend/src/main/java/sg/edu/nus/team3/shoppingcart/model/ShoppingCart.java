@@ -44,6 +44,7 @@ public class ShoppingCart {
 	
 	public void setShoppingCartItems(List<ShoppingCartItem>items) {
 		this.items = items; 
+	
 	}
 	
 	
