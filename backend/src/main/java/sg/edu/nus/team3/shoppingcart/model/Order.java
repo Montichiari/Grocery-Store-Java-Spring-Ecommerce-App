@@ -14,7 +14,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 public class Order {
 
 	@Id
@@ -23,12 +23,11 @@ public class Order {
 
 	@ManyToOne
 	private User user;
-	
+
 	private LocalDateTime createAt;
 	private LocalDate fulfilmentDate;
 	private String status;
 	private String paymentMethod;
-
 
 	@OneToMany(mappedBy = "order")
 	private List<OrderItem> orderItems;
@@ -104,8 +103,6 @@ public class Order {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-
 
 	// methods
 

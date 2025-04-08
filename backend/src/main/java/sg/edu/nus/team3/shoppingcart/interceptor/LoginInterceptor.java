@@ -9,8 +9,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 /**
-@author diony
-*/
+ * @author diony
+ */
 
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
@@ -25,16 +25,15 @@ public class LoginInterceptor implements HandlerInterceptor {
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		
-		
+
 		// Looks for email address in session attributes. If null, redirect to login.
-		HttpSession session = request.getSession();
-		
-		String username = (String) session.getAttribute("email");
-		
-		if (username == null) {
-			response.sendRedirect("/login");
-		}
+		// HttpSession session = request.getSession();
+
+		// String username = (String) session.getAttribute("email");
+
+		// if (username == null) {
+		// response.sendRedirect("/login");
+		// }
 	}
 
 	@Override
@@ -43,6 +42,5 @@ public class LoginInterceptor implements HandlerInterceptor {
 		// TODO Auto-generated method stub
 		HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
 	}
-	
-	
+
 }

@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import sg.edu.nus.team3.shoppingcart.model.Product;
 import sg.edu.nus.team3.shoppingcart.serviceimpl.ProductServiceImplementation;
 
+// @author Jared Chua
 @SpringBootTest(classes = ShoppingcartApplication.class)
 public class ProductTest {
   @Autowired

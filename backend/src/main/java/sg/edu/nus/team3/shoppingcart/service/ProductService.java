@@ -4,6 +4,7 @@ import java.util.List;
 
 import sg.edu.nus.team3.shoppingcart.model.Product;
 
+// @author Jared Chua
 public interface ProductService {
 
   public List<Product> searchProductById(int product_id);
