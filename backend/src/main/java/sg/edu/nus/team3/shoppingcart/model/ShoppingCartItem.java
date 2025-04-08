@@ -4,13 +4,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "shopping_cart_items")
+@Table(name = "shoppingcart_item")
 public class ShoppingCartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +23,7 @@ public class ShoppingCartItem {
     @Setter
     private ShoppingCart shoppingCart;
     @ManyToOne
+    @JoinColumn(name = "product_id")
     @Getter
     @Setter
     private Product product;
@@ -29,6 +31,8 @@ public class ShoppingCartItem {
     @Setter
     private int quantity;
 
+    
+    /*
     public void addItemToCart(ShoppingCart cart, Product product, int quantity) {
         // TODO: Remove exceptions, don't do it here
         if (cart == null || product == null) {
@@ -45,6 +49,8 @@ public class ShoppingCartItem {
     public ShoppingCartItem viewItem() {
         return this;
     }
+    
+    */
 
 	public Object getShoppingCart() {
 		// TODO Auto-generated method stub
