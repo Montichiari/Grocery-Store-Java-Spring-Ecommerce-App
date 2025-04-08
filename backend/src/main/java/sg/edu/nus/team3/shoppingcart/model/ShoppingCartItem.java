@@ -15,21 +15,44 @@ import lombok.Setter;
 public class ShoppingCartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
-    @Setter
     private int id;
     @ManyToOne
-    @Getter
-    @Setter
     private ShoppingCart shoppingCart;
     @ManyToOne
     @JoinColumn(name = "product_id")
-    @Getter
-    @Setter
     private Product product;
-    @Getter
-    @Setter
     private int quantity;
+    
+    public ShoppingCartItem() {
+    	
+    }
+    
+    
+    
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public ShoppingCart getShoppingCart() {
+		return shoppingCart;
+	}
+	public void setShoppingCart(ShoppingCart shoppingCart) {
+		this.shoppingCart = shoppingCart;
+	}
+	public Product getProduct() {
+		return product;
+	}
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 
     
     /*
@@ -52,19 +75,6 @@ public class ShoppingCartItem {
     
     */
 
-	public Object getShoppingCart() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Object getProduct() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public int getQuantity() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
+    
+    
 }

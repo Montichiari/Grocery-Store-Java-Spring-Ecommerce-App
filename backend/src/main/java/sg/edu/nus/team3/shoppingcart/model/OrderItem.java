@@ -9,26 +9,63 @@ import lombok.Setter;
 public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
     private int id;
-    @Getter
-    @Setter
     private int quantity;
     
     @Column(name = "transacted_unit_price")
-    @Getter
-    @Setter
     private double unitPrice;
     
     @ManyToOne
-    @Getter
-    @Setter
     private Order order;
     
     @ManyToOne
     @JoinColumn(name = "product_id")
-    @Getter
-    @Setter
     private Product product;
+    
+    public OrderItem() {
+    	
+    }
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public double getUnitPrice() {
+		return unitPrice;
+	}
+
+	public void setUnitPrice(double unitPrice) {
+		this.unitPrice = unitPrice;
+	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+    
+    
 
 }
