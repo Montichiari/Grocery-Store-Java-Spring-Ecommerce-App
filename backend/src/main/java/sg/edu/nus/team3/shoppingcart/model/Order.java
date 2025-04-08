@@ -25,9 +25,7 @@ public class Order {
 	@Setter
 	private int id;
 
-	// ManyToOne(mappedBy = "order")
-	// @Getter @Setter
-	// private int customerId;
+
 	@ManyToOne
 	@Getter
 	@Setter
@@ -45,10 +43,7 @@ public class Order {
 	@Setter
 	private String paymentMethod;
 
-	// @ManyToMany
-	// @JoinTable(name = "order_product", joinColumns = @JoinColumn(name =
-	// "order_id"),
-	// inverseJoinColumns = @JoinColumn(name = "product_id"))
+
 	@OneToMany(mappedBy = "order")
 	@Getter
 	@Setter
@@ -70,9 +65,7 @@ public class Order {
 		this.orderItems = orderItems;
 	}
 
-	public void setOrderItem(List<OrderItem> orderItems) {
-		this.orderItems = orderItems;
-	}
+
 
 	// methods
 
