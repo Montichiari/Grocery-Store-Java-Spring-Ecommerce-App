@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-public class AddToCartController {
+public class ShoppingCartController {
 
 	
 	
