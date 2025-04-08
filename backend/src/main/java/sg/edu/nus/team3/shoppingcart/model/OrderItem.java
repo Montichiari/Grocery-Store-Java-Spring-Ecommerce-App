@@ -14,12 +14,19 @@ public class OrderItem {
     @Getter
     @Setter
     private int quantity;
+    
+    @Column(name = "transacted_unit_price")
     @Getter
     @Setter
     private double unitPrice;
+    
+    @ManyToOne
     @Getter
     @Setter
     private Order order;
+    
+    @ManyToOne
+    @JoinColumn(name = "product_id")
     @Getter
     @Setter
     private Product product;
