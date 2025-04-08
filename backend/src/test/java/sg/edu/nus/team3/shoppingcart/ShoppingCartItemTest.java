@@ -24,7 +24,7 @@ class ShoppingCartItemTest {
     @BeforeEach
     void setUp() {
         shoppingCart = new ShoppingCart();
-        product = new Product();
+        product = new Product(0, null, 0, 0, null);
         shoppingCartItem = new ShoppingCartItem();
     }
 
