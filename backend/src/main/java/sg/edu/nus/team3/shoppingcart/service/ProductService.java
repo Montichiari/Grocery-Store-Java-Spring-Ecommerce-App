@@ -8,7 +8,6 @@ public interface ProductService {
 
   public List<Product> searchProductById(int product_id);
 
-  // ? Not necessary, as we can get Product data from searchProductById
   public double getProductPriceById(int product_id);
 
   public List<Product> getAllProducts();
