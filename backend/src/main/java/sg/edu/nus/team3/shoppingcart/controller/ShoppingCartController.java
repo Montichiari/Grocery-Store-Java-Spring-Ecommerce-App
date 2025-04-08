@@ -9,16 +9,14 @@ import sg.edu.nus.team3.shoppingcart.serviceimpl.ShoppingCartServiceImplementati
 @Controller
 public class ShoppingCartController {
 
-	// methods 
-	
+	// methods
+
 	@Autowired
-	private ShoppingCartService scservice; 
-	
+	private ShoppingCartService scservice;
+
 	@Autowired
-	public void setShoppingCartService(ShoppingCartServiceImplementation scserviceImpl)
-	{
-		this.scservice = scserviceImpl; 
+	public void setShoppingCartService(ShoppingCartServiceImplementation scserviceImpl) {
+		this.scservice = scserviceImpl;
 	}
-	
-	
+
 }

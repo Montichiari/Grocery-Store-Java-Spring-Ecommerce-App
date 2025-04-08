@@ -22,6 +22,7 @@ public class OrderItem {
     private Order order;
     @Getter
     @Setter
+    @ManyToOne
+    @JoinColumn(name = "product_id")
     private Product product;
-
 }
