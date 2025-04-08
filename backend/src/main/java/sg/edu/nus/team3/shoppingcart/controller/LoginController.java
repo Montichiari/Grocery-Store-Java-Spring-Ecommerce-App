@@ -25,7 +25,7 @@ public class LoginController {
 
 	@GetMapping("/login")
 	public String login() {
-		//To insert: return view;
+		//To insert:return "view";
 	}
 	
 	
@@ -52,9 +52,8 @@ public class LoginController {
 		
 	    // Deletes all information in current session, and locks users out of application till next login
 		session.invalidate();
-		
-		
-		// To insert: return view;
+
+		// To insert:return "view";
 	}
 	
 }
