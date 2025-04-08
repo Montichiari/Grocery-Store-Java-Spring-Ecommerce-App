@@ -6,11 +6,19 @@ import sg.edu.nus.team3.shoppingcart.model.Product;
 
 public interface ProductService {
 
-  public List<Product> searchProduct();
-  public double getPrice(int product_id);
+  public List<Product> searchProductById(int product_id);
+
+  // ? Not necessary, as we can get Product data from searchProductById
+  public double getProductPriceById(int product_id);
+
   public List<Product> getAllProducts();
+
   public void editProductById(int product_id, Product product);
+
   public void createProduct(Product product);
+
   public void deleteProductById(int product_id);
+
+  public List<Product> searchProductByName(String product_name);
 
 }

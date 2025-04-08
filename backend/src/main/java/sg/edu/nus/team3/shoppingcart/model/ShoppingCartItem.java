@@ -12,23 +12,53 @@ import lombok.Setter;
 @Entity
 @Table(name = "shopping_cart_items")
 public class ShoppingCartItem {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     @Setter
     private int id;
-
-   
-    // shopping cart items is the owning side 
     @ManyToOne
+    @Getter
+    @Setter
     private ShoppingCart shoppingCart;
-
     @ManyToOne
+    @Getter
+    @Setter
     private Product product;
-
+    @Getter
+    @Setter
     private int quantity;
 
-    // 构造方法、Getter/Setter、toString() 等
-    // ...
+    public void addItemToCart(ShoppingCart cart, Product product, int quantity) {
+        // TODO: Remove exceptions, don't do it here
+        if (cart == null || product == null) {
+            throw new IllegalArgumentException("购物车和商品不能为null");
+        }
+        if (quantity <= 0) {
+            throw new IllegalArgumentException("数量必须大于0");
+        }
+        this.shoppingCart = cart;
+        this.product = product;
+        this.quantity = quantity;
+    }
+
+    public ShoppingCartItem viewItem() {
+        return this;
+    }
+
+	public Object getShoppingCart() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object getProduct() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int getQuantity() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

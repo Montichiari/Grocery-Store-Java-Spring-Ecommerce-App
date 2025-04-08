@@ -1,7 +1,6 @@
 package sg.edu.nus.team3.shoppingcart.model;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -13,45 +12,39 @@ import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
 
-
-@Entity 
+@Entity
 public class ShoppingCart {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Getter @Setter 
+	@Getter
+	@Setter
 	private int id;
-	
-	@Getter @Setter
+
+	@Getter
+	@Setter
 	@OneToOne
-	private User user; 
-	
+	private User user;
+
 	@Getter
 	private String sessionId;
 
-	@OneToMany(mappedBy="shoppingCart")
-	// shopping cart items has the foreign key of shopping cart id 
-	private List<ShoppingCartItem> items; 
-	
-	@Getter @Setter
+	@OneToMany(mappedBy = "shoppingCart")
+	// shopping cart items has the foreign key of shopping cart id
+	private List<ShoppingCartItem> items;
+
+	@Getter
+	@Setter
 	private LocalDateTime upatedAt;
-	
-	
-	//getters and setters for shopping cart items 
-	public List<ShoppingCartItem> getShoppingCartItems(){
-		return items; 
+
+	// getters and setters for shopping cart items
+	public List<ShoppingCartItem> getShoppingCartItems() {
+		return items;
 	}
-	
-	public void setShoppingCartItems(List<ShoppingCartItem>items) {
-		this.items = items; 
+
+	public void setShoppingCartItems(List<ShoppingCartItem> items) {
+		this.items = items;
+
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }
