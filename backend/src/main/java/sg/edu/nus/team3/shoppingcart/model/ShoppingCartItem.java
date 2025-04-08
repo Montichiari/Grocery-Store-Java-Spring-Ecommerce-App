@@ -4,7 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -13,25 +12,25 @@ import lombok.Setter;
 @Entity
 @Table(name = "shopping_cart_items")
 public class ShoppingCartItem {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter @Setter
+    @Getter
+    @Setter
     private int id;
-
     @ManyToOne
-    @JoinColumn(name= "shopping_cart_id")
-    @Getter @Setter
+    @Getter
+    @Setter
     private ShoppingCart shoppingCart;
-
     @ManyToOne
-    @Getter @Setter
+    @Getter
+    @Setter
     private Product product;
-
-    @Getter @Setter
+    @Getter
+    @Setter
     private int quantity;
 
     public void addItemToCart(ShoppingCart cart, Product product, int quantity) {
+        // TODO: Remove exceptions, don't do it here
         if (cart == null || product == null) {
             throw new IllegalArgumentException("购物车和商品不能为null");
         }
@@ -57,8 +56,9 @@ public class ShoppingCartItem {
 		return null;
 	}
 
-	public Integer getQuantity() {
+	public int getQuantity() {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
+
 }
