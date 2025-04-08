@@ -26,6 +26,7 @@ public class ShoppingCart {
 	@Getter
 	@Setter
 	@OneToOne
+	(mappedBy = "cart")
 	private User user;
 
 
