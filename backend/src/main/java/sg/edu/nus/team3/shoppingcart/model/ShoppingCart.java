@@ -26,8 +26,7 @@ public class ShoppingCart {
 	@OneToOne
 	private User user;
 
-	@Getter
-	private String sessionId;
+
 
 	@OneToMany(mappedBy = "shoppingCart")
 	// shopping cart items has the foreign key of shopping cart id
