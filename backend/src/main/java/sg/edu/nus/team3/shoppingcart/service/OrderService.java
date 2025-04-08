@@ -8,8 +8,9 @@ import sg.edu.nus.team3.shoppingcart.model.OrderItem;
 
 public interface OrderService {
 	
-	List<Order> findAllOrder();
+	//List<Order> findAllOrder();
 
-	//Order createOrder(OrderItem orderItems);
+
+	Order createOrder(List<OrderItem> orderItems);
 
 }

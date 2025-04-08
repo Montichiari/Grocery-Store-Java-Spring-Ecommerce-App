@@ -61,7 +61,7 @@ public class User {
 	
 	private String role;
 	
-	@OneToOne (mappedBy = "user")
+	@OneToOne
 	private ShoppingCart cart;
 	
 	

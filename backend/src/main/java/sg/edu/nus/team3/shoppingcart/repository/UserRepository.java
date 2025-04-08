@@ -20,5 +20,5 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	@Query("SELECT u FROM User u WHERE u.email = :email")
 	public Optional<User> findUserByEmail(@Param("email") String email);
 	
-	public void registerUser(User user);
+	
 }
