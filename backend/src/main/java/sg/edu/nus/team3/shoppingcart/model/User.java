@@ -81,12 +81,13 @@ public class User {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.password = password;
+		this.shoppingCart = new ShoppingCart(this);
 		this.role = "Customer";
 	}
 
 	// Constructor Staff to create Staff OR Customer account
 	public User(String email, String handPhoneNo, String address, String firstName, String lastName, String password,
-			String role) {
+			String role, ShoppingCart shoppingCart) {
 		super();
 		this.email = email;
 		this.handPhoneNo = handPhoneNo;
@@ -95,6 +96,7 @@ public class User {
 		this.lastName = lastName;
 		this.password = password;
 		this.role = role;
+		this.shoppingCart = shoppingCart;
 	}
 
 	// Getters and setters

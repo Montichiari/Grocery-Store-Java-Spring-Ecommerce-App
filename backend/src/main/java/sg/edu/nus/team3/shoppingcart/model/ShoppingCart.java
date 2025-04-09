@@ -1,12 +1,15 @@
 package sg.edu.nus.team3.shoppingcart.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -32,6 +35,12 @@ public class ShoppingCart {
 
 	public ShoppingCart() {
 
+	}
+
+	public ShoppingCart(User user) {
+		this.user = user;
+		this.updatedAt = LocalDateTime.of(2023, 10, 15, 14, 30, 0);
+		this.items = new ArrayList<ShoppingCartItem>();
 	}
 
 	public ShoppingCart(int id, User user, List<ShoppingCartItem> items, LocalDateTime updatedAt) {
@@ -79,8 +88,8 @@ public class ShoppingCart {
 		return updatedAt;
 	}
 
-	public void setUpatedAt(LocalDateTime upatedAt) {
-		this.updatedAt = upatedAt;
+	public void setUpatedAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
 	@Override

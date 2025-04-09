@@ -41,20 +41,15 @@ public class ShoppingcartApplication {
 			System.out.println("--- Test persist each entity ---");
 
 			User alice = new User("alice.johnson@email.com", "91112233", "123 Oak Street, Anytown", "Alice", "Johnson",
-					"hashed_pw_aj", "customer");
+					"hashed_pw_aj");
 			Order order = new Order(alice, LocalDateTime.of(2023, 10, 15, 14, 30, 0), LocalDate.of(2023, 10, 15),
 					"Completed", "Credit Card", new ArrayList<OrderItem>());
 			Product product1 = new Product("Laptop", 21.3, 2, "Electronics");
 			OrderItem orderItem = new OrderItem(5, 2.1, order, product1);
-			ShoppingCart cart1 = new ShoppingCart(alice, new ArrayList<ShoppingCartItem>(),
-					LocalDateTime.of(2023, 10, 15, 14, 30, 0));
-			ShoppingCartItem cartItem = new ShoppingCartItem(cart1, product1, 5);
 
 			userRepo.save(alice);
 			orderRepo.save(order);
 			productRepo.save(product1);
-			cartRepo.save(cart1);
-			cartItemRepo.save(cartItem);
 			orderItemRepo.save(orderItem);
 
 			System.out.println("--- Test retrieve each entity ---");
