@@ -21,7 +21,6 @@ public class AdminController {
     @GetMapping("/")
     public ResponseEntity<List<Product>> getAllProducts() {
         List<Product> productList = productService.getAllProducts();
-        System.out.println(productList.size());
         return new ResponseEntity<>(productList, HttpStatus.OK);
     }
 }

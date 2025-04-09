@@ -32,8 +32,7 @@ public class ProductServiceImplementation implements ProductService {
   @Transactional
   public List<Product> getAllProducts() {
     // TODO: Finish implementation of getAllProducts()
-    List<Product> productList = productRepo.getProductList();
-    // System.out.println(productList.size());
+    List<Product> productList = productRepo.retrieveProductListFromProduct();
     return productList;
   }
 

@@ -27,6 +27,9 @@ public class Product {
 
   private String category;
 
+  public Product() {
+  }
+
   public Product(int id, String name, double unitPrice, int stock, String category) {
     this.name = name;
     this.unitPrice = unitPrice;
