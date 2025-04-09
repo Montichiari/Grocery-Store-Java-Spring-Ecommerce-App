@@ -63,6 +63,7 @@ public class User {
 	private String role;
 
 	@OneToOne
+	// ? Remove this if Dion's work
 	@JoinColumn(name = "shopping_cart_id")
 	private ShoppingCart cart;
 
