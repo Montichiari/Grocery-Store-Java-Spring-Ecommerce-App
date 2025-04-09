@@ -1,8 +1,10 @@
 package sg.edu.nus.team3.shoppingcart.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import sg.edu.nus.team3.shoppingcart.model.Product;
+import sg.edu.nus.team3.shoppingcart.model.ShoppingCart;
 import sg.edu.nus.team3.shoppingcart.model.ShoppingCartItem;
 import sg.edu.nus.team3.shoppingcart.model.User;
 
@@ -12,14 +14,13 @@ public interface ShoppingCartService {
 	// outline the methods but no need to define method body 
 	
 	
-	public void addProductToCart(User user_id, Product product_id); 
+	public void addShoppingCartItem(int user_id, int scart_item_id); 
 	
-	public void updateCartQuantity(int id, int quantity);
+	public List<ShoppingCartItem> viewShoppingCartItem(int user_id); 
 	
-	
-	public ArrayList<Product> viewCart();
+	public ShoppingCart createShoppingCart(int user_id); 
 
-	public void deleteCartQuantity(int id);
+	public void clearShoppingCart(int id);
 
 
 	
