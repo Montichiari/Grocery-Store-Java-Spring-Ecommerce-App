@@ -9,19 +9,17 @@ import lombok.Setter;
 public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
+    @Getter@Setter
     private int id;
-    @Getter
-    @Setter
+    @Getter@Setter
     private int quantity;
-    @Getter
-    @Setter
+    @Getter@Setter
     private double unitPrice;
-    @Getter
-    @Setter
+    @Getter@Setter
+    @ManyToOne
     private Order order;
-    @Getter
-    @Setter
+    @Getter@Setter
+    @ManyToOne
     private Product product;
 
 }
