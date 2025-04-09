@@ -1,5 +1,6 @@
 package sg.edu.nus.team3.shoppingcart.serviceimpl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +29,10 @@ public class OrderServiceImpl implements OrderService {
 	// public List<Order> findAllOrder() {
 	// return orderRepository.findAll();
 	// }
+	public List<Order> getWeeklyOrders() {
+		List<Order> orderList = orderRepository.findWeeklyOrders();
+		return orderList;
+	}
 
 	@Override
 	public Order createOrder(List<OrderItem> orderItems) {
