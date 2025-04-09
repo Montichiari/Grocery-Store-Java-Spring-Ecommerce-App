@@ -1,6 +1,7 @@
 package sg.edu.nus.team3.shoppingcart.serviceimpl;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,10 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import sg.edu.nus.team3.shoppingcart.model.Order;
 import sg.edu.nus.team3.shoppingcart.model.OrderItem;
-import sg.edu.nus.team3.shoppingcart.model.Product;
 import sg.edu.nus.team3.shoppingcart.repository.OrderRepository;
-import sg.edu.nus.team3.shoppingcart.repository.ProductRepository;
 import sg.edu.nus.team3.shoppingcart.service.OrderService;
+import sg.edu.nus.team3.shoppingcart.util.DateUtil;
 
 @Service
 @Transactional(readOnly = true)
@@ -22,21 +22,7 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private OrderRepository orderRepository;
 
-	@Autowired
-	private ProductRepository productRepository;
-
-	// @Override
-	// public List<Order> findAllOrder() {
-	// return orderRepository.findAll();
-	// }
-	public List<Order> getWeeklyOrders() {
-		List<Order> orderList = orderRepository.findWeeklyOrders();
-		return orderList;
-	}
-
-	@Override
 	public Order createOrder(List<OrderItem> orderItems) {
-
 		return new Order();
 		// Order order = new Order();
 
@@ -46,4 +32,20 @@ public class OrderServiceImpl implements OrderService {
 
 	}
 
+	public Optional<Order> getOrderById(int order_id) {
+		Optional<Order> order = orderRepository.findById(order_id);
+		return order;
+	}
+
+	public List<Order> getAllOrders() {
+		List<Order> orderList = orderRepository.findAll();
+		return orderList;
+	}
+
+	public List<Order> getWeeklyOrders() {
+		LocalDateTime startDate = DateUtil.convertToLocalDateTime(new Date());
+		LocalDateTime endDate = DateUtil.convertToLocalDateTime(DateUtil.subtractDays(new Date(), 7));
+		List<Order> orderList = orderRepository.findWeeklyOrders(startDate, endDate);
+		return orderList;
+	}
 }

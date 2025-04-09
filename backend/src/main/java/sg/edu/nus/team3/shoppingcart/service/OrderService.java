@@ -1,16 +1,17 @@
 package sg.edu.nus.team3.shoppingcart.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import sg.edu.nus.team3.shoppingcart.model.Order;
 import sg.edu.nus.team3.shoppingcart.model.OrderItem;
 
 public interface OrderService {
+	public Order createOrder(List<OrderItem> orderItems);
 
-	// List<Order> findAllOrder();
+	public Optional<Order> getOrderById(int order_id);
 
-	Order createOrder(List<OrderItem> orderItems);
+	public List<Order> getAllOrders();
 
-	// List<Order> getWeeklyOrders();
-
+	public List<Order> getWeeklyOrders();
 }

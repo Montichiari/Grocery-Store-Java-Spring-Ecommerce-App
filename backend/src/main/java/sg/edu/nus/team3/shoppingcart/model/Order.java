@@ -38,8 +38,6 @@ public class Order {
 	}
 
 	// Constructors
-	
-	
 
 	public List<OrderItem> getOrderItems() {
 		return orderItems;
