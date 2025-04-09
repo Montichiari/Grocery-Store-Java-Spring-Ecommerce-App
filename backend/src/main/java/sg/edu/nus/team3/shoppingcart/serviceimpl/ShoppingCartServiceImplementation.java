@@ -27,7 +27,7 @@ public class ShoppingCartServiceImplementation implements ShoppingCartService {
 	@Override
 	@Transactional
 	public List<ShoppingCartItem> viewShoppingCartItem(int user_id) {
-		// TODO Auto-generated method stub
+		// get user session id
 		return null;
 	}
 
