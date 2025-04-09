@@ -39,31 +39,44 @@ public class ShoppingcartApplication {
 		return args -> {
 
 			System.out.println("--- Test persist each entity ---");
-
-			User alice = new User("alice.johnson@email.com", "91112233", "123 Oak Street, Anytown", "Alice", "Johnson",
+			
+			User jimmy = new User("jimmy.johnson@email.com", "91112233", "123 Oak Street, Anytown", "Alice", "Johnson",
 					"hashed_pw_aj");
-			Order order = new Order(alice, LocalDateTime.of(2023, 10, 15, 14, 30, 0), LocalDate.of(2023, 10, 15),
-					"Completed", "Credit Card", new ArrayList<OrderItem>());
-			Product product1 = new Product("Laptop", 21.3, 2, "Electronics");
-			OrderItem orderItem = new OrderItem(5, 2.1, order, product1);
-
-			userRepo.save(alice);
-			// orderRepo.save(order);
-			// productRepo.save(product1);
-			// orderItemRepo.save(orderItem);
-
+			ShoppingCart cart1 = jimmy.getShoppingCart();
+			Product product2 = new Product("NINTENDO", 21.3, 2, "Electronics");
+			productRepo.save(product2);
+			Order orderJimmy = new Order(jimmy, LocalDateTime.of(2023, 10, 15, 14, 30, 0), LocalDate.of(2023, 10, 15), "Completed", "Credit Card");
+			ShoppingCartItem cartItem = new ShoppingCartItem(jimmy.getShoppingCart(), product2, 4);
+			OrderItem orderItem = new OrderItem(cartItem);
+			orderItem.setOrder(orderJimmy);
+			
+			userRepo.save(jimmy);
+			cartRepo.save(cart1);
+			orderRepo.save(orderJimmy);
+			productRepo.save(product2);
+			cartItemRepo.save(cartItem);
+			orderItemRepo.save(orderItem);
+			
 			System.out.println("--- Test retrieve each entity ---");
 
-			List<User> allUsers = userRepo.findAll();
-			List<Order> allOrders = orderRepo.findAll();
-			List<Product> allProducts = productRepo.findAll();
-			List<ShoppingCart> allShoppingCarts = cartRepo.findAll();
-			List<ShoppingCartItem> allShoppingCartItems = cartItemRepo.findAll();
-			List<OrderItem> allOrderItems = orderItemRepo.findAll();
-
-			// System.out.printf("Found ", allUsers.size(), allOrders.size(),
-			// allProducts.size(), allShoppingCarts.size(), allShoppingCartItems.size(),
-			// allOrderItems.size());
+			List<User> users = userRepo.findAll();
+			users.forEach(user -> System.out.println(user));
+			
+			List<ShoppingCart> carts = cartRepo.findAll();
+			carts.forEach(cart -> System.out.println(cart));
+			
+			List<Order> orders1 = orderRepo.findAll();
+			orders1.forEach(order1 -> System.out.println(order1));
+			
+			List<Product> products = productRepo.findAll();
+			products.forEach(product -> System.out.println(product));
+			
+			List<OrderItem> ordersItems = orderItemRepo.findAll();
+			ordersItems.forEach(ordersItem -> System.out.println(ordersItem));
+			
+			List<ShoppingCartItem> cartItems = cartItemRepo.findAll();
+			cartItems.forEach(cartitem -> System.out.println(cartitem));
+			
 		};
 	}
 }

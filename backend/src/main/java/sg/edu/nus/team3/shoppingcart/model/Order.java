@@ -38,18 +38,21 @@ public class Order {
 	}
 
 	// Constructors
-	public Order(User user, LocalDateTime createAt, LocalDate fulfilmentDate,
-			String status, String paymentMethod, List<OrderItem> orderItems) {
-		this.setUser(user);
-		this.setCreateAt(createAt);
-		this.setFulfilmentDate(fulfilmentDate);
-		this.setStatus(status);
-		this.setPaymentMethod(paymentMethod);
-		this.setOrderItems(orderItems);
-	}
+	
+	
 
 	public List<OrderItem> getOrderItems() {
 		return orderItems;
+	}
+
+	public Order(User user, LocalDateTime createAt, LocalDate fulfilmentDate, String status, String paymentMethod) {
+		super();
+		this.user = user;
+		this.createAt = createAt;
+		this.fulfilmentDate = fulfilmentDate;
+		this.status = status;
+		this.paymentMethod = paymentMethod;
+		this.orderItems = new ArrayList<OrderItem>();
 	}
 
 	public void setOrderItems(List<OrderItem> orderItems) {

@@ -33,6 +33,22 @@ public class OrderItem {
 		this.order = order;
 		this.product = product;
 	}
+    
+    public OrderItem(ShoppingCartItem cartItem, Order order) {
+		super();
+		this.quantity = cartItem.getQuantity();
+		this.unitPrice = cartItem.getProduct().getUnitPrice();
+		this.order = order;
+		this.product = cartItem.getProduct();
+	}
+    
+    // USE THIS IN CHECKOUT IMPLEMENTATION
+    public OrderItem(ShoppingCartItem cartItem) {
+		super();
+		this.quantity = cartItem.getQuantity();
+		this.unitPrice = cartItem.getProduct().getUnitPrice();
+		this.product = cartItem.getProduct();
+	}
 
 
 
