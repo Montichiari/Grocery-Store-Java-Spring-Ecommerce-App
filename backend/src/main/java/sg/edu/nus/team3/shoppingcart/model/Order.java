@@ -14,7 +14,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 public class Order {
 
 	@Id
@@ -23,12 +23,11 @@ public class Order {
 
 	@ManyToOne
 	private User user;
-	
+
 	private LocalDateTime createAt;
 	private LocalDate fulfilmentDate;
 	private String status;
 	private String paymentMethod;
-
 
 	@OneToMany(mappedBy = "order")
 	private List<OrderItem> orderItems;
@@ -39,18 +38,21 @@ public class Order {
 	}
 
 	// Constructors
-	public Order(User user, LocalDateTime createAt, LocalDate fulfilmentDate,
-			String status, String paymentMethod, List<OrderItem> orderItems) {
-		this.setUser(user);
-		this.setCreateAt(createAt);
-		this.setFulfilmentDate(fulfilmentDate);
-		this.setStatus(status);
-		this.setPaymentMethod(paymentMethod);
-		this.setOrderItems(orderItems);
-	}
+	
+	
 
 	public List<OrderItem> getOrderItems() {
 		return orderItems;
+	}
+
+	public Order(User user, LocalDateTime createAt, LocalDate fulfilmentDate, String status, String paymentMethod) {
+		super();
+		this.user = user;
+		this.createAt = createAt;
+		this.fulfilmentDate = fulfilmentDate;
+		this.status = status;
+		this.paymentMethod = paymentMethod;
+		this.orderItems = new ArrayList<OrderItem>();
 	}
 
 	public void setOrderItems(List<OrderItem> orderItems) {
@@ -105,7 +107,11 @@ public class Order {
 		this.id = id;
 	}
 
-
+	@Override
+	public String toString() {
+		return "Order [id=" + id + ", user=" + user + ", createAt=" + createAt + ", fulfilmentDate=" + fulfilmentDate
+				+ ", status=" + status + ", paymentMethod=" + paymentMethod + "]";
+	}
 
 	// methods
 

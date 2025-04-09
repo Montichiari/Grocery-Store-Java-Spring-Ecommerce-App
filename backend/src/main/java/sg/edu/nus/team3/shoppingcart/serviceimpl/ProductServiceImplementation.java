@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
 import sg.edu.nus.team3.shoppingcart.model.Product;
+import sg.edu.nus.team3.shoppingcart.repository.ProductRepository;
 import sg.edu.nus.team3.shoppingcart.service.ProductService;
 
 // @author Jared Chua
@@ -16,12 +17,11 @@ import sg.edu.nus.team3.shoppingcart.service.ProductService;
 public class ProductServiceImplementation implements ProductService {
 
   @Autowired
-  public Product productRepo;
+  public ProductRepository productRepo;
 
   public List<Product> searchProductById(int product_id) {
     // TODO: Finish implementation of searchProductById
-    List<Product> product = new ArrayList<Product>();
-    return product;
+    return new ArrayList<Product>();
   }
 
   public double getProductPriceById(int product_id) {
@@ -29,9 +29,11 @@ public class ProductServiceImplementation implements ProductService {
     return 0.0;
   }
 
+  @Transactional
   public List<Product> getAllProducts() {
     // TODO: Finish implementation of getAllProducts()
-    return new ArrayList<Product>();
+    List<Product> productList = productRepo.retrieveProductListFromProduct();
+    return productList;
   }
 
   public void createProduct(Product product) {

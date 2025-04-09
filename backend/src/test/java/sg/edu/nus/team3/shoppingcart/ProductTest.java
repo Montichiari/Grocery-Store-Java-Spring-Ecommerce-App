@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import sg.edu.nus.team3.shoppingcart.model.Product;
 import sg.edu.nus.team3.shoppingcart.serviceimpl.ProductServiceImplementation;
 
+// @author Jared Chua
 @SpringBootTest(classes = ShoppingcartApplication.class)
 public class ProductTest {
   @Autowired
@@ -87,9 +88,9 @@ public class ProductTest {
   @DisplayName("Should delete an existing product based on their ID")
   public void deleteProduct() {
     int productId = 99999;
+    List<Product> beforeDelete = productServiceImpl.searchProductById(productId);
     productServiceImpl.deleteProductById(productId);
-
     List<Product> getDeletedProduct = productServiceImpl.searchProductById(productId);
-    assertTrue(getDeletedProduct.size() == 0, "The product was not deleted successfully.");
+    assertTrue(!beforeDelete.equals(getDeletedProduct), "The product was not deleted successfully.");
   }
 }

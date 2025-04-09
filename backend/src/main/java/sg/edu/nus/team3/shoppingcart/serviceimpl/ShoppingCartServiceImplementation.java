@@ -1,6 +1,5 @@
 package sg.edu.nus.team3.shoppingcart.serviceimpl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +8,7 @@ import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional;
 import sg.edu.nus.team3.shoppingcart.model.ShoppingCart;
 import sg.edu.nus.team3.shoppingcart.model.ShoppingCartItem;
-import sg.edu.nus.team3.shoppingcart.model.User;
-
+import sg.edu.nus.team3.shoppingcart.repository.ShoppingCartRepository;
 import sg.edu.nus.team3.shoppingcart.service.ShoppingCartService;
 
 @Service
@@ -18,15 +16,12 @@ import sg.edu.nus.team3.shoppingcart.service.ShoppingCartService;
 public class ShoppingCartServiceImplementation implements ShoppingCartService {
 
 	@Autowired
-	ShoppingCart screpo;
+	ShoppingCartRepository screpo;
 
-	
 	@Override
 	@Transactional
 	public void addShoppingCartItem(int user_id, int scart_item_id) {
-		
-		
-		
+
 	}
 
 	@Override
@@ -45,9 +40,7 @@ public class ShoppingCartServiceImplementation implements ShoppingCartService {
 	@Override
 	public void clearShoppingCart(int id) {
 		// TODO Auto-generated method stub
-		
-	} 
-	
-	
+
+	}
 
 }
