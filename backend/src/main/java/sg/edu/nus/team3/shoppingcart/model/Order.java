@@ -104,6 +104,12 @@ public class Order {
 		this.id = id;
 	}
 
+	@Override
+	public String toString() {
+		return "Order [id=" + id + ", user=" + user + ", createAt=" + createAt + ", fulfilmentDate=" + fulfilmentDate
+				+ ", status=" + status + ", paymentMethod=" + paymentMethod + "]";
+	}
+
 	// methods
 
 }

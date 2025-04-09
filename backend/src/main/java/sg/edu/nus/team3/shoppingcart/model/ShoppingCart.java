@@ -19,12 +19,8 @@ public class ShoppingCart {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Getter
-	@Setter
 	private int id;
 
-	@Getter
-	@Setter
 	@OneToOne(mappedBy = "shoppingCart")
 	private User user;
 
@@ -32,18 +28,64 @@ public class ShoppingCart {
 	// shopping cart items has the foreign key of shopping cart id
 	private List<ShoppingCartItem> items;
 
-	@Getter
-	@Setter
 	private LocalDateTime updatedAt;
 
+	public ShoppingCart() {
+
+	}
+
+	public ShoppingCart(int id, User user, List<ShoppingCartItem> items, LocalDateTime updatedAt) {
+		super();
+		this.id = id;
+		this.user = user;
+		this.items = items;
+		this.updatedAt = updatedAt;
+	}
+
+	public ShoppingCart(User user, List<ShoppingCartItem> items, LocalDateTime updatedAt) {
+		super();
+		this.user = user;
+		this.items = items;
+		this.updatedAt = updatedAt;
+	}
+
 	// getters and setters for shopping cart items
-	public List<ShoppingCartItem> getShoppingCartItems() {
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public List<ShoppingCartItem> getItems() {
 		return items;
 	}
 
-	public void setShoppingCartItems(List<ShoppingCartItem> items) {
+	public void setItems(List<ShoppingCartItem> items) {
 		this.items = items;
+	}
 
+	public LocalDateTime getUpatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpatedAt(LocalDateTime upatedAt) {
+		this.updatedAt = upatedAt;
+	}
+
+	@Override
+	public String toString() {
+		return "ShoppingCart [id=" + id + ", user=" + user + ", updatedAt=" + updatedAt + "]";
 	}
 
 }

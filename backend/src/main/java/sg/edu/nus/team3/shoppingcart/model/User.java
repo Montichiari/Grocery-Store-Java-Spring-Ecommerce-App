@@ -179,6 +179,13 @@ public class User {
 		this.shoppingCart = shoppingCart;
 	}
 
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", email=" + email + ", handPhoneNo=" + handPhoneNo + ", address=" + address
+				+ ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password + ", role=" + role
+				+ ", shoppingCart=" + shoppingCart + "]";
+	}
+
 	// To update toString once other classes are created
 
 }

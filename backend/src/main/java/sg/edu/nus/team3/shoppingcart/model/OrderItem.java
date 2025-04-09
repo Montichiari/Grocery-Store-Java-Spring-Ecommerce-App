@@ -23,8 +23,20 @@ public class OrderItem {
     public OrderItem() {
 
     }
+    
+    
 
-    public int getId() {
+    public OrderItem(int quantity, double unitPrice, Order order, Product product) {
+		super();
+		this.quantity = quantity;
+		this.unitPrice = unitPrice;
+		this.order = order;
+		this.product = product;
+	}
+
+
+
+	public int getId() {
         return id;
     }
 
@@ -63,5 +75,16 @@ public class OrderItem {
     public void setProduct(Product product) {
         this.product = product;
     }
+
+
+
+	@Override
+	public String toString() {
+		return "OrderItem [id=" + id + ", quantity=" + quantity + ", unitPrice=" + unitPrice + ", order=" + order
+				+ ", product=" + product + "]";
+	}
+    
+    
+    
 
 }
