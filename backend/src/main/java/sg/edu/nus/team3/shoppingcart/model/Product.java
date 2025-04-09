@@ -1,6 +1,5 @@
 package sg.edu.nus.team3.shoppingcart.model;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,40 +10,67 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-// @author Jared Chua
 @Entity
-@Table(name = "product")
-@RequiredArgsConstructor
 public class Product {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Getter
   private int id;
-  @Getter
-  @Setter
-  @NotNull(message = "Name cannot be null")
+
   private String name;
-  @Getter
-  @Setter
-  @Positive(message = "Unit price of a product cannot be negative")
-  @Column(name = "unit_price")
+
   private double unitPrice;
-  @Getter
-  @Setter
-  @Positive(message = "Number of stock of a product cannot be negative")
+
   private int stock;
-  @Getter
-  @Setter
-  // TODO: Add custom ENUM validator here
+
   private String category;
 
   public Product(int id, String name, double unitPrice, int stock, String category) {
     this.name = name;
     this.unitPrice = unitPrice;
     this.stock = stock;
+    this.category = category;
+  }
+
+  public int getId() {
+    return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public double getUnitPrice() {
+    return unitPrice;
+  }
+
+  public void setUnitPrice(double unitPrice) {
+    this.unitPrice = unitPrice;
+  }
+
+  public int getStock() {
+    return stock;
+  }
+
+  public void setStock(int stock) {
+    this.stock = stock;
+  }
+
+  public String getCategory() {
+    return category;
+  }
+
+  public void setCategory(String category) {
     this.category = category;
   }
 

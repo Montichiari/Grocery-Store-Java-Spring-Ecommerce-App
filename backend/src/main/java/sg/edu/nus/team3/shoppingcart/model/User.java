@@ -63,9 +63,7 @@ public class User {
 	private String role;
 
 	@OneToOne
-	// ? Remove this if Dion's work
-	@JoinColumn(name = "shopping_cart_id")
-	private ShoppingCart cart;
+	private ShoppingCart shoppingCart;
 
 	// Constructors
 
@@ -173,12 +171,12 @@ public class User {
 		this.role = role;
 	}
 
-	public ShoppingCart getCart() {
-		return cart;
+	public ShoppingCart getShoppingCart() {
+		return shoppingCart;
 	}
 
-	public void setCart(ShoppingCart cart) {
-		this.cart = cart;
+	public void setShoppingCart(ShoppingCart shoppingCart) {
+		this.shoppingCart = shoppingCart;
 	}
 
 	// To update toString once other classes are created
