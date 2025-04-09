@@ -25,11 +25,8 @@ public class ShoppingCart {
 
 	@Getter
 	@Setter
-	@OneToOne
-	(mappedBy = "cart")
+	@OneToOne(mappedBy = "cart")
 	private User user;
-
-
 
 	@OneToMany(mappedBy = "shoppingCart")
 	// shopping cart items has the foreign key of shopping cart id
@@ -37,7 +34,7 @@ public class ShoppingCart {
 
 	@Getter
 	@Setter
-	private LocalDateTime upatedAt;
+	private LocalDateTime updatedAt;
 
 	// getters and setters for shopping cart items
 	public List<ShoppingCartItem> getShoppingCartItems() {

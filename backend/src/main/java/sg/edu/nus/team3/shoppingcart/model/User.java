@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -51,7 +52,7 @@ public class User {
 	@Column(name = "last_name", length = 35)
 	private String lastName;
 
-	@OneToMany(mappedBy = "id")
+	@OneToMany(mappedBy = "user")
 	private List<Order> orders;
 
 	@NotBlank(message = "Password is required")
@@ -62,6 +63,7 @@ public class User {
 	private String role;
 
 	@OneToOne
+	@JoinColumn(name = "shopping_cart_id")
 	private ShoppingCart cart;
 
 	// Constructors

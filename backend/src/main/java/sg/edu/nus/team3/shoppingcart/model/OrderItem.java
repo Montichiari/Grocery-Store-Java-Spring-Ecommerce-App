@@ -1,8 +1,6 @@
 package sg.edu.nus.team3.shoppingcart.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Table(name = "order_item")

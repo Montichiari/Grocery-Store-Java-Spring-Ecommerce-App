@@ -88,9 +88,9 @@ public class ProductTest {
   @DisplayName("Should delete an existing product based on their ID")
   public void deleteProduct() {
     int productId = 99999;
+    List<Product> beforeDelete = productServiceImpl.searchProductById(productId);
     productServiceImpl.deleteProductById(productId);
-
     List<Product> getDeletedProduct = productServiceImpl.searchProductById(productId);
-    assertTrue(getDeletedProduct.size() == 0, "The product was not deleted successfully.");
+    assertTrue(!beforeDelete.equals(getDeletedProduct), "The product was not deleted successfully.");
   }
 }

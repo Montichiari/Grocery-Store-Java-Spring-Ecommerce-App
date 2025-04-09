@@ -8,14 +8,13 @@ DROP TABLE IF EXISTS users;
 
 -- Create ShoppingCart table
 CREATE TABLE shoppingcart (
-  id INT PRIMARY KEY,
-  session_id VARCHAR(255),
+  id INT AUTO_INCREMENT PRIMARY KEY,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 -- Create User table
 CREATE TABLE users (
-  id INT PRIMARY KEY,
+  id INT AUTO_INCREMENT PRIMARY KEY,
   email VARCHAR(255) UNIQUE NOT NULL,
   shopping_cart_id INT UNIQUE NOT NULL,
   handphone_no VARCHAR(20),
@@ -28,7 +27,7 @@ CREATE TABLE users (
 );
 -- Create Product table
 CREATE TABLE product (
-  id INT PRIMARY KEY,
+  id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   unit_price FLOAT NOT NULL,
   category VARCHAR(100),
@@ -36,7 +35,7 @@ CREATE TABLE product (
 );
 -- Create Order table
 CREATE TABLE orders (
-  id INT PRIMARY KEY,
+  id INT AUTO_INCREMENT PRIMARY KEY,
   user_id INT,
   fulfilment_date DATE,
   status VARCHAR(50),
@@ -46,7 +45,7 @@ CREATE TABLE orders (
 );
 -- Create OrderItem table (junction table for Order and Product)
 CREATE TABLE order_item (
-  id INT PRIMARY KEY,
+  id INT AUTO_INCREMENT PRIMARY KEY,
   order_id INT,
   product_id INT,
   quantity INT NOT NULL,
@@ -56,11 +55,10 @@ CREATE TABLE order_item (
 );
 -- Create ShoppingCartItems table (junction table for ShoppingCart and Product)
 CREATE TABLE shoppingcart_item (
-  id INT,
+  id INT AUTO_INCREMENT PRIMARY KEY,
   product_id INT,
   shopping_cart_id INT,
   quantity INT NOT NULL,
-  PRIMARY KEY (shopping_cart_id, product_id),
   FOREIGN KEY (shopping_cart_id) REFERENCES shoppingcart(id),
   FOREIGN KEY (product_id) REFERENCES product(id)
 );
@@ -71,27 +69,27 @@ CREATE TABLE shoppingcart_item (
 -- =============================================
 -- shoppingcart Table (20 entries)
 -- =============================================
-INSERT INTO shoppingcart (id, session_id, updated_at) VALUES
-(1, 'sess_a1b2c3d4e5f6', '2023-10-26 10:00:00'),
-(2, 'sess_g7h8i9j0k1l2', '2023-10-26 10:05:00'),
-(3, 'sess_m3n4o5p6q7r8', '2023-10-26 10:10:00'),
-(4, 'sess_s9t0u1v2w3x4', '2023-10-26 10:15:00'),
-(5, 'sess_y5z6a7b8c9d0', '2023-10-26 10:20:00'),
-(6, 'sess_e1f2g3h4i5j6', '2023-10-26 10:25:00'),
-(7, 'sess_k7l8m9n0o1p2', '2023-10-26 10:30:00'),
-(8, 'sess_q3r4s5t6u7v8', '2023-10-26 10:35:00'),
-(9, 'sess_w9x0y1z2a3b4', '2023-10-26 10:40:00'),
-(10, 'sess_c5d6e7f8g9h0', '2023-10-26 10:45:00'),
-(11, 'sess_i1j2k3l4m5n6', '2023-10-26 10:50:00'),
-(12, 'sess_o7p8q9r0s1t2', '2023-10-26 10:55:00'),
-(13, 'sess_u3v4w5x6y7z8', '2023-10-26 11:00:00'),
-(14, 'sess_a9b0c1d2e3f4', '2023-10-26 11:05:00'),
-(15, 'sess_g5h6i7j8k9l0', '2023-10-26 11:10:00'),
-(16, 'sess_m1n2o3p4q5r6', '2023-10-26 11:15:00'),
-(17, 'sess_s7t8u9v0w1x2', '2023-10-26 11:20:00'),
-(18, 'sess_y3z4a5b6c7d8', '2023-10-26 11:25:00'),
-(19, 'sess_e9f0g1h2i3j4', '2023-10-26 11:30:00'),
-(20, 'sess_k5l6m7n8o9p0', '2023-10-26 11:35:00');
+INSERT INTO shoppingcart (id, updated_at) VALUES
+(1, '2023-10-26 10:00:00'),
+(2, '2023-10-26 10:05:00'),
+(3, '2023-10-26 10:10:00'),
+(4, '2023-10-26 10:15:00'),
+(5, '2023-10-26 10:20:00'),
+(6, '2023-10-26 10:25:00'),
+(7, '2023-10-26 10:30:00'),
+(8, '2023-10-26 10:35:00'),
+(9, '2023-10-26 10:40:00'),
+(10, '2023-10-26 10:45:00'),
+(11, '2023-10-26 10:50:00'),
+(12, '2023-10-26 10:55:00'),
+(13, '2023-10-26 11:00:00'),
+(14, '2023-10-26 11:05:00'),
+(15, '2023-10-26 11:10:00'),
+(16, '2023-10-26 11:15:00'),
+(17, '2023-10-26 11:20:00'),
+(18, '2023-10-26 11:25:00'),
+(19, '2023-10-26 11:30:00'),
+(20, '2023-10-26 11:35:00');
 
 -- =============================================
 -- product Table (50 entries)
