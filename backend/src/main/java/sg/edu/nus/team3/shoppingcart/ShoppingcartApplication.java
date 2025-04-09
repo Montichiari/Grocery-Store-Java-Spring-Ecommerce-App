@@ -48,19 +48,22 @@ public class ShoppingcartApplication {
 			OrderItem orderItem = new OrderItem(5, 2.1, order, product1);
 
 			userRepo.save(alice);
-			orderRepo.save(order);
-			productRepo.save(product1);
-			orderItemRepo.save(orderItem);
+			// orderRepo.save(order);
+			// productRepo.save(product1);
+			// orderItemRepo.save(orderItem);
 
 			System.out.println("--- Test retrieve each entity ---");
 
-			userRepo.findAll();
-			orderRepo.findAll();
-			productRepo.findAll();
-			cartRepo.findAll();
-			cartItemRepo.findAll();
-			orderItemRepo.findAll();
+			List<User> allUsers = userRepo.findAll();
+			List<Order> allOrders = orderRepo.findAll();
+			List<Product> allProducts = productRepo.findAll();
+			List<ShoppingCart> allShoppingCarts = cartRepo.findAll();
+			List<ShoppingCartItem> allShoppingCartItems = cartItemRepo.findAll();
+			List<OrderItem> allOrderItems = orderItemRepo.findAll();
 
+			// System.out.printf("Found ", allUsers.size(), allOrders.size(),
+			// allProducts.size(), allShoppingCarts.size(), allShoppingCartItems.size(),
+			// allOrderItems.size());
 		};
 	}
 }
