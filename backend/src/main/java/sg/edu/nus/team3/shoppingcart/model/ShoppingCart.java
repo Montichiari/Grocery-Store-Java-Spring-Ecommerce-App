@@ -94,7 +94,7 @@ public class ShoppingCart {
 
 	@Override
 	public String toString() {
-		return "ShoppingCart [id=" + id + ", user=" + user + ", updatedAt=" + updatedAt + "]";
+		return "ShoppingCart [id=" + id + ", updatedAt=" + updatedAt + "]";
 	}
 
 }
