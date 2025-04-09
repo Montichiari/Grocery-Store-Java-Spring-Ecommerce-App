@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import sg.edu.nus.team3.shoppingcart.model.Product;
 
-public interface ProductRepository extends JpaRepository<Integer, Product> {
+public interface ProductRepository extends JpaRepository<Product, Integer> {
 
 }

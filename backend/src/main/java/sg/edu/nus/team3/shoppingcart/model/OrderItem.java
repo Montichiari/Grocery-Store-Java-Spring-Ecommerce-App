@@ -25,8 +25,20 @@ public class OrderItem {
     public OrderItem() {
 
     }
+    
+    
 
-    public int getId() {
+    public OrderItem(int quantity, double unitPrice, Order order, Product product) {
+		super();
+		this.quantity = quantity;
+		this.unitPrice = unitPrice;
+		this.order = order;
+		this.product = product;
+	}
+
+
+
+	public int getId() {
         return id;
     }
 

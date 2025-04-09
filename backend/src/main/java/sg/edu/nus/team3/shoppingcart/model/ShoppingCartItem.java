@@ -29,6 +29,15 @@ public class ShoppingCartItem {
     
     
     
+	public ShoppingCartItem(ShoppingCart shoppingCart, Product product, int quantity) {
+		super();
+		this.shoppingCart = shoppingCart;
+		this.product = product;
+		this.quantity = quantity;
+	}
+
+
+
 	public int getId() {
 		return id;
 	}
