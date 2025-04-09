@@ -14,10 +14,10 @@ public interface ShoppingCartService {
 
 	public List<ShoppingCartItem> addShoppingCartItem(int user_id, int scart_item_id);
 
-	public List<ShoppingCartItem> viewShoppingCart(int user_id);
-
 	public ShoppingCart createShoppingCart(int user_id);
 
 	public void clearShoppingCart(int id);
+
+	public ShoppingCart findShoppingCartByUserEmail();
 
 }

@@ -29,9 +29,9 @@ public class ShoppingCartController {
     private ShoppingCartItemServiceImpl shoppingCartItemService;
 
     @GetMapping("/items")
-    public ResponseEntity<List<ShoppingCartItem>> getItemsInCart(HttpSession session) {
+    public ResponseEntity<ShoppingCart> getItemsInCart(HttpSession session) {
         session.getAttribute("email");
-        List<ShoppingCartItem> items = shoppingCartService.viewShoppingCart();
+        ShoppingCart items = shoppingCartService.findShoppingCartByUserEmail().getItems();
         return new ResponseEntity<>(items, HttpStatus.OK);
     }
 

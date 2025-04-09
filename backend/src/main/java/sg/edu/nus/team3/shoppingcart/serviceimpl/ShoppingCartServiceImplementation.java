@@ -10,6 +10,7 @@ import sg.edu.nus.team3.shoppingcart.model.ShoppingCart;
 import sg.edu.nus.team3.shoppingcart.model.ShoppingCartItem;
 import sg.edu.nus.team3.shoppingcart.repository.ShoppingCartRepository;
 import sg.edu.nus.team3.shoppingcart.service.ShoppingCartService;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -20,15 +21,18 @@ public class ShoppingCartServiceImplementation implements ShoppingCartService {
 
 	@Override
 	@Transactional
-	public void addShoppingCartItem(int user_id, int scart_item_id) {
+	public List<ShoppingCartItem> addShoppingCartItem(int user_id, int scart_item_id) {
+		return null;
 
 	}
 
 	@Override
 	@Transactional
-	public List<ShoppingCartItem> viewShoppingCartItem(int user_id) {
-		// get user session id
-		return null;
+	public ShoppingCart findShoppingCartByUserEmail() {
+
+		ShoppingCart user_shopping_cart = screpo.findShoppingCartByUserEmail("email");
+		return user_shopping_cart;
+
 	}
 
 	@Override
