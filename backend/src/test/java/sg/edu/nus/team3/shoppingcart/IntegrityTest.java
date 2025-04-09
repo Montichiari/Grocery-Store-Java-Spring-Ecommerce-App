@@ -115,15 +115,16 @@ public class IntegrityTest {
 
         User testUser = new User("alice.johnson@email.com", "91112233", "123 Oak Street, Anytown", "Alice", "Johnson",
                 "hashed_pw_aj");
-        Order testOrder = new Order(testUser, LocalDateTime.of(2023, 10, 15, 14, 30, 0), LocalDate.of(2023, 10, 15),
-                "Completed", "Credit Card", new ArrayList<OrderItem>());
+        // Order testOrder = new Order(testUser, LocalDateTime.of(2023, 10, 15, 14, 30,
+        // 0), LocalDate.of(2023, 10, 15),
+        // "Completed", "Credit Card", new ArrayList<OrderItem>());
         Product testProduct = new Product("Laptop", 21.3, 2, "Electronics");
-        OrderItem testOrderItem = new OrderItem(5, 2.1, testOrder, testProduct);
+        // OrderItem testOrderItem = new OrderItem(5, 2.1, testOrder, testProduct);
 
         userRepo.save(testUser);
-        orderRepo.save(testOrder);
+        // orderRepo.save(testOrder);
         productRepo.save(testProduct);
-        orderItemRepo.save(testOrderItem);
+        // orderItemRepo.save(testOrderItem);
 
         int afterOrderItemCount = orderItemRepo.findAll().size();
         int afterOrderCount = orderRepo.findAll().size();

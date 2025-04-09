@@ -31,53 +31,57 @@ public class ShoppingcartApplication {
 		SpringApplication.run(ShoppingcartApplication.class, args);
 	}
 
-	@Bean
-	CommandLineRunner runMe(UserRepository userRepo, OrderRepository orderRepo, ProductRepository productRepo,
-			ShoppingCartRepository cartRepo, ShoppingCartItemRepository cartItemRepo,
-			OrderItemRepository orderItemRepo) {
-
-		return args -> {
-
-			System.out.println("--- Test persist each entity ---");
-
-			User jimmy = new User("jimmy.johnson@email.com", "91112233", "123 Oak Street, Anytown", "Alice", "Johnson",
-					"hashed_pw_aj");
-			ShoppingCart cart1 = jimmy.getShoppingCart();
-			Product product2 = new Product("NINTENDO", 21.3, 2, "Electronics");
-			productRepo.save(product2);
-			Order orderJimmy = new Order(jimmy, LocalDateTime.of(2023, 10, 15, 14, 30, 0), LocalDate.of(2023, 10, 15),
-					"Completed", "Credit Card");
-			ShoppingCartItem cartItem = new ShoppingCartItem(jimmy.getShoppingCart(), product2, 4);
-			OrderItem orderItem = new OrderItem(cartItem);
-			orderItem.setOrder(orderJimmy);
-
-			userRepo.save(jimmy);
-			cartRepo.save(cart1);
-			orderRepo.save(orderJimmy);
-			productRepo.save(product2);
-			cartItemRepo.save(cartItem);
-			orderItemRepo.save(orderItem);
-
-			System.out.println("--- Test retrieve each entity ---");
-
-			List<User> users = userRepo.findAll();
-			users.forEach(user -> System.out.println(user));
-
-			List<ShoppingCart> carts = cartRepo.findAll();
-			carts.forEach(cart -> System.out.println(cart));
-
-			List<Order> orders1 = orderRepo.findAll();
-			orders1.forEach(order1 -> System.out.println(order1));
-
-			List<Product> products = productRepo.findAll();
-			products.forEach(product -> System.out.println(product));
-
-			List<OrderItem> ordersItems = orderItemRepo.findAll();
-			ordersItems.forEach(ordersItem -> System.out.println(ordersItem));
-
-			List<ShoppingCartItem> cartItems = cartItemRepo.findAll();
-			cartItems.forEach(cartitem -> System.out.println(cartitem));
-
-		};
-	}
+	// @Bean
+	// CommandLineRunner runMe(UserRepository userRepo, OrderRepository orderRepo,
+	// ProductRepository productRepo,
+	// ShoppingCartRepository cartRepo, ShoppingCartItemRepository cartItemRepo,
+	// OrderItemRepository orderItemRepo) {
+	//
+	// return args -> {
+	//
+	// System.out.println("--- Test persist each entity ---");
+	//
+	// User jimmy = new User("jimmy.johnson@email.com", "91112233", "123 Oak Street,
+	// Anytown", "Alice", "Johnson",
+	// "hashed_pw_aj");
+	// ShoppingCart cart1 = jimmy.getShoppingCart();
+	// Product product2 = new Product("NINTENDO", 21.3, 2, "Electronics");
+	// productRepo.save(product2);
+	// Order orderJimmy = new Order(jimmy, LocalDateTime.of(2023, 10, 15, 14, 30,
+	// 0), LocalDate.of(2023, 10, 15),
+	// "Completed", "Credit Card");
+	// ShoppingCartItem cartItem = new ShoppingCartItem(jimmy.getShoppingCart(),
+	// product2, 4);
+	// OrderItem orderItem = new OrderItem(cartItem);
+	// orderItem.setOrder(orderJimmy);
+	//
+	// userRepo.save(jimmy);
+	// cartRepo.save(cart1);
+	// orderRepo.save(orderJimmy);
+	// productRepo.save(product2);
+	// cartItemRepo.save(cartItem);
+	// orderItemRepo.save(orderItem);
+	//
+	// System.out.println("--- Test retrieve each entity ---");
+	//
+	// List<User> users = userRepo.findAll();
+	// users.forEach(user -> System.out.println(user));
+	//
+	// List<ShoppingCart> carts = cartRepo.findAll();
+	// carts.forEach(cart -> System.out.println(cart));
+	//
+	// List<Order> orders1 = orderRepo.findAll();
+	// orders1.forEach(order1 -> System.out.println(order1));
+	//
+	// List<Product> products = productRepo.findAll();
+	// products.forEach(product -> System.out.println(product));
+	//
+	// List<OrderItem> ordersItems = orderItemRepo.findAll();
+	// ordersItems.forEach(ordersItem -> System.out.println(ordersItem));
+	//
+	// List<ShoppingCartItem> cartItems = cartItemRepo.findAll();
+	// cartItems.forEach(cartitem -> System.out.println(cartitem));
+	//
+	// };
+	// }
 }
