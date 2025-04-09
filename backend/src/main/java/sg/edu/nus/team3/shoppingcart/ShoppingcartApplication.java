@@ -47,23 +47,18 @@ public class ShoppingcartApplication {
 			Product product1 = new Product("Laptop", 21.3, 2, "Electronics");
 			OrderItem orderItem = new OrderItem(5, 2.1, order, product1);
 
-			userRepo.save(alice);
+			// userRepo.save(alice);
 			// orderRepo.save(order);
 			// productRepo.save(product1);
 			// orderItemRepo.save(orderItem);
 
 			System.out.println("--- Test retrieve each entity ---");
-
-			List<User> allUsers = userRepo.findAll();
-			List<Order> allOrders = orderRepo.findAll();
-			List<Product> allProducts = productRepo.findAll();
-			List<ShoppingCart> allShoppingCarts = cartRepo.findAll();
-			List<ShoppingCartItem> allShoppingCartItems = cartItemRepo.findAll();
-			List<OrderItem> allOrderItems = orderItemRepo.findAll();
-
-			// System.out.printf("Found ", allUsers.size(), allOrders.size(),
-			// allProducts.size(), allShoppingCarts.size(), allShoppingCartItems.size(),
-			// allOrderItems.size());
+			if (userRepo.findAll().size() > 0 && orderRepo.findAll().size() > 0 && productRepo.findAll().size() > 0
+					&& cartRepo.findAll().size() > 0
+					&& cartItemRepo.findAll().size() > 0 && orderItemRepo.findAll().size() > 0)
+				System.out.println("--- Database is properly synced. ---");
+			else
+				System.out.println("One or more tables have missing data. Please check your database.");
 		};
 	}
 }
