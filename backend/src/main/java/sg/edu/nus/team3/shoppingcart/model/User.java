@@ -51,7 +51,7 @@ public class User {
 	@Column(name = "last_name", length = 35)
 	private String lastName;
 	
-	@OneToMany (mappedBy = "customer")
+	@OneToMany(mappedBy = "user")
 	private List<Order> orders;
 	
 	@NotBlank(message = "Password is required")
@@ -62,7 +62,7 @@ public class User {
 	private String role;
 	
 	@OneToOne
-	private ShoppingCart cart;
+	private ShoppingCart shoppingCart;
 	
 	
 	// Constructors
@@ -189,15 +189,15 @@ public class User {
 		this.role = role;
 	}
 
-
-	public ShoppingCart getCart() {
-		return cart;
+	public ShoppingCart getShoppingCart() {
+		return shoppingCart;
 	}
 
-
-	public void setCart(ShoppingCart cart) {
-		this.cart = cart;
+	public void setShoppingCart(ShoppingCart shoppingCart) {
+		this.shoppingCart = shoppingCart;
 	}
+	
+	
 
 
 	// To update toString once other classes are created

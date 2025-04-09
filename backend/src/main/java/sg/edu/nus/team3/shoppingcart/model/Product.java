@@ -1,29 +1,25 @@
 package sg.edu.nus.team3.shoppingcart.model;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-@RequiredArgsConstructor
+@Entity
 public class Product {
+	
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Getter
   private int id;
-  @Getter
-  @Setter
+
   private String name;
-  @Getter
-  @Setter
+
   private double unitPrice;
-  @Getter
-  @Setter
+
   private int stock;
-  @Getter
-  @Setter
+
   private String category;
 
   public Product(int id, String name, double unitPrice, int stock, String category) {
@@ -32,8 +28,70 @@ public class Product {
     this.stock = stock;
     this.category = category;
   }
+  
+  
 
-  @Override
+  public int getId() {
+	return id;
+}
+
+
+
+public void setId(int id) {
+	this.id = id;
+}
+
+
+
+public String getName() {
+	return name;
+}
+
+
+
+public void setName(String name) {
+	this.name = name;
+}
+
+
+
+public double getUnitPrice() {
+	return unitPrice;
+}
+
+
+
+public void setUnitPrice(double unitPrice) {
+	this.unitPrice = unitPrice;
+}
+
+
+
+public int getStock() {
+	return stock;
+}
+
+
+
+public void setStock(int stock) {
+	this.stock = stock;
+}
+
+
+
+public String getCategory() {
+	return category;
+}
+
+
+
+public void setCategory(String category) {
+	this.category = category;
+}
+
+
+
+@Override
   public boolean equals(Object comparator) {
     if (!(comparator instanceof Product))
       return false;

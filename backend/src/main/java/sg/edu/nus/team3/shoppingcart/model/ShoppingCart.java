@@ -25,8 +25,7 @@ public class ShoppingCart {
 
 	@Getter
 	@Setter
-	@OneToOne
-	(mappedBy = "cart")
+	@OneToOne (mappedBy = "shoppingCart")
 	private User user;
 
 
