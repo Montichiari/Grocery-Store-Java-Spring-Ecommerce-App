@@ -63,6 +63,15 @@ public class ShoppingCartItem {
 		this.quantity = quantity;
 	}
 
+
+
+	@Override
+	public String toString() {
+		return "ShoppingCartItem [id=" + id + ", shoppingCart=" + shoppingCart + ", product=" + product + ", quantity="
+				+ quantity + "]";
+	}
+	
+	
     
     /*
     public void addItemToCart(ShoppingCart cart, Product product, int quantity) {

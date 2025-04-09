@@ -78,4 +78,15 @@ public class OrderItem {
         this.product = product;
     }
 
+
+
+	@Override
+	public String toString() {
+		return "OrderItem [id=" + id + ", quantity=" + quantity + ", unitPrice=" + unitPrice + ", order=" + order
+				+ ", product=" + product + "]";
+	}
+    
+    
+    
+
 }

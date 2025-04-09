@@ -85,6 +85,12 @@ public class ShoppingCart {
 	public void setUpatedAt(LocalDateTime upatedAt) {
 		this.updatedAt = upatedAt;
 	}
+
+
+	@Override
+	public String toString() {
+		return "ShoppingCart [id=" + id + ", user=" + user + ", updatedAt=" + updatedAt + "]";
+	}
 	
 	
 
