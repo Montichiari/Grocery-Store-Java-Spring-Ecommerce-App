@@ -37,8 +37,7 @@ public class LoginController {
 		// on successful login, updates session with "email" and "role" attributes
 		
 		if (userService.loginAttempt(email, password)) {
-			
-			session.setAttribute("email", email);
+			session.setAttribute("id", userService.findUserByEmail(email).get().getId());
 			session.setAttribute("role", userService.findUserByEmail(email).get().getRole());
 			
 			return "redirect:/";
