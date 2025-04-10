@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import sg.edu.nus.team3.shoppingcart.model.Order;
 import sg.edu.nus.team3.shoppingcart.model.OrderItem;
+import sg.edu.nus.team3.shoppingcart.projections.OrderProjection;
 
 public interface OrderService {
 	public Order createOrder(List<OrderItem> orderItems);
@@ -13,5 +14,5 @@ public interface OrderService {
 
 	public List<Order> getAllOrders();
 
-	public List<Order> getWeeklyOrders();
+	public List<OrderProjection> getWeeklyOrders();
 }

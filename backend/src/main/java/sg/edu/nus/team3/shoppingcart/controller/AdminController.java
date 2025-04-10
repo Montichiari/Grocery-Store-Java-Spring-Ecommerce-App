@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import sg.edu.nus.team3.shoppingcart.model.Order;
 import sg.edu.nus.team3.shoppingcart.model.Product;
+import sg.edu.nus.team3.shoppingcart.projections.OrderProjection;
 import sg.edu.nus.team3.shoppingcart.serviceimpl.OrderServiceImpl;
 import sg.edu.nus.team3.shoppingcart.serviceimpl.ProductServiceImplementation;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,14 +41,20 @@ public class AdminController {
     }
 
     @GetMapping("/weekly-orders")
-    public ResponseEntity<List<Order>> getOrdersInWeek(@RequestParam String param) {
-        List<Order> ordersList = orderService.getWeeklyOrders();
+    public ResponseEntity<List<OrderProjection>> getOrdersInWeek() {
+        List<OrderProjection> ordersList = orderService.getWeeklyOrders();
         return new ResponseEntity<>(ordersList, HttpStatus.OK);
     }
 
     @PostMapping("/product")
-    public ResponseEntity<Product> createProduct(@RequestBody String entity) {
-        // TODO: process POST request
+    public ResponseEntity<Product> createProduct(@RequestBody Map<String, Object> product) {
+        String name = product.get("name").toString();
+        double unitPrice = (double) product.get("unitPrice");
+        int stock = (int) product.get("stock");
+        String category = product.get("category").toString();
+
+        Product productToSave = new Product(name, unitPrice, stock, category);
+        productService.createProduct(productToSave);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -63,8 +70,12 @@ public class AdminController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping("/product/{id}")
-    public ResponseEntity<Product> deleteProduct(@PathVariable int id) {
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+    // ! Delete not allowed, since there are old Orders tied to the products
+    // ! Consider performing a cascade action on affected orders to a placeholder
+    // ! product (e.g. "Product not available") before deletion
+    // @DeleteMapping("/product/{id}")
+    // public ResponseEntity<Product> deleteProduct(@PathVariable int id) {
+    // productService.deleteProductById(id);
+    // return new ResponseEntity<>(HttpStatus.OK);
+    // }
 }

@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import sg.edu.nus.team3.shoppingcart.model.Order;
+import sg.edu.nus.team3.shoppingcart.projections.OrderProjection;
 import sg.edu.nus.team3.shoppingcart.serviceimpl.OrderServiceImpl;
 import sg.edu.nus.team3.shoppingcart.util.DateUtil;
 
@@ -44,11 +45,11 @@ public class OrderServiceTest {
     public void retrieveOrdersInCurrentWeekTest() {
         Date today = new Date();
         Date weekBefore = DateUtil.subtractDays(today, 7);
-        List<Order> weeklyOrdersList = orderServiceImpl.getWeeklyOrders();
+        List<OrderProjection> weeklyOrdersList = orderServiceImpl.getWeeklyOrders();
 
         assertTrue(weeklyOrdersList.size() > 0, "There should be at least 1 order within the week");
 
-        for (Order order : weeklyOrdersList) {
+        for (OrderProjection order : weeklyOrdersList) {
             Date orderDate = DateUtil.convertToDate(order.getCreateAt());
             boolean isWithinWeek = DateUtil.isDateBetween(weekBefore, today, orderDate);
             assertTrue(isWithinWeek, "All orders should be within 7 days");

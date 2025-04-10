@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import sg.edu.nus.team3.shoppingcart.model.Order;
 import sg.edu.nus.team3.shoppingcart.model.OrderItem;
+import sg.edu.nus.team3.shoppingcart.projections.OrderProjection;
 import sg.edu.nus.team3.shoppingcart.repository.OrderRepository;
 import sg.edu.nus.team3.shoppingcart.service.OrderService;
 import sg.edu.nus.team3.shoppingcart.util.DateUtil;
@@ -42,10 +43,10 @@ public class OrderServiceImpl implements OrderService {
 		return orderList;
 	}
 
-	public List<Order> getWeeklyOrders() {
-		LocalDateTime startDate = DateUtil.convertToLocalDateTime(new Date());
-		LocalDateTime endDate = DateUtil.convertToLocalDateTime(DateUtil.subtractDays(new Date(), 7));
-		List<Order> orderList = orderRepository.findWeeklyOrders(startDate, endDate).get();
+	public List<OrderProjection> getWeeklyOrders() {
+		LocalDateTime endDate = DateUtil.convertToLocalDateTime(new Date());
+		LocalDateTime startDate = DateUtil.convertToLocalDateTime(DateUtil.subtractDays(new Date(), 7));
+		List<OrderProjection> orderList = orderRepository.findWeeklyOrders(startDate, endDate).get();
 		return orderList;
 	}
 }

@@ -20,10 +20,10 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     @Modifying
     @Transactional
-    @Query("UPDATE Product p SET p.name = :name, p.stock = :stock, p.unitPrice = :unit_price WHERE p.id = :productId")
+    @Query("UPDATE Product p SET p.name = :name, p.stock = :stock, p.unitPrice = :unit_price, p.category = :category WHERE p.id = :productId")
     public void updateProductById(@Param("productId") int product_id, @Param("name") String name,
             @Param("stock") int stock,
-            @Param("unit_price") double unit_price);
+            @Param("unit_price") double unit_price, @Param("category") String category);
 
     @Modifying
     @Transactional

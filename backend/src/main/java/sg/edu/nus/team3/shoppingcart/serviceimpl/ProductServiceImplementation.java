@@ -35,7 +35,8 @@ public class ProductServiceImplementation implements ProductService {
   }
 
   public void editProductById(int product_id, Product product) {
-    productRepo.updateProductById(product_id, product.getName(), product.getStock(), product.getUnitPrice());
+    productRepo.updateProductById(product_id, product.getName(), product.getStock(), product.getUnitPrice(),
+        product.getCategory());
   }
 
   public void deleteProductById(int product_id) {

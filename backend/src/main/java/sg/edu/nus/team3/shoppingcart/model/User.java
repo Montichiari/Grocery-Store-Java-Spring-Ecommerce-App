@@ -2,6 +2,9 @@ package sg.edu.nus.team3.shoppingcart.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -54,6 +57,7 @@ public class User {
 	private String lastName;
 
 	@OneToMany(mappedBy = "user")
+	@JsonBackReference("user-orders")
 	private List<Order> orders;
 
 	@NotBlank(message = "Password is required")
