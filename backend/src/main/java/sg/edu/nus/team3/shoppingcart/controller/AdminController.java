@@ -59,7 +59,7 @@ public class AdminController {
         String editedCategory = product.get("category").toString();
 
         Product editedProduct = new Product(editedName, editedUnitPrice, editedStock, editedCategory);
-        // productService.updateProduct(id, editedProduct);
+        productService.editProductById(id, editedProduct);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
