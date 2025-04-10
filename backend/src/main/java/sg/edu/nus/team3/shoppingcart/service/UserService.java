@@ -14,9 +14,8 @@ public interface UserService {
 	
 	public Optional<User> findUserById(int id);
 	
-	public void registerUser(String email, String passwordInput, String handPhoneNo, String address, String firstName, String lastName);
+	public User createUser (User user);
 	
 	public boolean loginAttempt(String email, String passwordInput);
-	
-	
+
 }

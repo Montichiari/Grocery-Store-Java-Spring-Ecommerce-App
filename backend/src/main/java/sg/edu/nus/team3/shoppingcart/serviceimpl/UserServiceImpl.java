@@ -31,6 +31,7 @@ public class UserServiceImpl implements UserService {
 
 	}
 
+	/*
 	@Override
 	public void registerUser(String email, String passwordInput, String handPhoneNo, String address, String firstName,
 			String lastName) {
@@ -50,6 +51,7 @@ public class UserServiceImpl implements UserService {
 		
 		userRepo.save(user);
 	}
+	*/
 
 	@Override
 	public boolean loginAttempt(String email, String passwordInput) {
@@ -65,6 +67,12 @@ public class UserServiceImpl implements UserService {
 	public Optional<User> findUserById(int id) {
 		// TODO Auto-generated method stub
 		return userRepo.findUserById(id);
+	}
+
+	@Override
+	public User createUser(User user) {
+		return userRepo.save(user);
+		
 	}
 
 }
