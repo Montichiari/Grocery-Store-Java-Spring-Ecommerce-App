@@ -32,6 +32,11 @@ public class LoginController {
 	@Autowired
 	private UserService userService;
 
+	// ONLY FOR TESTING REDIRECT**
+	@GetMapping("/login")
+	public ResponseEntity<?> loginRedirectInfo() {
+	    return ResponseEntity.ok(Map.of("message", "Redirected to login"));
+	}
 	
 	@PostMapping("/login")
 	public ResponseEntity<?> handleLogin(@Valid @RequestBody LoginRequest request, HttpSession session) {

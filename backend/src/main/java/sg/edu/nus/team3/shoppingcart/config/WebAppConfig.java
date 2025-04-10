@@ -14,8 +14,8 @@ public class WebAppConfig implements WebMvcConfigurer {
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		// Current interceptor implementation redirects to login from ALL URLs except Login itself, if not logged in.
-		registry.addInterceptor(loginInterceptor).addPathPatterns("/*").excludePathPatterns("/login");
+		// Current interceptor implementation redirects to login from cart and admin urls except Login itself, if not logged in.
+		registry.addInterceptor(loginInterceptor).addPathPatterns("/cart/**", "/admin/**").excludePathPatterns("/login");
 	}
 	
 	

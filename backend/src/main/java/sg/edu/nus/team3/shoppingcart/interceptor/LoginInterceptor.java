@@ -18,7 +18,16 @@ public class LoginInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		// TODO Auto-generated method stub
+		
+		 //Looks for email address in session attributes. If null, redirect to login.
+		 HttpSession session = request.getSession();
+
+		 Integer id = (Integer) session.getAttribute("id");
+
+		 if (id == null) {
+		 response.sendRedirect("/login");
+			return false;
+		 }
 		return true;
 	}
 
