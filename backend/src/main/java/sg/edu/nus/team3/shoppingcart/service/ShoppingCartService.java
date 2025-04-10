@@ -12,12 +12,16 @@ public interface ShoppingCartService {
 
 	// outline the methods but no need to define method body
 
-	public List<ShoppingCartItem> addShoppingCartItem(int user_id, int scart_item_id);
+	// public List<ShoppingCartItem> addShoppingCartItem(int user_id, int
+	// scart_item_id);
 
-	public ShoppingCart createShoppingCart(int user_id);
+	// public ShoppingCart createShoppingCart(int user_id);
 
-	public void clearShoppingCart(int id);
+	// public void clearShoppingCart(String email);
 
-	public ShoppingCart findShoppingCartByUserEmail();
+	// done but have not tested
+	public ShoppingCart findShoppingCartByUserId(int id);
+
+	// public void addProductToCart(User user_id, Product product_id);
 
 }

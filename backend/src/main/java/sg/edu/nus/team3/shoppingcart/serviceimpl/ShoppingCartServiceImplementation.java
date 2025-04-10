@@ -6,11 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
+import sg.edu.nus.team3.shoppingcart.model.Product;
 import sg.edu.nus.team3.shoppingcart.model.ShoppingCart;
 import sg.edu.nus.team3.shoppingcart.model.ShoppingCartItem;
 import sg.edu.nus.team3.shoppingcart.repository.ShoppingCartRepository;
 import sg.edu.nus.team3.shoppingcart.service.ShoppingCartService;
 import java.util.Optional;
+
+// @ authored by @thina 
 
 @Service
 @Transactional
@@ -19,32 +22,27 @@ public class ShoppingCartServiceImplementation implements ShoppingCartService {
 	@Autowired
 	ShoppingCartRepository screpo;
 
+	// @Override
+	// @Transactional
+	// public List<ShoppingCartItem> addShoppingCartItem(int user_id, int
+	// scart_item_id) {
+	// return null;
+
+	// }
+
 	@Override
 	@Transactional
-	public List<ShoppingCartItem> addShoppingCartItem(int user_id, int scart_item_id) {
-		return null;
+	public ShoppingCart findShoppingCartByUserId(int id) {
 
-	}
-
-	@Override
-	@Transactional
-	public ShoppingCart findShoppingCartByUserEmail() {
-
-		ShoppingCart user_shopping_cart = screpo.findShoppingCartByUserEmail("email");
+		ShoppingCart user_shopping_cart = screpo.findShoppingCartByUserId(id);
 		return user_shopping_cart;
 
 	}
 
-	@Override
-	public ShoppingCart createShoppingCart(int user_id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	// @Override
+	// public void clearShoppingCart(String email) {
+	// // find shopping cart by user email
 
-	@Override
-	public void clearShoppingCart(int id) {
-		// TODO Auto-generated method stub
-
-	}
+	// }
 
 }

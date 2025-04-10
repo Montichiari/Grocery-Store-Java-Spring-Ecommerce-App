@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 public interface ShoppingCartRepository extends JpaRepository<ShoppingCart, Integer> {
 
 	// find shopping cart by user id
-	@Query("SELECT s FROM ShoppingCart s WHERE s.user.email LIKE CONCAT('%', :email, '%')")
-	ShoppingCart findShoppingCartByUserEmail(String email);
+	@Query("SELECT s FROM ShoppingCart s WHERE s.user.id = :id")
+	ShoppingCart findShoppingCartByUserId(int id);
 
 }
