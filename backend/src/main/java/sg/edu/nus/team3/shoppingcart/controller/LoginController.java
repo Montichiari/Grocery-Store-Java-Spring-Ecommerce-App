@@ -30,11 +30,6 @@ public class LoginController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping("/login")
-	public String login() {
-		return "view";
-	}
-
 	
 	@PostMapping("/login")
 	public ResponseEntity<?> handleLogin(@RequestParam("email") String email, @RequestParam("password") String password, HttpSession session) {
@@ -43,13 +38,15 @@ public class LoginController {
 		// on successful login, updates session with "email" and "role" attributes
 		
 		if (userService.loginAttempt(email, password)) {
-			session.setAttribute("id", userService.findUserByEmail(email).get().getId());
+			session.setAttribute("id", (Integer) userService.findUserByEmail(email).get().getId());
 			session.setAttribute("role", userService.findUserByEmail(email).get().getRole());
 			
-			return ResponseEntity.ok(Map.of("message","Login successful"));
+			User user = userService.findUserByEmail(email).get();
+			
+			return new ResponseEntity<User>(user, HttpStatus.OK);
 		}
 		
-		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "k")));
+		return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
 	
 	
@@ -66,8 +63,8 @@ public class LoginController {
 		
 		try {
 			User newUser = userService.createUser(user);
-			
 			return new ResponseEntity<User> (newUser, HttpStatus.CREATED);
+			
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
 		}
@@ -80,7 +77,7 @@ public class LoginController {
 		session.invalidate();
 		
 		
-		return ResponseEntity.ok(Map.of("message", "Logged out"));
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	
