@@ -45,7 +45,7 @@ public class OrderServiceImpl implements OrderService {
 	public List<Order> getWeeklyOrders() {
 		LocalDateTime startDate = DateUtil.convertToLocalDateTime(new Date());
 		LocalDateTime endDate = DateUtil.convertToLocalDateTime(DateUtil.subtractDays(new Date(), 7));
-		List<Order> orderList = orderRepository.findWeeklyOrders(startDate, endDate);
+		List<Order> orderList = orderRepository.findWeeklyOrders(startDate, endDate).get();
 		return orderList;
 	}
 }
