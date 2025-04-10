@@ -32,6 +32,7 @@ public class ShoppingcartApplication {
 		SpringApplication.run(ShoppingcartApplication.class, args);
 	}
 	
+	/*
 	@Bean
 	CommandLineRunner runMe(UserService uSc) {
 		return args -> {
@@ -39,6 +40,7 @@ public class ShoppingcartApplication {
 			uSc.registerUser(jimmy);
 		};
 	}
+	*/
 
 	// @Bean
 	// CommandLineRunner runMe(UserRepository userRepo, OrderRepository orderRepo,
