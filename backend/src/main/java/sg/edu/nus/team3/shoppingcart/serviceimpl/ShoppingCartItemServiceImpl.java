@@ -37,6 +37,7 @@ public class ShoppingCartItemServiceImpl implements ShoppingCartItemService {
 		// save this new shopping cart item to the database
 		shoppingCartItemRepository.save(converted_product_to_shopping_cart_item);
 		return converted_product_to_shopping_cart_item;
+		// then put this shopping cart item into the shopping cart
 
 	}
 
