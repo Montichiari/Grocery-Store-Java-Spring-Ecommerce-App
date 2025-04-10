@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.servlet.http.HttpSession;
 import sg.edu.nus.team3.shoppingcart.model.User;
+import sg.edu.nus.team3.shoppingcart.model.dto.LoginRequest;
 import sg.edu.nus.team3.shoppingcart.service.UserService;
 
 /**
@@ -32,16 +33,16 @@ public class LoginController {
 
 	
 	@PostMapping("/login")
-	public ResponseEntity<?> handleLogin(@RequestParam("email") String email, @RequestParam("password") String password, HttpSession session) {
+	public ResponseEntity<?> handleLogin(@RequestBody LoginRequest request, HttpSession session) {
 		
 		// Log users in if email exists in database, and associated password matches
 		// on successful login, updates session with "email" and "role" attributes
 		
-		if (userService.loginAttempt(email, password)) {
-			session.setAttribute("id", (Integer) userService.findUserByEmail(email).get().getId());
-			session.setAttribute("role", userService.findUserByEmail(email).get().getRole());
+		if (userService.loginAttempt(request.getEmail(), request.getPassword())) {
+			session.setAttribute("id", (Integer) userService.findUserByEmail(request.getEmail()).get().getId());
+			session.setAttribute("role", userService.findUserByEmail(request.getEmail()).get().getRole());
 			
-			User user = userService.findUserByEmail(email).get();
+			User user = userService.findUserByEmail(request.getEmail()).get();
 			
 			return new ResponseEntity<User>(user, HttpStatus.OK);
 		}
@@ -50,6 +51,16 @@ public class LoginController {
 	}
 	
 	
+	@GetMapping("/status")
+	public ResponseEntity<?> checkLoginStatus(HttpSession session) {
+		Integer userId = (Integer) session.getAttribute("id");
+		
+		if (userId != null) {
+			return new ResponseEntity<Integer>((Integer) session.getAttribute("id"), HttpStatus.OK);
+		}
+		
+		return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+	}
 	
 	//public ResponseEntity<Map<String, Object>> checkLoginStatus(HttpSession session) {
 		//Object id = session.
