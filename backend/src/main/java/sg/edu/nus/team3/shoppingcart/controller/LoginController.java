@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import sg.edu.nus.team3.shoppingcart.model.User;
 import sg.edu.nus.team3.shoppingcart.model.dto.LoginRequest;
 import sg.edu.nus.team3.shoppingcart.service.UserService;
@@ -33,7 +34,7 @@ public class LoginController {
 
 	
 	@PostMapping("/login")
-	public ResponseEntity<?> handleLogin(@RequestBody LoginRequest request, HttpSession session) {
+	public ResponseEntity<?> handleLogin(@Valid @RequestBody LoginRequest request, HttpSession session) {
 		
 		// Log users in if email exists in database, and associated password matches
 		// on successful login, updates session with "email" and "role" attributes

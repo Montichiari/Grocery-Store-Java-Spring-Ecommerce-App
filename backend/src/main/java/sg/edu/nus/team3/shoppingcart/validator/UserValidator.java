@@ -15,8 +15,11 @@ public class UserValidator implements Validator {
 	}
 
 	@Override
-	public void validate(Object target, Errors errors) {
-		// TODO Auto-generated method stub
+	public void validate(Object obj, Errors errors) {
+		
+		
+		
+		
 		
 	}
 	

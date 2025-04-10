@@ -17,5 +17,11 @@ public interface UserService {
 	public User createUser (User user);
 	
 	public boolean loginAttempt(String email, String passwordInput);
-
+	
+	public boolean existsByEmail(String email);
+	
+	public void registerUser(String email, String passwordInput, String handPhoneNo, String address, String firstName,
+			String lastName);
+	
+	public void registerUser(User user);
 }

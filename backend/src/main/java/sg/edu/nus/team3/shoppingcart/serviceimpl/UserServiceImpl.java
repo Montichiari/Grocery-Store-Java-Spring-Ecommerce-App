@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import sg.edu.nus.team3.shoppingcart.exception.InvalidLoginException;
 import sg.edu.nus.team3.shoppingcart.model.User;
 import sg.edu.nus.team3.shoppingcart.repository.UserRepository;
 import sg.edu.nus.team3.shoppingcart.service.UserService;
@@ -16,7 +17,7 @@ import sg.edu.nus.team3.shoppingcart.service.UserService;
 */
 
 @Service
-@Transactional(readOnly = true)
+@Transactional
 public class UserServiceImpl implements UserService {
 	
 	@Autowired
@@ -31,7 +32,6 @@ public class UserServiceImpl implements UserService {
 
 	}
 
-	/*
 	@Override
 	public void registerUser(String email, String passwordInput, String handPhoneNo, String address, String firstName,
 			String lastName) {
@@ -51,16 +51,18 @@ public class UserServiceImpl implements UserService {
 		
 		userRepo.save(user);
 	}
-	*/
 
 	@Override
 	public boolean loginAttempt(String email, String passwordInput) {
 		
 		// Returns true of login attempt is successful when the user can be found by email and matches() returns true, and false if not
+		Optional<User> userOpt = userRepo.findUserByEmail(email);
 		
-		return userRepo.findUserByEmail(email)
-				.map(user -> passwordEncoder.matches(passwordInput, user.getPassword()))
-				.orElse(false);
+	    if (userOpt.isEmpty() || !passwordEncoder.matches(passwordInput, userOpt.get().getPassword())) {
+	        throw new InvalidLoginException("Invalid email or password");
+	    }
+		
+		return true;
 	}
 
 	@Override
@@ -73,6 +75,25 @@ public class UserServiceImpl implements UserService {
 	public User createUser(User user) {
 		return userRepo.save(user);
 		
+	}
+
+	@Override
+	public boolean existsByEmail(String email) {
+		Optional<User> userOpt = userRepo.findUserByEmail(email);
+		
+		if (userOpt.isEmpty()) {
+			return false;
+		}
+
+		return true;
+	}
+
+	@Override
+	public void registerUser(User user) {
+		String hashedPassword = passwordEncoder.encode(user.getPassword());
+		user.setPassword(hashedPassword);
+		
+		userRepo.save(user);
 	}
 
 }
