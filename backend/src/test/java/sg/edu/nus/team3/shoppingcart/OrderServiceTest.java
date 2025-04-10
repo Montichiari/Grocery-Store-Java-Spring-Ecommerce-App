@@ -20,6 +20,7 @@ public class OrderServiceTest {
     @Autowired
     private OrderServiceImpl orderServiceImpl;
 
+    // @author: Jared Chua
     @Test
     @DisplayName("Should return all orders in database")
     public void retrieveAllOrdersTest() {
@@ -27,6 +28,7 @@ public class OrderServiceTest {
         assertTrue(allOrdersList.size() > 0, "There should be more than 0 orders in the orders table");
     }
 
+    // @author: Jared Chua
     @Test
     @DisplayName("Should return one order by their id")
     public void retrieveOrderByIdTest() {
@@ -36,6 +38,7 @@ public class OrderServiceTest {
         assertTrue(orderToRetrieve.isPresent(), "There should be at least 1 order retrieved");
     }
 
+    // @author: Jared Chua
     @Test
     @DisplayName("Should return all the orders in the previous week")
     public void retrieveOrdersInCurrentWeekTest() {
