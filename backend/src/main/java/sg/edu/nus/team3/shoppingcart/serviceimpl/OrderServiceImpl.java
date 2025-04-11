@@ -1,8 +1,6 @@
 package sg.edu.nus.team3.shoppingcart.serviceimpl;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +28,11 @@ public class OrderServiceImpl implements OrderService {
 	public List<Order> findAllOrder() {
 		return orderRepository.findAll();
 	}
+	
+	@Override
+	public Order saveOrder(Order order) {
+		return orderRepository.save(order);
+	}
 
 	//Pre-create order, for reviewing and selecting payment method before checking out
 	@Override
@@ -47,47 +50,28 @@ public class OrderServiceImpl implements OrderService {
 	
 	
 	@Override
-	public Order createOrder(Order order, User user) {
-		
-		//Order items are already in Order from preCreateOrder
-		
-		//May not need this? Can be done in SQL?
-		LocalDateTime now = LocalDateTime.now();
-		order.setCreateAt(now);
-		
-		order.setStatus("PAID");
-		
+	public void updateProductStock(Order order) {
 		//Iterate through OrderItem list
 		for (OrderItem item : order.getOrderItems()) {
 			
 			//Fetch the product by ID
-			Optional<Product> optionalProduct 
-				= productRepository.findById(item.getProduct().getId());
+			Product checkProduct = productRepository.findById(item.getProduct().getId())
+					.orElseThrow(() -> new RuntimeException("Product not found: " + item.getProduct().getId()));
 			
 			//Check to make sure we have the product
-			if (optionalProduct.isPresent()) {
-				
-				Product product = optionalProduct.get();
-				
-				if (product.getStock() >= item.getQuantity()) {
-					
-					//Remove from product if there's enough stock
-					product.setStock(product.getStock() - item.getQuantity());
-					
-				} else {
-					//throw exception - product stock not enough
-				}
-				
-			} else {
-				//throw exception - product not found
+			if (checkProduct.getStock() < item.getQuantity()) {
+				throw new RuntimeException("Not enough stock: " + checkProduct.getId());
 			}
 			
+			//Remove from product if there's enough stock
+			checkProduct.setStock(checkProduct.getStock() - item.getQuantity());
+			
+			//Save updated product
+			productRepository.save(checkProduct);
 		}
-		return orderRepository.save(order);
-		//return order;
+	}
 			
 
-	}
 	
 	/* no need?
 	@Override
@@ -111,18 +95,11 @@ public class OrderServiceImpl implements OrderService {
 		for (OrderItem item: orderItems) {
 			
 			//Fetch the product by ID
-			Optional<Product> optionalProduct = productRepository.findById(item.getProduct().getId());
+			Product checkProduct = productRepository.findById(item.getProduct().getId())
+					.orElseThrow(() -> new RuntimeException("Product not found: " + item.getProduct().getId()));
 			
-			//Check to make sure we have the product
-			if (optionalProduct.isPresent()) {
-				
-				Product product = optionalProduct.get();
-				
-				totalPrice += product.getUnitPrice()*item.getQuantity();
-				
-			} else {
-				//throw exception - product not found
-			}
+			totalPrice += checkProduct.getUnitPrice()*item.getQuantity();
+			
 		}
 		return totalPrice;
 	}
@@ -134,14 +111,8 @@ public class OrderServiceImpl implements OrderService {
 		Order orderToCheck = orderRepository.findById(id)
 				.orElseThrow(() -> new RuntimeException("Order not found"));
 		return orderToCheck;
-		//return List<Order> orderRepository.findById(id);
-		//		.orElseThrow(() -> new RuntimeException("Order not found"));
 	}
-	//@Override
-	//public User getUserByOrderId(int id) {
-	//	return or
-	//}
-	
+
 	
 	
 	//List all orders by user?

@@ -60,5 +60,12 @@ public class UserServiceImpl implements UserService {
 				.map(user -> passwordEncoder.matches(passwordInput, user.getPassword()))
 				.orElse(false);
 	}
+	
+	
+	//temporary method?
+	@Override
+	public User findUserById(int userId) {
+		return userRepo.findById(userId).orElse(null);
+	}
 
 }

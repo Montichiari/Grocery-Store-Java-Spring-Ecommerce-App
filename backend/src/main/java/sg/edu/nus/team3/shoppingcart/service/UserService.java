@@ -15,4 +15,7 @@ public interface UserService {
 	public void registerUser(String email, String passwordInput, String handPhoneNo, String address, String firstName, String lastName);
 	
 	public boolean loginAttempt(String email, String passwordInput);
+	
+	//temporary?
+	public User findUserById(int userId);
 }

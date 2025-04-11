@@ -2,6 +2,9 @@ package sg.edu.nus.team3.shoppingcart.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,6 +23,7 @@ import jakarta.validation.constraints.Size;
  */
 
 @Entity
+@JsonIgnoreProperties({"order"})		//Ignore "order" during serialization (i.e. prevent loops in json)
 @Table(name = "users")
 public class User {
 
