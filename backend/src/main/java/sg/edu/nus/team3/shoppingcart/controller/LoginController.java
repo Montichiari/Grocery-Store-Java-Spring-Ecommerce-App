@@ -18,6 +18,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import sg.edu.nus.team3.shoppingcart.model.User;
 import sg.edu.nus.team3.shoppingcart.model.dto.LoginRequest;
+import sg.edu.nus.team3.shoppingcart.model.dto.RegisterRequest;
 import sg.edu.nus.team3.shoppingcart.service.UserService;
 
 /**
@@ -26,17 +27,11 @@ import sg.edu.nus.team3.shoppingcart.service.UserService;
 
 @RestController
 @CrossOrigin()
-@RequestMapping("/")
+@RequestMapping("/user")
 public class LoginController {
 	
 	@Autowired
 	private UserService userService;
-
-	// ONLY FOR TESTING REDIRECT**
-	@GetMapping("/login")
-	public ResponseEntity<?> loginRedirectInfo() {
-	    return ResponseEntity.ok(Map.of("message", "Redirected to login"));
-	}
 	
 	@PostMapping("/login")
 	public ResponseEntity<?> handleLogin(@Valid @RequestBody LoginRequest request, HttpSession session) {
@@ -44,7 +39,7 @@ public class LoginController {
 		// Log users in if email exists in database, and associated password matches
 		// on successful login, updates session with "email" and "role" attributes
 		
-		if (userService.loginAttempt(request.getEmail(), request.getPassword())) {
+		if (userService.loginAttempt(request)) {
 			session.setAttribute("id", (Integer) userService.findUserByEmail(request.getEmail()).get().getId());
 			session.setAttribute("role", userService.findUserByEmail(request.getEmail()).get().getRole());
 			
@@ -72,14 +67,29 @@ public class LoginController {
 		//Object id = session.
 	//}
 	
-	@PostMapping("/register")
-	public ResponseEntity<User> createUser(@RequestBody User user) {
+	@PostMapping("/register-customer")
+	public ResponseEntity<User> registerCustomer(@Valid @RequestBody RegisterRequest request) {
 		
 		// Log users in if email exists in database, and associated password matches
 		// on successful login, updates session with "email" and "role" attributes
 		
 		try {
-			User newUser = userService.createUser(user);
+			User newUser = userService.registerCustomer(request);
+			return new ResponseEntity<User> (newUser, HttpStatus.CREATED);
+			
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+		}
+	}
+	
+	@PostMapping("/register-staff")
+	public ResponseEntity<User> registerStaff(@Valid @RequestBody RegisterRequest request) {
+		
+		// Log users in if email exists in database, and associated password matches
+		// on successful login, updates session with "email" and "role" attributes
+		
+		try {
+			User newUser = userService.registerStaff(request);
 			return new ResponseEntity<User> (newUser, HttpStatus.CREATED);
 			
 		} catch (Exception e) {
