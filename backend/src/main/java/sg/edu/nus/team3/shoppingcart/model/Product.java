@@ -93,13 +93,12 @@ public class Product {
 
     return this.id == that.id && this.name == that.name && this.unitPrice == that.unitPrice && this.stock == that.stock
         && this.category == that.category;
-    
-    
+
   }
 
-@Override
-public String toString() {
-	return "Product [id=" + id + ", name=" + name + ", unitPrice=" + unitPrice + ", stock=" + stock + ", category="
-			+ category + "]";
-}
+  @Override
+  public String toString() {
+    return "Product [id=" + id + ", name=" + name + ", unitPrice=" + unitPrice + ", stock=" + stock + ", category="
+        + category + "]";
+  }
 }
