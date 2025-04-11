@@ -9,7 +9,9 @@ public class RegisterRequest {
 		private String handPhoneNo;
 		private String address;
 		
-		
+		public RegisterRequest() {
+			
+		}
 		
 		
 		public String getEmail() {

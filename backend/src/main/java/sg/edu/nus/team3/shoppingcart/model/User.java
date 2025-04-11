@@ -71,7 +71,8 @@ public class User {
 
 	// Empty Constructor
 	public User() {
-
+		
+		this.shoppingCart = new ShoppingCart(this);
 	}
 
 	// Constructor for new Users. Role is set by UserService, depending on creation URL.

@@ -1,6 +1,7 @@
 package sg.edu.nus.team3.shoppingcart.controller;
 
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,15 +37,17 @@ public class LoginController {
 	@PostMapping("/login")
 	public ResponseEntity<?> handleLogin(@Valid @RequestBody LoginRequest request, HttpSession session) {
 		
+		Optional<User> userOpt = userService.findUserByEmail(request.getEmail());
+		
 		// Log users in if email exists in database, and associated password matches
 		// on successful login, updates session with "email" and "role" attributes
 		
 		if (userService.loginAttempt(request)) {
-			session.setAttribute("id", (Integer) userService.findUserByEmail(request.getEmail()).get().getId());
-			session.setAttribute("role", userService.findUserByEmail(request.getEmail()).get().getRole());
+			User user = userOpt.get();
 			
-			User user = userService.findUserByEmail(request.getEmail()).get();
-			
+			session.setAttribute("id", user.getId());
+			session.setAttribute("role", user.getRole());
+						
 			return new ResponseEntity<User>(user, HttpStatus.OK);
 		}
 		

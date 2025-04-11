@@ -10,6 +10,10 @@ public class LoginRequest {
 		this.email = email;
 		this.password = password;	
 	}
+	
+	public LoginRequest() {
+		
+	}
 
 	public String getEmail() {
 		return email;
