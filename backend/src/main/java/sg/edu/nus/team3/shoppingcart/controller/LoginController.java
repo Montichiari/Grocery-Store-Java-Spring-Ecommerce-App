@@ -70,7 +70,7 @@ public class LoginController {
 		//Object id = session.
 	//}
 	
-	@PostMapping("/register-customer")
+	@PostMapping("/register/customer")
 	public ResponseEntity<User> registerCustomer(@Valid @RequestBody RegisterRequest request) {
 		
 		// Log users in if email exists in database, and associated password matches
@@ -85,7 +85,7 @@ public class LoginController {
 		}
 	}
 	
-	@PostMapping("/register-staff")
+	@PostMapping("/register/staff")
 	public ResponseEntity<User> registerStaff(@Valid @RequestBody RegisterRequest request) {
 		
 		// Log users in if email exists in database, and associated password matches
