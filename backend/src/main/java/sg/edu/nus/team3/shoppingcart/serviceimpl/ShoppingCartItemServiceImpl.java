@@ -7,8 +7,11 @@ import sg.edu.nus.team3.shoppingcart.model.ShoppingCartItem;
 import sg.edu.nus.team3.shoppingcart.service.ShoppingCartItemService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import sg.edu.nus.team3.shoppingcart.repository.ShoppingCartItemRepository;
 
+@Service
 public class ShoppingCartItemServiceImpl implements ShoppingCartItemService {
 
 	@Autowired
