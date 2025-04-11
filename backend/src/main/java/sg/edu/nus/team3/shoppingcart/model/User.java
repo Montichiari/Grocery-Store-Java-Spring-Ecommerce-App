@@ -74,8 +74,8 @@ public class User {
 
 	}
 
-	// Constructor for Customers to create Customer account
-	public User(String email, String handPhoneNo, String address, String firstName, String lastName, String password) {
+	// Constructor for new Users. Role is set by UserService, depending on creation URL.
+	public User(String email, String password, String firstName, String lastName, String handPhoneNo, String address) {
 		super();
 		this.email = email;
 		this.handPhoneNo = handPhoneNo;
@@ -84,22 +84,8 @@ public class User {
 		this.lastName = lastName;
 		this.password = password;
 		this.shoppingCart = new ShoppingCart(this);
-		this.role = "Customer";
 	}
 
-	// Constructor Staff to create Staff OR Customer account
-	public User(String email, String handPhoneNo, String address, String firstName, String lastName, String password,
-			String role, ShoppingCart shoppingCart) {
-		super();
-		this.email = email;
-		this.handPhoneNo = handPhoneNo;
-		this.address = address;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.password = password;
-		this.role = role;
-		this.shoppingCart = shoppingCart;
-	}
 
 	// Getters and setters
 

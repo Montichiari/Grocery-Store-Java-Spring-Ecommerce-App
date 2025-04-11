@@ -89,9 +89,19 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void registerUser(User user) {
+	public void registerCustomer(User user) {
 		String hashedPassword = passwordEncoder.encode(user.getPassword());
 		user.setPassword(hashedPassword);
+		user.setRole("customer");
+		
+		userRepo.save(user);
+	}
+	
+	@Override
+	public void registerStaff (User user) {
+		String hashedPassword = passwordEncoder.encode(user.getPassword());
+		user.setPassword(hashedPassword);
+		user.setRole("staff");
 		
 		userRepo.save(user);
 	}

@@ -23,5 +23,7 @@ public interface UserService {
 	public void registerUser(String email, String passwordInput, String handPhoneNo, String address, String firstName,
 			String lastName);
 	
-	public void registerUser(User user);
+	public void registerCustomer(User user);
+	
+	public void registerStaff(User user);
 }
