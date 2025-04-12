@@ -31,12 +31,6 @@ public class ShoppingCartItem {
         this.product = product;
         this.quantity = quantity;
     }
-    
-    public ShoppingCartItem(Product product, int quantity) {
-        super();
-        this.product = product;
-        this.quantity = quantity;
-    }
 
     public int getId() {
         return id;
