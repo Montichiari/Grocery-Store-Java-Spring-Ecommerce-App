@@ -47,6 +47,7 @@ public class LoginController {
 			
 			session.setAttribute("id", user.getId());
 			session.setAttribute("role", user.getRole());
+			session.setAttribute("cartId", user.getShoppingCart().getId());
 						
 			return new ResponseEntity<User>(user, HttpStatus.OK);
 		}

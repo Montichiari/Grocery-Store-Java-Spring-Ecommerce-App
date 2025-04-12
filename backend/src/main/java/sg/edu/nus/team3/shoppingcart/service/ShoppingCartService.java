@@ -3,6 +3,7 @@ package sg.edu.nus.team3.shoppingcart.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.servlet.http.HttpSession;
 import sg.edu.nus.team3.shoppingcart.model.Product;
 import sg.edu.nus.team3.shoppingcart.model.ShoppingCart;
 import sg.edu.nus.team3.shoppingcart.model.ShoppingCartItem;
@@ -23,7 +24,7 @@ public interface ShoppingCartService {
 	public void clearShoppingCart(int id);
 
 
-	
+	public void addToCart(Product product, int qty, HttpSession session);
 	
 	
 	
