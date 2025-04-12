@@ -13,6 +13,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
+// @author: Jared Chua
 @Entity
 public class Product {
 
