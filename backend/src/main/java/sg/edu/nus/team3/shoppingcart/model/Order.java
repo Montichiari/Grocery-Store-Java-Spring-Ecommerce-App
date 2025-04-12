@@ -28,7 +28,7 @@ public class Order {
 	private User user;
 
 	private LocalDateTime createAt;
-	private LocalDate fulfilmentDate;
+	private LocalDateTime fulfilmentDate;
 	private String status;
 	private String paymentMethod;
 
@@ -43,7 +43,7 @@ public class Order {
 	}
 
 	// Constructors
-	public Order(User user, LocalDateTime createAt, LocalDate fulfilmentDate, String status, String paymentMethod, double totalAmount) {
+	public Order(User user, LocalDateTime createAt, LocalDateTime fulfilmentDate, String status, String paymentMethod, double totalAmount) {
 		super();
 		this.user = user;
 		this.createAt = createAt;
