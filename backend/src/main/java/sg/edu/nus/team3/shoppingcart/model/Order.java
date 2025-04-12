@@ -25,12 +25,14 @@ public class Order {
 	private User user;
 
 	private LocalDateTime createAt;
-	private LocalDate fulfilmentDate;
+	private LocalDateTime fulfilmentDate;
 	private String status;
 	private String paymentMethod;
 
 	@OneToMany(mappedBy = "order")
 	private List<OrderItem> orderItems;
+	
+	private double totalAmount;
 
 	// Empty constructor required by JPA
 	public Order() {
@@ -45,7 +47,7 @@ public class Order {
 		return orderItems;
 	}
 
-	public Order(User user, LocalDateTime createAt, LocalDate fulfilmentDate, String status, String paymentMethod) {
+	public Order(User user, LocalDateTime createAt, LocalDateTime fulfilmentDate, String status, String paymentMethod, double totalAmount) {
 		super();
 		this.user = user;
 		this.createAt = createAt;
@@ -53,6 +55,7 @@ public class Order {
 		this.status = status;
 		this.paymentMethod = paymentMethod;
 		this.orderItems = new ArrayList<OrderItem>();
+		this.totalAmount = totalAmount;
 	}
 
 	public void setOrderItems(List<OrderItem> orderItems) {
