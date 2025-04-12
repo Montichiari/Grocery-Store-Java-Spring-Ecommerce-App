@@ -1,5 +1,7 @@
 package sg.edu.nus.team3.shoppingcart.model;
 
+import java.util.Objects;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,89 +19,112 @@ import lombok.Setter;
 @Entity
 public class Product {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 
-  private String name;
+	private String name;
 
-  private double unitPrice;
+	private String description;
 
-  private int stock;
+	private double unitPrice;
 
-  private String category;
+	private int stock;
 
-  public Product() {
-  }
+	private String category;
 
-  public Product(int id, String name, double unitPrice, int stock, String category) {
-    this.name = name;
-    this.unitPrice = unitPrice;
-    this.stock = stock;
-    this.category = category;
-  }
+	public Product() {
+	}
 
-  public Product(String name, double unitPrice, int stock, String category) {
-    this.name = name;
-    this.unitPrice = unitPrice;
-    this.stock = stock;
-    this.category = category;
-  }
+	public Product(int id, String name, double unitPrice, int stock, String category) {
+		this.name = name;
+		this.unitPrice = unitPrice;
+		this.stock = stock;
+		this.category = category;
+	}
 
-  public int getId() {
-    return id;
-  }
+	public Product(String name, double unitPrice, int stock, String category) {
+		this.name = name;
+		this.unitPrice = unitPrice;
+		this.stock = stock;
+		this.category = category;
+	}
 
-  public void setId(int id) {
-    this.id = id;
-  }
 
-  public String getName() {
-    return name;
-  }
+	public int getId() {
+		return id;
+	}
 
-  public void setName(String name) {
-    this.name = name;
-  }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-  public double getUnitPrice() {
-    return unitPrice;
-  }
+	public String getName() {
+		return name;
+	}
 
-  public void setUnitPrice(double unitPrice) {
-    this.unitPrice = unitPrice;
-  }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-  public int getStock() {
-    return stock;
-  }
+	public String getDescription() {
+		return description;
+	}
 
-  public void setStock(int stock) {
-    this.stock = stock;
-  }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-  public String getCategory() {
-    return category;
-  }
+	public double getUnitPrice() {
+		return unitPrice;
+	}
 
-  public void setCategory(String category) {
-    this.category = category;
-  }
+	public void setUnitPrice(double unitPrice) {
+		this.unitPrice = unitPrice;
+	}
 
-  @Override
-  public boolean equals(Object comparator) {
-    if (!(comparator instanceof Product))
-      return false;
-    Product that = (Product) comparator;
+	public int getStock() {
+		return stock;
+	}
 
-    return this.id == that.id && this.name == that.name && this.unitPrice == that.unitPrice && this.stock == that.stock
-        && this.category == that.category;
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
 
-  }
+	public String getCategory() {
+		return category;
+	}
 
-  @Override
-  public String toString() {
-    return "Product [id=" + id + ", name=" + name + ", unitPrice=" + unitPrice + ", stock=" + stock + ", category="
-        + category + "]";
-  }
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(category, description, id, name, stock, unitPrice);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Product other = (Product) obj;
+		return Objects.equals(category, other.category) && Objects.equals(description, other.description)
+				&& id == other.id && Objects.equals(name, other.name) && stock == other.stock
+				&& Double.doubleToLongBits(unitPrice) == Double.doubleToLongBits(other.unitPrice);
+	}
+
+	@Override
+	public String toString() {
+		return "Product [id=" + id + ", name=" + name + ", description=" + description + ", unitPrice=" + unitPrice
+				+ ", stock=" + stock + ", category=" + category + "]";
+	}
+
+
 }

@@ -14,6 +14,7 @@ import sg.edu.nus.team3.shoppingcart.model.OrderItem;
 import sg.edu.nus.team3.shoppingcart.model.ShoppingCart;
 import sg.edu.nus.team3.shoppingcart.model.ShoppingCartItem;
 import sg.edu.nus.team3.shoppingcart.model.User;
+import sg.edu.nus.team3.shoppingcart.model.dto.OrderSummaryResponse;
 import sg.edu.nus.team3.shoppingcart.projections.OrderProjection;
 import sg.edu.nus.team3.shoppingcart.repository.OrderRepository;
 import sg.edu.nus.team3.shoppingcart.repository.ShoppingCartRepository;
@@ -96,6 +97,14 @@ public class OrderServiceImpl implements OrderService {
 		cartRepo.save(cart);
 
 		return order;
+	}
+
+	@Override
+	public List<OrderSummaryResponse> getOrdersForUser(int userId) {
+		return orderRepository.findByUserIdOrderByOrderDateDesc(userId)
+				.stream()
+				.map(OrderSummaryResponse::new)
+				.toList();
 	}
 
 }

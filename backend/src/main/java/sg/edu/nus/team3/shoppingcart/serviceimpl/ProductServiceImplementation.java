@@ -1,14 +1,15 @@
 package sg.edu.nus.team3.shoppingcart.serviceimpl;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
 import sg.edu.nus.team3.shoppingcart.model.Product;
+import sg.edu.nus.team3.shoppingcart.model.dto.ProductDetailResponse;
+import sg.edu.nus.team3.shoppingcart.model.dto.ProductResponse;
 import sg.edu.nus.team3.shoppingcart.repository.ProductRepository;
 import sg.edu.nus.team3.shoppingcart.service.ProductService;
 
@@ -46,5 +47,26 @@ public class ProductServiceImplementation implements ProductService {
   public List<Product> searchProductByName(String product_name) {
     List<Product> productInfo = productRepo.findByProductName(product_name).stream().toList();
     return productInfo;
+  }
+  
+  public List<ProductResponse> getAllProductsR() {
+      return productRepo.findAll()
+              .stream()
+              .map(ProductResponse::new)
+              .toList();
+  }
+
+  public List<ProductResponse> getProductsByCategory(String category) {
+      return productRepo.findByCategory(category)
+              .stream()
+              .map(ProductResponse::new)
+              .toList();
+  }
+  
+  public ProductDetailResponse getProductById(int id) {
+      Product product = productRepo.findById(id)
+              .orElseThrow(() -> new NoSuchElementException("Product not found"));
+
+      return new ProductDetailResponse(product);
   }
 }

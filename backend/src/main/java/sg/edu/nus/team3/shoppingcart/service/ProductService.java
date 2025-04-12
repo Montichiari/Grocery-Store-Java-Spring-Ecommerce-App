@@ -1,9 +1,10 @@
 package sg.edu.nus.team3.shoppingcart.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import sg.edu.nus.team3.shoppingcart.model.Product;
+import sg.edu.nus.team3.shoppingcart.model.dto.ProductDetailResponse;
+import sg.edu.nus.team3.shoppingcart.model.dto.ProductResponse;
 
 // @author Jared Chua
 public interface ProductService {
@@ -19,5 +20,11 @@ public interface ProductService {
   public void deleteProductById(int product_id);
 
   public List<Product> searchProductByName(String product_name);
+  
+  public List<ProductResponse> getAllProductsR();
+  
+  public List<ProductResponse> getProductsByCategory(String category);
+  
+  public ProductDetailResponse getProductById(int id);
 
 }

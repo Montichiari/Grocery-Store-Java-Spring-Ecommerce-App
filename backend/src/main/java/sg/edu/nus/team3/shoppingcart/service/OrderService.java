@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import sg.edu.nus.team3.shoppingcart.model.Order;
 import sg.edu.nus.team3.shoppingcart.model.OrderItem;
+import sg.edu.nus.team3.shoppingcart.model.dto.OrderSummaryResponse;
 import sg.edu.nus.team3.shoppingcart.projections.OrderProjection;
 
 public interface OrderService {
@@ -17,4 +18,6 @@ public interface OrderService {
 	public List<OrderProjection> getWeeklyOrders();
 	
 	public Order checkout(int userId, int cartId);
+	
+	public List<OrderSummaryResponse> getOrdersForUser(int userId);
 }

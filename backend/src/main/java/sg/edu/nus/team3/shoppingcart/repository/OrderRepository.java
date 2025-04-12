@@ -20,4 +20,8 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
     // fulfilmentDate, o.status as status, o.paymentMethod as paymentMethod,
     // o.user.id as userId FROM Order o")
     // public Optional<List<OrderProjection>> findWeeklyOrders();
+    
+    @Query("SELECT o FROM Order o WHERE o.user.id = :userId ORDER BY o.createAt DESC")
+    List<Order> findByUserIdOrderByOrderDateDesc(@Param("userId")int userId);
+    
 }
