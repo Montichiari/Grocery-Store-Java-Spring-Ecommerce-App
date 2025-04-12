@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,9 +28,9 @@ public class ShoppingCart {
 	@OneToOne(mappedBy = "shoppingCart")
 	private User user;
 
-	@OneToMany(mappedBy = "shoppingCart")
+	@OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL)
 	// shopping cart items has the foreign key of shopping cart id
-	private List<ShoppingCartItem> items;
+	private List<ShoppingCartItem> items = new ArrayList<>();
 
 	private LocalDateTime updatedAt;
 
@@ -40,7 +41,6 @@ public class ShoppingCart {
 	public ShoppingCart(User user) {
 		this.user = user;
 		this.updatedAt = LocalDateTime.of(2023, 10, 15, 14, 30, 0);
-		this.items = new ArrayList<ShoppingCartItem>();
 	}
 
 	public ShoppingCart(int id, User user, List<ShoppingCartItem> items, LocalDateTime updatedAt) {

@@ -42,13 +42,12 @@ public class ShoppingCartController {
         int cartId = (int) session.getAttribute("cartId");
 
         if (cartId == 0) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(Map.of("error", "Please log in to clear cart"));
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
 
         cartService.clearShoppingCart(cartId);
 
-        return new ResponseEntity<>(HttpStatus.);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 	
 	/*

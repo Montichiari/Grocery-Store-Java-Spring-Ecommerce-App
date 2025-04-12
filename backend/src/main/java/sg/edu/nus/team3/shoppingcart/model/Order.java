@@ -1,12 +1,12 @@
 package sg.edu.nus.team3.shoppingcart.model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -33,8 +33,8 @@ public class Order {
 	private String status;
 	private String paymentMethod;
 
-	@OneToMany(mappedBy = "order")
-	private List<OrderItem> orderItems;
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+	private List<OrderItem> orderItems = new ArrayList<OrderItem>();
 	
 	private double totalAmount;
 
@@ -56,44 +56,17 @@ public class Order {
 		this.fulfilmentDate = fulfilmentDate;
 		this.status = status;
 		this.paymentMethod = paymentMethod;
-		this.orderItems = new ArrayList<OrderItem>();
 		this.totalAmount = totalAmount;
 	}
 
-	public void setOrderItems(List<OrderItem> orderItems) {
-		this.orderItems = orderItems;
+	
+
+	public int getId() {
+		return id;
 	}
 
-	public String getPaymentMethod() {
-		return paymentMethod;
-	}
-
-	public void setPaymentMethod(String paymentMethod) {
-		this.paymentMethod = paymentMethod;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public LocalDate getFulfilmentDate() {
-		return fulfilmentDate;
-	}
-
-	public void setFulfilmentDate(LocalDate fulfilmentDate) {
-		this.fulfilmentDate = fulfilmentDate;
-	}
-
-	public LocalDateTime getCreateAt() {
-		return createAt;
-	}
-
-	public void setCreateAt(LocalDateTime createAt) {
-		this.createAt = createAt;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public User getUser() {
@@ -104,19 +77,58 @@ public class Order {
 		this.user = user;
 	}
 
-	public int getId() {
-		return id;
+	public LocalDateTime getCreateAt() {
+		return createAt;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setCreateAt(LocalDateTime createAt) {
+		this.createAt = createAt;
+	}
+
+	public LocalDateTime getFulfilmentDate() {
+		return fulfilmentDate;
+	}
+
+	public void setFulfilmentDate(LocalDateTime fulfilmentDate) {
+		this.fulfilmentDate = fulfilmentDate;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getPaymentMethod() {
+		return paymentMethod;
+	}
+
+	public void setPaymentMethod(String paymentMethod) {
+		this.paymentMethod = paymentMethod;
+	}
+
+	public double getTotalAmount() {
+		return totalAmount;
+	}
+
+	public void setTotalAmount(double totalAmount) {
+		this.totalAmount = totalAmount;
+	}
+
+	public void setOrderItems(List<OrderItem> orderItems) {
+		this.orderItems = orderItems;
 	}
 
 	@Override
 	public String toString() {
 		return "Order [id=" + id + ", user=" + user + ", createAt=" + createAt + ", fulfilmentDate=" + fulfilmentDate
-				+ ", status=" + status + ", paymentMethod=" + paymentMethod + "]";
+				+ ", status=" + status + ", paymentMethod=" + paymentMethod + ", totalAmount=" + totalAmount + "]";
 	}
+
+	
+	
 
 	// methods
 
