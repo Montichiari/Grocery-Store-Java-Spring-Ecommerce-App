@@ -1,17 +1,18 @@
 package sg.edu.nus.team3.shoppingcart.service;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import jakarta.servlet.http.HttpSession;
 import sg.edu.nus.team3.shoppingcart.model.Product;
 import sg.edu.nus.team3.shoppingcart.model.ShoppingCart;
 import sg.edu.nus.team3.shoppingcart.model.ShoppingCartItem;
-import sg.edu.nus.team3.shoppingcart.model.User;
-
+import sg.edu.nus.team3.shoppingcart.repository.ProductRepository;
+import sg.edu.nus.team3.shoppingcart.repository.ShoppingCartRepository;
 
 public interface ShoppingCartService {
-
+	
 	// outline the methods but no need to define method body 
 	
 	
@@ -24,7 +25,7 @@ public interface ShoppingCartService {
 	public void clearShoppingCart(int id);
 
 
-	public void addToCart(Product product, int qty, HttpSession session);
+	public void addToCart(int cartId, int productId, int qty);
 	
 	
 	
