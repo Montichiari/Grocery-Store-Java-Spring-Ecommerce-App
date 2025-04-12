@@ -18,18 +18,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		
-		 //Looks for user id in session attributes. If null, returns 401 Unauthorized.
-		 HttpSession session = request.getSession();
-
-		 Integer id = (Integer) session.getAttribute("id");
-
-		 if (id == null) {
-		 response.setStatus(401);
-		 response.getWriter().write("Please log in to continue");
-			return false;
-		 }
-		 
+		// TODO Auto-generated method stub
 		return true;
 	}
 

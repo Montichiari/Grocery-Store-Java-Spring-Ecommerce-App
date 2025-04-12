@@ -113,8 +113,8 @@ public class IntegrityTest {
         int prevCartCount = cartRepo.findAll().size();
         int prevUserCount = userRepo.findAll().size();
 
-        User testUser = new User("alice.johnson@email.com", "hashed_pw_aj", "Alice", "Johnson", "91112233",
-                "123 Oak Street, Anytown");
+        User testUser = new User("alice.johnson@email.com", "91112233", "123 Oak Street, Anytown", "Alice", "Johnson",
+                "hashed_pw_aj");
         // Order testOrder = new Order(testUser, LocalDateTime.of(2023, 10, 15, 14, 30,
         // 0), LocalDate.of(2023, 10, 15),
         // "Completed", "Credit Card", new ArrayList<OrderItem>());

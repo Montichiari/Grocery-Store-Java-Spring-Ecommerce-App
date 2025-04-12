@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import sg.edu.nus.team3.shoppingcart.model.Product;
 import sg.edu.nus.team3.shoppingcart.model.ShoppingCart;
@@ -58,18 +57,6 @@ public class ShoppingCartServiceImplementation implements ShoppingCartService {
 		// clear memory of the list after removing from database
 		list_of_shopping_cart_items.removeAll(list_of_shopping_cart_items);
 
-	}
-
-	@Override
-	public void addToCart(Product product, int qty, HttpSession session) {
-		
-		ShoppingCart cart = screpo.findCartByCartId((int) session.getAttribute("cartId"));
-		
-		ShoppingCartItem newCartItem = new ShoppingCartItem(product, qty);
-		
-		newCartItem.setShoppingCart(cart);
-		
-		
 	}
 
 }
