@@ -23,7 +23,7 @@ import sg.edu.nus.team3.shoppingcart.repository.ShoppingCartRepository;
 import sg.edu.nus.team3.shoppingcart.repository.UserRepository;
 
 @SpringBootTest
-public class IntegrityTest {
+public class IntegrationTest {
     @Autowired
     OrderItemRepository orderItemRepo;
     @Autowired
