@@ -25,7 +25,7 @@ public class Product {
 
 	private String name;
 
-	private String description;
+	// private String description;
 
 	private double unitPrice;
 
@@ -67,6 +67,7 @@ public class Product {
 		this.name = name;
 	}
 
+	/*
 	public String getDescription() {
 		return description;
 	}
@@ -74,6 +75,7 @@ public class Product {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	*/
 
 	public double getUnitPrice() {
 		return unitPrice;
@@ -100,12 +102,6 @@ public class Product {
 	}
 
 
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(category, description, id, name, stock, unitPrice);
-	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -115,14 +111,14 @@ public class Product {
 		if (getClass() != obj.getClass())
 			return false;
 		Product other = (Product) obj;
-		return Objects.equals(category, other.category) && Objects.equals(description, other.description)
-				&& id == other.id && Objects.equals(name, other.name) && stock == other.stock
+		return Objects.equals(category, other.category) && //Objects.equals(description, other.description) &&
+				id == other.id && Objects.equals(name, other.name) && stock == other.stock
 				&& Double.doubleToLongBits(unitPrice) == Double.doubleToLongBits(other.unitPrice);
 	}
 
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", name=" + name + ", description=" + description + ", unitPrice=" + unitPrice
+		return "Product [id=" + id + ", name=" + name + ", unitPrice=" + unitPrice
 				+ ", stock=" + stock + ", category=" + category + "]";
 	}
 

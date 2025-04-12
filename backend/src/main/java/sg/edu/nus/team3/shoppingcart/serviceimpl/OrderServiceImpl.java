@@ -89,7 +89,7 @@ public class OrderServiceImpl implements OrderService {
 			order.getOrderItems().add(orderItem);
 		}
 
-		order.setTotalAmount(total);
+		//order.setTotalAmount(total);
 		orderRepository.save(order);
 
 		// Clear cart

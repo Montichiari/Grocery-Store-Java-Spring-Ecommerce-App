@@ -7,13 +7,13 @@ import sg.edu.nus.team3.shoppingcart.model.Order;
 public class OrderSummaryResponse {
 	private int orderId;
 	private LocalDateTime createAt;
-	private double totalAmount;
+	// private double totalAmount;
 	private String status;
 
 	public OrderSummaryResponse(Order order) {
 		this.orderId = order.getId();
 		this.createAt = order.getCreateAt();
-		this.totalAmount = order.getTotalAmount();
+		// this.totalAmount = order.getTotalAmount();
 		this.status = order.getStatus();
 	}
 	
@@ -37,6 +37,7 @@ public class OrderSummaryResponse {
 		this.createAt = createAt;
 	}
 
+	/*
 	public double getTotalAmount() {
 		return totalAmount;
 	}
@@ -44,6 +45,7 @@ public class OrderSummaryResponse {
 	public void setTotalAmount(double totalAmount) {
 		this.totalAmount = totalAmount;
 	}
+	*/
 
 	public String getStatus() {
 		return status;

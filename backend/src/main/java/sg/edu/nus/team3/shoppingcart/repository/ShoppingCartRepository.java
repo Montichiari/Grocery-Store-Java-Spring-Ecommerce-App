@@ -24,10 +24,7 @@ public interface ShoppingCartRepository extends JpaRepository<ShoppingCart, Inte
 	// in built method
 	// screpo.deleteById(productId)
 	
-	@Query ("SELECT c FROM c WHERE c.id = :cartId")
-	public ShoppingCart findCartByCartId(@Param("cartId") int cartId);
-	
-	@Query ("SELECT c FROM c WHERE c.user.id = :userId")
+	@Query ("SELECT c FROM ShoppingCart c WHERE c.user.id = :userId")
 	public ShoppingCart findCartByUserId(@Param("userId") int userId);
 
 

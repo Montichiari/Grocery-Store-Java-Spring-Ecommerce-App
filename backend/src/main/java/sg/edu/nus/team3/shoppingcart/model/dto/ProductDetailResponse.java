@@ -6,14 +6,14 @@ public class ProductDetailResponse {
 	
 	private int id;
     private String name;
-    private String description;
+    // private String description;
     private double unitPrice;
     private String category;
 	
     public ProductDetailResponse(Product product) {
         this.id = product.getId();
         this.name = product.getName();
-        this.description = product.getDescription();
+        // this.description = product.getDescription();
         this.unitPrice = product.getUnitPrice();
         this.category = product.getCategory();
     }

@@ -26,5 +26,7 @@ public interface ProductService {
   public List<ProductResponse> getProductsByCategory(String category);
   
   public ProductDetailResponse getProductById(int id);
+  
+  public Product findById(int id);
 
 }

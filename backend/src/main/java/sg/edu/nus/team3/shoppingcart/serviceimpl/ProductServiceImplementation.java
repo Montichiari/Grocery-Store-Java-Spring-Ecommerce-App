@@ -69,4 +69,11 @@ public class ProductServiceImplementation implements ProductService {
 
       return new ProductDetailResponse(product);
   }
+
+@Override
+public Product findById(int id) {
+	// TODO Auto-generated method stub
+	
+	return productRepo.findById(id).get();
+}
 }

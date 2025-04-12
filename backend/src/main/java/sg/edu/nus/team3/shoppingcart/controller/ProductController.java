@@ -1,7 +1,6 @@
 package sg.edu.nus.team3.shoppingcart.controller;
 
 import java.util.List;
-import java.util.Map;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import sg.edu.nus.team3.shoppingcart.model.dto.ProductDetailResponse;
+import sg.edu.nus.team3.shoppingcart.model.Product;
 import sg.edu.nus.team3.shoppingcart.model.dto.ProductResponse;
 import sg.edu.nus.team3.shoppingcart.service.ProductService;
 
@@ -40,7 +39,7 @@ public class ProductController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getProductDetail(@PathVariable int id) {
         try {
-            ProductDetailResponse product = productService.getProductById(id);
+            Product product = productService.findById(id);
             return new ResponseEntity<>(product, HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

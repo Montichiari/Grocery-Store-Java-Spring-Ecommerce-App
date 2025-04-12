@@ -1,5 +1,6 @@
 package sg.edu.nus.team3.shoppingcart.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,18 +30,18 @@ public class Order {
 	private User user;
 
 	private LocalDateTime createAt;
-	private LocalDateTime fulfilmentDate;
+	private LocalDate fulfilmentDate;
 	private String status;
 	private String paymentMethod;
 
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
 	private List<OrderItem> orderItems = new ArrayList<OrderItem>();
 	
-	private double totalAmount;
+	// private double totalAmount;
 
 	// Empty constructor required by JPA
 	public Order() {
-		this.setOrderItems(new ArrayList<>());// Initialize with an empty list
+		this.orderItems = new ArrayList<>();// Initialize with an empty list
 	}
 
 	// Constructors
@@ -49,14 +50,14 @@ public class Order {
 		return orderItems;
 	}
 
-	public Order(User user, LocalDateTime createAt, LocalDateTime fulfilmentDate, String status, String paymentMethod, double totalAmount) {
+	public Order(User user, LocalDateTime createAt, LocalDate fulfilmentDate, String status, String paymentMethod) {
 		super();
 		this.user = user;
 		this.createAt = createAt;
 		this.fulfilmentDate = fulfilmentDate;
 		this.status = status;
 		this.paymentMethod = paymentMethod;
-		this.totalAmount = totalAmount;
+		// this.totalAmount = totalAmount;
 	}
 
 	
@@ -85,11 +86,11 @@ public class Order {
 		this.createAt = createAt;
 	}
 
-	public LocalDateTime getFulfilmentDate() {
+	public LocalDate getFulfilmentDate() {
 		return fulfilmentDate;
 	}
 
-	public void setFulfilmentDate(LocalDateTime fulfilmentDate) {
+	public void setFulfilmentDate(LocalDate fulfilmentDate) {
 		this.fulfilmentDate = fulfilmentDate;
 	}
 
@@ -109,6 +110,7 @@ public class Order {
 		this.paymentMethod = paymentMethod;
 	}
 
+	/*
 	public double getTotalAmount() {
 		return totalAmount;
 	}
@@ -120,11 +122,12 @@ public class Order {
 	public void setOrderItems(List<OrderItem> orderItems) {
 		this.orderItems = orderItems;
 	}
+	*/
 
 	@Override
 	public String toString() {
 		return "Order [id=" + id + ", user=" + user + ", createAt=" + createAt + ", fulfilmentDate=" + fulfilmentDate
-				+ ", status=" + status + ", paymentMethod=" + paymentMethod + ", totalAmount=" + totalAmount + "]";
+				+ ", status=" + status + ", paymentMethod=" + paymentMethod + "]";
 	}
 
 	
