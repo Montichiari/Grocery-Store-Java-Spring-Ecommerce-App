@@ -9,13 +9,14 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 import java.util.Optional;
 
+//@ author @ thina 
 @Repository
 public interface ShoppingCartRepository extends JpaRepository<ShoppingCart, Integer> {
 
 	// find shopping cart by user id
-
-	@Query("SELECT s FROM ShoppingCart s WHERE s.user.id = :userId")
-	Optional<ShoppingCart> findShoppingCartByUserId(@Param("userId") int id);
+	// no need this method anymore i think
+	// @Query("SELECT s FROM ShoppingCart s WHERE s.user.id = :userId")
+	// Optional<ShoppingCart> findShoppingCartByUserId(@Param("userId") int id);
 
 	// find shopping cart by shopping_cart id
 	// session has shopping_cart id directly

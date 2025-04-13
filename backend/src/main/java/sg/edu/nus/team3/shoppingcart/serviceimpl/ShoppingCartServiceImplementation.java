@@ -13,6 +13,8 @@ import sg.edu.nus.team3.shoppingcart.repository.ShoppingCartItemRepository;
 import sg.edu.nus.team3.shoppingcart.repository.ShoppingCartRepository;
 import sg.edu.nus.team3.shoppingcart.service.ShoppingCartService;
 import java.util.Optional;
+import sg.edu.nus.team3.shoppingcart.service.ProductService;
+import sg.edu.nus.team3.shoppingcart.repository.ProductRepository;
 
 // @ authored by @thina 
 
@@ -28,16 +30,20 @@ public class ShoppingCartServiceImplementation implements ShoppingCartService {
 
 	@Override
 	@Transactional
-	public ShoppingCart findShoppingCartByUserId(int id) {
+	public ShoppingCart findShoppingCartById(int id) {
 
-		ShoppingCart user_shopping_cart = scRepo.findShoppingCartByUserId(id);
-		return user_shopping_cart;
+		Optional<ShoppingCart> userShoppingCart = scRepo.findShoppingCartById(id);
+		if (!(userShoppingCart.isPresent())) {
+			throw new RuntimeException("Shopping cart not found for user id: " + id);
+		} else {
+			return userShoppingCart.get();
+		}
 
 	}
 
 	@Override
 	@Transactional
-	public ShoppingCart saveShoppingCart(ShoppingCart userShoppingCart) {
+	public void saveShoppingCart(ShoppingCart userShoppingCart) {
 		// save cart to database
 		ShoppingCart savedShoppingCart = scRepo.save(userShoppingCart);
 
@@ -45,17 +51,17 @@ public class ShoppingCartServiceImplementation implements ShoppingCartService {
 
 	@Override
 	@Transactional
-	public void deleteAllItemsInCart(int user_id_from_session) {
-		// find list of shopping cart items by user id
-		// find shopping cart by user id
-		ShoppingCart user_shopping_cart = findShoppingCartByUserId(user_id_from_session);
-		// get list of shopping cart items
-		List<ShoppingCartItem> list_of_shopping_cart_items = user_shopping_cart.getItems();
+	public void deleteAllItemsInCart(int cartId) {
+
+		// use find cart by id method in the earlier part of this service implementation
+		ShoppingCart userCart = findShoppingCartById(cartId);
+
+		List<ShoppingCartItem> listCartItems = userCart.getItems();
 
 		// delete all items in the cart from the database
-		for (int i = 0; i < list_of_shopping_cart_items.size(); i++) {
+		for (int i = 0; i < listCartItems.size(); i++) {
 			// get each shopping cart item id and delete from the database
-			ShoppingCartItem shopping_cart_item = list_of_shopping_cart_items.get(i);
+			ShoppingCartItem shopping_cart_item = listCartItems.get(i);
 			// after getting each shopping cart item, delete each item from the database of
 			// shopping cart item
 			int shopping_cart_item_id = shopping_cart_item.getId();
@@ -63,8 +69,25 @@ public class ShoppingCartServiceImplementation implements ShoppingCartService {
 		}
 
 		// clear memory of the list after removing from database
-		list_of_shopping_cart_items.removeAll(list_of_shopping_cart_items);
+		listCartItems.removeAll(listCartItems);
 
 	}
+
+	public ShoppingCart addItemToCart(int shoppingCartId, int productId, int quantity){
+	// find shopping cart by cart id 
+	ShoppingCart userCart = findShoppingCartById(shoppingCartId); 
+	// check if the product id exists in the database 
+	Product product = ProductRepository.findProductById(productId);
+	// get shopping cart , then get the list of the items in cart
+	// if the list contains the product, update quantity of the product in the cart
+	// else, add the product to the cart and set the quantity 
+	
+
+
+
+
+
+return ShoppingCart updated_cart ; 
+}
 
 }

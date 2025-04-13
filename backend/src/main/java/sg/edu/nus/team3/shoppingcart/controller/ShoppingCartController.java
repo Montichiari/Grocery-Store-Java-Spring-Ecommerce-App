@@ -31,8 +31,8 @@ public class ShoppingCartController {
 
     // need to test
     @GetMapping("/items")
-    public ResponseEntity<List<ShoppingCartItem>> getItemsInCart(HttpSession session  ) {
-        int shoppingCartId = session.getSession("cartId")
+    public ResponseEntity<List<ShoppingCartItem>> getItemsInCart(HttpSession session) {
+        int shoppingCartId = (int) session.getAttribute("cartId");
         List<ShoppingCartItem> list_items = shoppingCart_service.findShoppingCartByUserId(userId).getItems();
         return new ResponseEntity<List<ShoppingCartItem>>(list_items, HttpStatus.OK);
     }

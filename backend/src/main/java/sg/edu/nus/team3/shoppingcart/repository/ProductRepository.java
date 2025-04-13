@@ -29,4 +29,9 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Transactional
     @Query("DELETE FROM Product p WHERE p.id = :productId")
     public void deleteProductById(@Param("productId") int product_id);
+
+    public static Product findProductById(int productId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'findProductById'");
+    }
 }
