@@ -2,8 +2,8 @@ package sg.edu.nus.team3.shoppingcart.service;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import jakarta.transaction.Transactional;
+
 import sg.edu.nus.team3.shoppingcart.model.Product;
 import sg.edu.nus.team3.shoppingcart.model.ShoppingCart;
 import sg.edu.nus.team3.shoppingcart.model.ShoppingCartItem;

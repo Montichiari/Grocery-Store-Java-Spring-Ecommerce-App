@@ -1,7 +1,6 @@
 package sg.edu.nus.team3.shoppingcart.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-
 import sg.edu.nus.team3.shoppingcart.model.ShoppingCart;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.Query;
@@ -14,6 +13,7 @@ import java.util.Optional;
 public interface ShoppingCartRepository extends JpaRepository<ShoppingCart, Integer> {
 
 	// find shopping cart by user id
+
 	@Query("SELECT s FROM ShoppingCart s WHERE s.user.id = :userId")
 	Optional<ShoppingCart> findShoppingCartByUserId(@Param("userId") int id);
 
