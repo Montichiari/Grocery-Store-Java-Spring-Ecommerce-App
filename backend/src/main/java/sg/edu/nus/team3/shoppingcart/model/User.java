@@ -69,7 +69,6 @@ public class User {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "shopping_cart_id", referencedColumnName = "id")
-	@JsonIgnore
 	private ShoppingCart shoppingCart;
 
 	// Constructors
