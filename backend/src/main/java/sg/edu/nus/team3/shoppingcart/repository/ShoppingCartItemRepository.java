@@ -6,5 +6,4 @@ import sg.edu.nus.team3.shoppingcart.model.ShoppingCartItem;
 
 public interface ShoppingCartItemRepository extends JpaRepository<ShoppingCartItem, Integer> {
 
-	
 }

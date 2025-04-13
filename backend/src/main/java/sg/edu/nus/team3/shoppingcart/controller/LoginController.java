@@ -18,9 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import sg.edu.nus.team3.shoppingcart.model.User;
-import sg.edu.nus.team3.shoppingcart.model.dto.LoginRequest;
-import sg.edu.nus.team3.shoppingcart.model.dto.RegisterRequest;
 import sg.edu.nus.team3.shoppingcart.service.UserService;
+import sg.edu.nus.team3.shoppingcart.model.dto.*;
 
 /**
  * @author diony
