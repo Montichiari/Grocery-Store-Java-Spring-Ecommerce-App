@@ -15,11 +15,8 @@ import javax.servlet.http.HttpSession;
 import sg.edu.nus.team3.shoppingcart.model.Product;
 import sg.edu.nus.team3.shoppingcart.model.ShoppingCart;
 import sg.edu.nus.team3.shoppingcart.model.ShoppingCartItem;
-import sg.edu.nus.team3.shoppingcart.repository.ShoppingCartItemRepository;
-import sg.edu.nus.team3.shoppingcart.repository.ShoppingCartRepository;
-import sg.edu.nus.team3.shoppingcart.serviceimpl.ShoppingCartItemServiceImpl;
-import sg.edu.nus.team3.shoppingcart.serviceimpl.ShoppingCartServiceImplementation;
-import sg.edu.nus.team3.shoppingcart.service.UserService;
+import sg.edu.nus.team3.shoppingcart.service.ShoppingCartItemService;
+import sg.edu.nus.team3.shoppingcart.service.ShoppingCartService;
 
 // @Authored by @thina
 @RestController
@@ -27,23 +24,17 @@ import sg.edu.nus.team3.shoppingcart.service.UserService;
 public class ShoppingCartController {
 
     @Autowired
-    private ShoppingCartServiceImplementation shoppingCartServiceImpl;
+    private ShoppingCartService shoppingCart_service;
 
     @Autowired
-    private ShoppingCartItemServiceImpl shoppingCartItemServiceImpl;
-
-    @Autowired
-    private ShoppingCartItemRepository sc_itemrepo;
-
-    @Autowired
-    private ShoppingCartRepository sc_repo;
+    private ShoppingCartItemService shoppingCartItem_service;
 
     // need to test
     @GetMapping("/items")
-    public ResponseEntity<List<ShoppingCartItem>> getItemsInCart(HttpSession session) {
-        int userId = (int) session.getAttribute("id");
-        List<ShoppingCartItem> list_of_items = shoppingCartServiceImpl.findShoppingCartByUserId(userId).getItems();
-        return new ResponseEntity<List<ShoppingCartItem>>(list_of_items, HttpStatus.OK);
+    public ResponseEntity<List<ShoppingCartItem>> getItemsInCart(HttpSession session  ) {
+        int shoppingCartId = session.getSession("cartId")
+        List<ShoppingCartItem> list_items = shoppingCart_service.findShoppingCartByUserId(userId).getItems();
+        return new ResponseEntity<List<ShoppingCartItem>>(list_items, HttpStatus.OK);
     }
 
     // need to test
@@ -57,24 +48,26 @@ public class ShoppingCartController {
         if (session.getAttribute("id") == null) {
             return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
         }
-        int user_id_from_session = (int) session.getAttribute("id");
+        int user_id_session = (int) session.getAttribute("id");
         // find shopping cart by user Id
-        ShoppingCart user_shopping_cart = shoppingCartServiceImpl.findShoppingCartByUserId(user_id_from_session);
-        // call method from ShopiingCartItemServiveImpl to create a new shopping cart
+        ShoppingCart userShoppingCart = shoppingCart_service.findShoppingCartByUserId(user_id_session);
+        // call method from ShoppingCartService to create a new shopping cart
         // item
-        ShoppingCartItem converted_shopping_cart_item = shoppingCartItemServiceImpl
-                .createShoppingCartItem(user_shopping_cart, product_item, quantity);
+        ShoppingCartItem newCartItem = shoppingCartItem_service.createShoppingCartItem(userShoppingCart, product_item,
+                quantity);
         // once get converted shopping cart item, add this shopping cart item to the
-        // shopping cart
-        user_shopping_cart.getItems().add(converted_shopping_cart_item);
+        // cart
+
+        // create addShoppingCartItem method in the service impl class
+        userShoppingCart.getItems().add(newCartItem);
         // update the time to show when the shopping cart was last updated
-        user_shopping_cart.setUpatedAt(user_shopping_cart.getUpatedAt());
+        userShoppingCart.setUpatedAt(userShoppingCart.getUpatedAt());
         // save updated shopping cart into the shoppingcartrepository
-        sc_repo.save(user_shopping_cart);
-        // get the shopping cart items from this shopping cart
-        List<ShoppingCartItem> shopping_cart_items = user_shopping_cart.getItems();
+        shoppingCart_service.saveShoppingCart(userShoppingCart);
+        // get the updated list of items from this shopping cart
+        List<ShoppingCartItem> list_CartItems = userShoppingCart.getItems();
         // return the list of shopping cart items with the new item added to the cart
-        return new ResponseEntity<List<ShoppingCartItem>>(shopping_cart_items, HttpStatus.OK);
+        return new ResponseEntity<List<ShoppingCartItem>>(list_CartItems, HttpStatus.OK);
     }
 
     // need to test
@@ -86,28 +79,32 @@ public class ShoppingCartController {
         }
 
         // user id from session object
-        int user_id_from_session = (int) session.getAttribute("id");
+        int userid_session = (int) session.getAttribute("id");
 
-        // call method from service impl class to delete all items in cart
-        shoppingCartServiceImpl.deleteAllShoppingCartItemsInCart(user_id_from_session);
+        // call method from service class to delete all items in cart
+        shoppingCart_service.deleteAllItemsInCart(userid_session);
 
-        // find shopping cart by user id
-        ShoppingCart user_shopping_cart = shoppingCartServiceImpl.findShoppingCartByUserId(user_id_from_session);
-        // get list of shopping cart items
-        List<ShoppingCartItem> list_of_shopping_cart_items = user_shopping_cart.getItems();
+        // the following code has been implemented into the service method
+        // deleteAllItemsInCart
+        // // find shopping cart by user id
+        // ShoppingCart user_shopping_cart =
+        // shoppingCart_service.findShoppingCartByUserId(userid_session);
+        // // get list of shopping cart items
+        // List<ShoppingCartItem> shoppingcart_items = user_shopping_cart.getItems();
 
-        // delete all items in the cart from the database
-        for (int i = 0; i < list_of_shopping_cart_items.size(); i++) {
-            // get each shopping cart item id and delete from the database
-            ShoppingCartItem shopping_cart_item = list_of_shopping_cart_items.get(i);
-            // after getting each shopping cart item, delete each item from the database of
-            // shopping cart item
-            int shopping_cart_item_id = shopping_cart_item.getId();
-            sc_itemrepo.deleteById(shopping_cart_item_id);
-        }
+        // // delete all items in the cart from the database
+        // for (int i = 0; i < shoppingcart_items.size(); i++) {
+        // // get each shopping cart item id and delete from the database
+        // ShoppingCartItem shoppingcart_item = shoppingcart_items.get(i);
+        // // after getting each shopping cart item, delete each item from the database
+        // of
+        // // shopping cart item
+        // int shopping_cart_item_id = shoppingcart_item.getId();
+        // sc_itemrepo.deleteById(shopping_cart_item_id);
+        // }
 
         // clear memory of the list after removing from database
-        list_of_shopping_cart_items.removeAll(list_of_shopping_cart_items);
+        // shoppingcart_items.removeAll(shoppingcart_items);
 
         return ResponseEntity.noContent().build();
 

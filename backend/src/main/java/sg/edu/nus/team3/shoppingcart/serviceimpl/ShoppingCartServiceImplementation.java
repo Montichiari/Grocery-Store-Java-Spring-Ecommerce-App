@@ -21,23 +21,31 @@ import java.util.Optional;
 public class ShoppingCartServiceImplementation implements ShoppingCartService {
 
 	@Autowired
-	ShoppingCartRepository screpo;
+	ShoppingCartRepository scRepo;
 
 	@Autowired
-	ShoppingCartItemRepository sc_itemrepo;
+	ShoppingCartItemRepository scItemRepo;
 
 	@Override
 	@Transactional
 	public ShoppingCart findShoppingCartByUserId(int id) {
 
-		ShoppingCart user_shopping_cart = screpo.findShoppingCartByUserId(id);
+		ShoppingCart user_shopping_cart = scRepo.findShoppingCartByUserId(id);
 		return user_shopping_cart;
 
 	}
 
 	@Override
 	@Transactional
-	public void deleteAllShoppingCartItemsInCart(int user_id_from_session) {
+	public ShoppingCart saveShoppingCart(ShoppingCart userShoppingCart) {
+		// save cart to database
+		ShoppingCart savedShoppingCart = scRepo.save(userShoppingCart);
+
+	}
+
+	@Override
+	@Transactional
+	public void deleteAllItemsInCart(int user_id_from_session) {
 		// find list of shopping cart items by user id
 		// find shopping cart by user id
 		ShoppingCart user_shopping_cart = findShoppingCartByUserId(user_id_from_session);
@@ -51,7 +59,7 @@ public class ShoppingCartServiceImplementation implements ShoppingCartService {
 			// after getting each shopping cart item, delete each item from the database of
 			// shopping cart item
 			int shopping_cart_item_id = shopping_cart_item.getId();
-			sc_itemrepo.deleteById(shopping_cart_item_id);
+			scItemRepo.deleteById(shopping_cart_item_id);
 		}
 
 		// clear memory of the list after removing from database
