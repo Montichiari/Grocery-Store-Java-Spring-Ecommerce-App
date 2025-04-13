@@ -9,12 +9,16 @@ import sg.edu.nus.team3.shoppingcart.model.User;
 
 public interface OrderService {
 	
+	public Order checkoutCart(int userId, int cartId);
+	
 	List<Order> findAllOrder();
 	public Order saveOrder(Order order);
-	Order preCreateOrder(List<OrderItem> orderItems, User user);
+	Order getOrderById(int id);
+	
 	public void updateProductStock(Order order);
 	
-	double calcTotal(List<OrderItem> orderItems);
-	Order getOrderById(int id);
+	//Order preCreateOrder(List<OrderItem> orderItems, User user);
+	//double calcTotal(List<OrderItem> orderItems);
+	
 
 }
