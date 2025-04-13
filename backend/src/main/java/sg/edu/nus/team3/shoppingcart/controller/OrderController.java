@@ -39,7 +39,7 @@ public class OrderController {
 
 	    try {
 	        Order order = orderService.checkout(userId, cartId);
-	        return new ResponseEntity<>(HttpStatus.OK);
+	        return new ResponseEntity<>(order, HttpStatus.OK);
 	    } catch (Exception e) {
 	        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	    }
