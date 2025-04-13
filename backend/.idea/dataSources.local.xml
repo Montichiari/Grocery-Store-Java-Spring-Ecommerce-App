@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal" created-in="IU-243.26053.27">
+    <data-source name="commercedb@localhost" uuid="0e3abc94-4d8f-490b-a030-de2d6fdd93fa">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" />
+      <user-name>team3</user-name>
+      <schema-mapping />
+    </data-source>
+  </component>
+</project>
