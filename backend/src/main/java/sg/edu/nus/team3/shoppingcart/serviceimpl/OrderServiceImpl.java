@@ -1,8 +1,7 @@
 package sg.edu.nus.team3.shoppingcart.serviceimpl;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +24,10 @@ import sg.edu.nus.team3.shoppingcart.service.OrderService;
 @Transactional(readOnly = true)
 public class OrderServiceImpl implements OrderService {
 
+	//--------------------------------------------------------------
+	// Author: Hiroyo
+	//--------------------------------------------------------------
+
 	@Autowired
 	private UserRepository userRepository;
 	
@@ -39,7 +42,7 @@ public class OrderServiceImpl implements OrderService {
 	
 	// Create order and orderItems from shopping cart
 	@Override
-	public Order checkoutCart(int userId, int cartId) {
+	public Order checkoutCart(int userId, int cartId, String paymentMethod) {
 		User user = userRepository.findById(userId).orElseThrow();
 		ShoppingCart cart = shoppingCartRepository.findById(cartId).orElseThrow();
 		
@@ -51,13 +54,23 @@ public class OrderServiceImpl implements OrderService {
 		// Create new order
 		Order order = new Order();
 		order.setUser(user);
-		order.setCreateAt(LocalDateTime.now());
 		order.setStatus("PENDING");
 		
 		// Create orderItems and get the total price
 		// Loop through shopping cart items and add each orderItem to order
 		double total = 0.0;
 		for (ShoppingCartItem item : cart.getItems()) {
+			
+			//Fetch the product by ID
+			Product checkProduct = productRepository.findById(item.getProduct().getId())
+					.orElseThrow(() -> new RuntimeException("Product not found: " + item.getProduct().getId()));
+			
+			//Check to make sure there's enough product stock
+			if (checkProduct.getStock() < item.getQuantity()) {
+				throw new RuntimeException("Not enough stock: " + checkProduct.getId());
+			}
+			
+			//If there's enough stock, create an order and remove from product
 			OrderItem orderItem = new OrderItem();
 			orderItem.setOrder(order);
 			orderItem.setProduct(item.getProduct());
@@ -66,39 +79,64 @@ public class OrderServiceImpl implements OrderService {
 			
 			total += orderItem.getUnitPrice()*orderItem.getQuantity();
 			order.getOrderItems().add(orderItem);
+			
+			checkProduct.setStock(checkProduct.getStock() - item.getQuantity());
+			productRepository.save(checkProduct);
 		}
 		
-		// Set the total price and save order to order repository
+		// Set the total price
 		order.setTotalAmount(total);
+		
+		// Payment method selected
+		order.setPaymentMethod(paymentMethod);//add validation?
+		
+		// Assume payment is successful
+		order.setStatus("COMPLETED");
+		order.setCreateAt(LocalDateTime.now());
+		
+		// Set fulfilment date to 1 day later
+		LocalDate later = order.getCreateAt().toLocalDate().plusDays(1);
+		order.setFulfilmentDate(later);
+		
+		// Save order to repository
 		orderRepository.save(order);
 		
 		// Clear cart at the end
 		cart.getItems().clear();
 		shoppingCartRepository.save(cart);
 		
+		
+		
+		
 		return order;
 		
 	}
 	
-
-	@Override
-	public List<Order> findAllOrder() {
-		return orderRepository.findAll();
-	}
-	
-	@Override
-	public Order saveOrder(Order order) {
-		return orderRepository.save(order);
-	}
-	
-	//Get the current order
+	//Get the current order by order id
 	@Override
 	public Order getOrderById(int id) {
 		Order orderToCheck = orderRepository.findById(id)
 				.orElseThrow(() -> new RuntimeException("Order not found"));
 		return orderToCheck;
 	}
+	//--------------------------------------------------------------
+
 	
+	
+	
+	
+	
+	// Not used anymore --------------------------------------
+	/*
+	@Override
+	public Order saveOrder(Order order) {
+		return orderRepository.save(order);
+	}
+	
+	@Override
+	public List<Order> findAllOrder() {
+	//	return orderRepository.findAll();
+	}
 	
 	@Override
 	public void updateProductStock(Order order) {
@@ -107,7 +145,7 @@ public class OrderServiceImpl implements OrderService {
 			
 			//Fetch the product by ID
 			Product checkProduct = productRepository.findById(item.getProduct().getId())
-					.orElseThrow(() -> new RuntimeException("Produt not found: " + item.getProduct().getId()));
+					.orElseThrow(() -> new RuntimeException("Product not found: " + item.getProduct().getId()));
 			
 			//Check to make sure we have the product
 			if (checkProduct.getStock() < item.getQuantity()) {
@@ -122,7 +160,6 @@ public class OrderServiceImpl implements OrderService {
 		}
 	}
 	
-	/*
 	@Override
 	public Order completeOrder(Order order) {
 		order.setStatus("COMPLETED");
@@ -133,9 +170,7 @@ public class OrderServiceImpl implements OrderService {
 		return orderRepository.save(order);
 		//return order;
 	}
-	*/
 
-	/*
 	@Override
 	public double calcTotal(List<OrderItem> orderItems) {
 		
@@ -153,23 +188,9 @@ public class OrderServiceImpl implements OrderService {
 		}
 		return totalPrice;
 	}
+	
 	*/
-	
-	
-	
-
-	
-	
-	//List all orders by user?
-	//@Override
-	//public List<Order> searchOrderHistory(User user) {
-	//	return orderRepository.findByUser(user);
-	//}
-	
-	//List orders made (by all users?) in the past week?
-	//@Override
-	//public List<Order>  getOrdersInWeek(Order order) {
-	//
+	//--------------------------------------------------------------------
 
 
 }

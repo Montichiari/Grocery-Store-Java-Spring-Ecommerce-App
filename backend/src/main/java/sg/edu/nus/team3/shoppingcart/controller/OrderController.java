@@ -1,11 +1,9 @@
 package sg.edu.nus.team3.shoppingcart.controller;
 
-import java.time.LocalDate;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,10 +19,9 @@ import sg.edu.nus.team3.shoppingcart.service.OrderService;
 @RequestMapping("/api/orders")
 public class OrderController {
 	
-	
-	//-----------------------------------------------
+	//----------------------------------------------------------
 	// Author: Hiroyo
-	//-----------------------------------------------
+	//----------------------------------------------------------
 	
 	@Autowired
 	private OrderService orderService;
@@ -37,8 +34,8 @@ public class OrderController {
 		Integer cartId = (Integer) session.getAttribute("cartId");
 		
 		//check with hard coded values
-		userId = 1;
-		cartId = 1;
+		//userId = 1;
+		//cartId = 1;
 		
 		// Throw an error if the user or the cart doesn't exist
 		if (userId == null || cartId == null) {
@@ -46,23 +43,8 @@ public class OrderController {
 		}
 		
 		try {
-			// Create order from userId and cartId
-			Order order = orderService.checkoutCart(userId, cartId);
-			
-			// Payment method selected
-			order.setPaymentMethod(paymentMethod);//add validation (use enum?)
-			
-			// Assume payment is successful
-			order.setStatus("COMPLETED");
-			// Set fulfilment date to 1 day later
-			LocalDate later = order.getCreateAt().toLocalDate().plusDays(1);
-			order.setFulfilmentDate(later);
-			
-			// Save order
-			orderService.saveOrder(order);
-			
-			// Update product entity
-			orderService.updateProductStock(order);
+			// Create order from userId and cartId and paymentMethod
+			Order order = orderService.checkoutCart(userId, cartId, paymentMethod);
 			
 			return new ResponseEntity<>(order,HttpStatus.OK);
 			
@@ -86,7 +68,7 @@ public class OrderController {
 		return new ResponseEntity<>(order,HttpStatus.OK);
 	}
 	
-	//-----------------------------------------------
+	//----------------------------------------------------------
 	
 	
 	
