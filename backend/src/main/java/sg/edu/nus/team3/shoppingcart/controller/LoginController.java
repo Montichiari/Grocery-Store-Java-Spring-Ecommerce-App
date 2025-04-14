@@ -25,7 +25,7 @@ import sg.edu.nus.team3.shoppingcart.model.dto.UpdateUserRequest;
 import sg.edu.nus.team3.shoppingcart.service.UserService;
 
 /**
-@author diony
+@author Dion Yao
 */
 
 @RestController

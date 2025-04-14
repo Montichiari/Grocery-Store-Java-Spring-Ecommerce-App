@@ -19,7 +19,7 @@ import sg.edu.nus.team3.shoppingcart.repository.UserRepository;
 import sg.edu.nus.team3.shoppingcart.service.UserService;
 
 /**
-@author diony
+@author Dion Yao
  */
 
 @Service

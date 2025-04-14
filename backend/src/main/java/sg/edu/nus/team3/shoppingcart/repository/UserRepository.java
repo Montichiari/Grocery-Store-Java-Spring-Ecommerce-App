@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import sg.edu.nus.team3.shoppingcart.model.User;
 
 /**
-@author diony
+@author Dion Yao
 */
 
 

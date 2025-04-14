@@ -16,7 +16,7 @@ import sg.edu.nus.team3.shoppingcart.model.Order;
 import sg.edu.nus.team3.shoppingcart.service.OrderService;
 
 @RestController
-@RequestMapping("/api/orders")
+@RequestMapping("/orders")
 public class OrderController {
 	
 	//----------------------------------------------------------

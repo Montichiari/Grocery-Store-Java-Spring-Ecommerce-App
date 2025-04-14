@@ -8,6 +8,10 @@ import sg.edu.nus.team3.shoppingcart.model.dto.RegisterRequest;
 import sg.edu.nus.team3.shoppingcart.model.dto.UpdateUserRequest;
 import sg.edu.nus.team3.shoppingcart.repository.UserRepository;
 
+/**
+ * @author Dion Yao
+ */
+
 @Component
 public class UserMapper {
 

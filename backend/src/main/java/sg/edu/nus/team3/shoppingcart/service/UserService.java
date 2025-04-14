@@ -9,7 +9,7 @@ import sg.edu.nus.team3.shoppingcart.model.dto.RegisterRequest;
 import sg.edu.nus.team3.shoppingcart.model.dto.UpdateUserRequest;
 
 /**
-@author diony
+@author Dion Yao
 */
 
 public interface UserService {
