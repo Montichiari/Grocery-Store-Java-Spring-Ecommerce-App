@@ -36,7 +36,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     // please do not delete this
 
     @Transactional
-    @Query("SELECT p FROM Product p.id = :productId")
+    @Query("SELECT p FROM Product p WHERE p.id = :productId")
     public Optional<Product> findProductById(@Param("productId") int productId);
 
 }
