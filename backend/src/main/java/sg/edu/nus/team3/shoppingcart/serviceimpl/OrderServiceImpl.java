@@ -29,7 +29,7 @@ import sg.edu.nus.team3.shoppingcart.service.OrderService;
 import sg.edu.nus.team3.shoppingcart.util.DateUtil;
 
 @Service
-@Transactional(readOnly = true)
+@Transactional
 public class OrderServiceImpl implements OrderService {
 
 	//--------------------------------------------------------------
@@ -138,10 +138,6 @@ public class OrderServiceImpl implements OrderService {
 		return orderToCheck;
 	}
 
-		public Optional<Order> getOrderById(int order_id) {
-		Optional<Order> order = orderRepository.findById(order_id);
-		return order;
-	}
 
 	public List<Order> getAllOrders() {
 		List<Order> orderList = orderRepository.findAll();

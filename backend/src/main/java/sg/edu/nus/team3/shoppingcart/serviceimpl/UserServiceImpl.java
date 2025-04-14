@@ -152,11 +152,12 @@ public class UserServiceImpl implements UserService {
 		return userRepo.findAll();
 	}
 	
-	
+	/* Hiroyo's temp
 	//temporary method?
 	@Override
 	public User findUserById(int userId) {
 		return userRepo.findById(userId).orElse(null);
 	}
+	*/
 
 }
