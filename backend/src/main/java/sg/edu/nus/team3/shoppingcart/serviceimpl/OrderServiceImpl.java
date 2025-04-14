@@ -50,16 +50,6 @@ public class OrderServiceImpl implements OrderService {
 
 
 	@Override
-	public Order createOrder(List<OrderItem> orderItems) {
-		return new Order();
-		// Order order = new Order();
-
-		// for (OrderItem item : orderItems) {
-		// Optional<Product> product = productRepository.findById();
-		// }
-
-	// Create order and orderItems from shopping cart
-	@Override
 	public Order checkoutCart(int userId, int cartId, String paymentMethod) {
 		User user = userRepository.findById(userId).orElseThrow();
 		ShoppingCart cart = shoppingCartRepository.findById(cartId).orElseThrow();
@@ -138,6 +128,15 @@ public class OrderServiceImpl implements OrderService {
 		return orderToCheck;
 	}
 
+	
+	/*
+	 * Jared's stuff
+	 */
+	
+	public Optional<Order> getOptOrderById(int order_id) {
+		Optional<Order> order = orderRepository.findById(order_id);
+		return order;
+	}
 
 	public List<Order> getAllOrders() {
 		List<Order> orderList = orderRepository.findAll();
