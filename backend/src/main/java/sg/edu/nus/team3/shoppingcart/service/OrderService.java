@@ -15,4 +15,10 @@ public interface OrderService {
 	public List<Order> getAllOrders();
 
 	public List<OrderProjection> getWeeklyOrders();
+
+	
+	public Order checkoutCart(int userId, int cartId, String paymentMethod);
+	public Order getOrderById(int id);
+	
+
 }

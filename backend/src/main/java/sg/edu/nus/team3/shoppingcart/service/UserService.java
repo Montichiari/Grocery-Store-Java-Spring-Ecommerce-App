@@ -33,4 +33,11 @@ public interface UserService {
 	public void deleteUser(int userId);
 	
 	public List<User> findAll();
+
+/* Hiroyo's temp
+	public boolean loginAttempt(String email, String passwordInput);
+	
+	//temporary?
+	public User findUserById(int userId);
+	*/
 }

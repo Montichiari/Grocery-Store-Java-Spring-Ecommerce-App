@@ -151,5 +151,12 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return userRepo.findAll();
 	}
+	
+	
+	//temporary method?
+	@Override
+	public User findUserById(int userId) {
+		return userRepo.findById(userId).orElse(null);
+	}
 
 }

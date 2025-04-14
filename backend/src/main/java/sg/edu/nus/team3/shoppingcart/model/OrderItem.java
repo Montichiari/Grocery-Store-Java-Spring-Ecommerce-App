@@ -1,8 +1,11 @@
 package sg.edu.nus.team3.shoppingcart.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.*;
 
 @Entity
+@JsonIgnoreProperties({"order"})		//Ignore "order" during serialization (i.e. prevent loops in json)
 @Table(name = "order_item")
 public class OrderItem {
     @Id

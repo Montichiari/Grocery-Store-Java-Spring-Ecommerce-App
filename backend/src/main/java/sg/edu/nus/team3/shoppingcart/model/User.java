@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -24,6 +26,7 @@ import jakarta.validation.constraints.Size;
  */
 
 @Entity
+@JsonIgnoreProperties({"order"})		//Ignore "order" during serialization (i.e. prevent loops in json)
 @Table(name = "users")
 public class User {
 
