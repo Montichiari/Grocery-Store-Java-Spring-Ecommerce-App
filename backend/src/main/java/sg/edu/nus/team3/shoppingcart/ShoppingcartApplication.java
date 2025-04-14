@@ -37,7 +37,7 @@ public class ShoppingcartApplication {
 		return args -> {
 			User jimmy = new User("testy.johnson@email.com", "91112233", "123 Oak Street, Anytown", "Testy", "Johnson",
 					"password123");
-			uSc.registerCustomer(jimmy);
+			uSc.registerUser(jimmy);
 		};
 	}
 	// @Bean

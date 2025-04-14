@@ -147,4 +147,10 @@ public class UserServiceImpl implements UserService {
 		return userRepo.save(user);
 	}
 
+	@Override
+	public void registerUser(User user) {
+		// TODO Auto-generated method stub
+		userRepo.save(user);
+	}
+
 }

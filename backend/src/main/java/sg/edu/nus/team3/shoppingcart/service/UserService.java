@@ -30,4 +30,6 @@ public interface UserService {
 	public User updateUser(int userId, UpdateUserRequest request);
 	
 	public void deleteUser(int userId);
+	
+	public void registerUser(User user);
 }
