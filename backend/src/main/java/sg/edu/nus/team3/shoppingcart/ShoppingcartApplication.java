@@ -23,6 +23,7 @@ import sg.edu.nus.team3.shoppingcart.repository.ProductRepository;
 import sg.edu.nus.team3.shoppingcart.repository.ShoppingCartItemRepository;
 import sg.edu.nus.team3.shoppingcart.repository.ShoppingCartRepository;
 import sg.edu.nus.team3.shoppingcart.repository.UserRepository;
+import sg.edu.nus.team3.shoppingcart.serviceimpl.UserServiceImpl;
 
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
 public class ShoppingcartApplication {
@@ -31,6 +32,14 @@ public class ShoppingcartApplication {
 		SpringApplication.run(ShoppingcartApplication.class, args);
 	}
 
+	@Bean
+	CommandLineRunner runMe(UserServiceImpl uSc) {
+		return args -> {
+			User jimmy = new User("testy.johnson@email.com", "91112233", "123 Oak Street, Anytown", "Testy", "Johnson",
+					"password123");
+			uSc.registerCustomer(jimmy);
+		};
+	}
 	// @Bean
 	// CommandLineRunner runMe(UserRepository userRepo, OrderRepository orderRepo,
 	// ProductRepository productRepo,
