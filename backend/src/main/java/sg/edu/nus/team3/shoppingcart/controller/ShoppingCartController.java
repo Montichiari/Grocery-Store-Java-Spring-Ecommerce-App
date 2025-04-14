@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.http.HttpStatus;
 import javax.servlet.http.HttpSession;
 
@@ -29,60 +31,46 @@ public class ShoppingCartController {
     @Autowired
     private ShoppingCartItemService shoppingCartItem_service;
 
-    // need to test
     @GetMapping("/items")
     public ResponseEntity<List<ShoppingCartItem>> getItemsInCart(HttpSession session) {
         int shoppingCartId = (int) session.getAttribute("cartId");
-        List<ShoppingCartItem> list_items = shoppingCart_service.findShoppingCartByUserId(userId).getItems();
+        List<ShoppingCartItem> list_items = shoppingCart_service.findShoppingCartById(shoppingCartId).getItems();
         return new ResponseEntity<List<ShoppingCartItem>>(list_items, HttpStatus.OK);
     }
 
-    // need to test
-    @PostMapping("/add-item/{product_id}")
+    @PostMapping("/add-item/{product_item}")
     public ResponseEntity<List<ShoppingCartItem>> addItemToCart(@PathVariable Product product_item, int quantity,
             HttpSession session) {
-        // do if else statement here if the user id is null/not valid , then reject the
-        // user and return error message
-        // else continue with the flow
-        // get user id from session object
-        if (session.getAttribute("id") == null) {
-            return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
-        }
-        int user_id_session = (int) session.getAttribute("id");
-        // find shopping cart by user Id
-        ShoppingCart userShoppingCart = shoppingCart_service.findShoppingCartByUserId(user_id_session);
-        // call method from ShoppingCartService to create a new shopping cart
-        // item
-        ShoppingCartItem newCartItem = shoppingCartItem_service.createShoppingCartItem(userShoppingCart, product_item,
-                quantity);
-        // once get converted shopping cart item, add this shopping cart item to the
-        // cart
+        // get shopping cart id, product id, and quantity before can use addItemToCart
+        int cartId = (int) session.getAttribute("cartId");
 
-        // create addShoppingCartItem method in the service impl class
-        userShoppingCart.getItems().add(newCartItem);
-        // update the time to show when the shopping cart was last updated
-        userShoppingCart.setUpatedAt(userShoppingCart.getUpatedAt());
-        // save updated shopping cart into the shoppingcartrepository
-        shoppingCart_service.saveShoppingCart(userShoppingCart);
-        // get the updated list of items from this shopping cart
-        List<ShoppingCartItem> list_CartItems = userShoppingCart.getItems();
+        // once cart is confirmed to exist, use addItemToCart method to add items to
+        // cart
+        // get product id from path variable
+        int productId = product_item.getId();
+
+        ShoppingCart userCart = shoppingCart_service.addItemToCart(cartId, productId, quantity);
+        // method returns a shopping cart
+
+        // from the cart item can get the list of items in shopping cart
+        List<ShoppingCartItem> listCartItems = userCart.getItems();
+        // return the list of items in the shopping cart
+
         // return the list of shopping cart items with the new item added to the cart
-        return new ResponseEntity<List<ShoppingCartItem>>(list_CartItems, HttpStatus.OK);
+        return new ResponseEntity<List<ShoppingCartItem>>(listCartItems, HttpStatus.OK);
     }
 
-    // need to test
     @DeleteMapping("/delete-item/")
     public ResponseEntity<Void> clearShoppingCart(HttpSession session) {
 
-        if (session.getAttribute("id") == null) {
+        // user id from session object
+        int cartId = (int) session.getAttribute("cartId");
+        if (session.getAttribute("cartId") == null) {
             return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
         }
 
-        // user id from session object
-        int userid_session = (int) session.getAttribute("id");
-
         // call method from service class to delete all items in cart
-        shoppingCart_service.deleteAllItemsInCart(userid_session);
+        shoppingCart_service.deleteAllItemsInCart(cartId);
 
         // the following code has been implemented into the service method
         // deleteAllItemsInCart

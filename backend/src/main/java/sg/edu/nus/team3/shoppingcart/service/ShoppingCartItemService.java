@@ -10,6 +10,7 @@ public interface ShoppingCartItemService {
 
 	public void deleteShoppingCartItem();
 
+	// please do not delete
 	// authored by @thina, method to convert product to shopping cart item and save
 	// into database to be
 	// used in the shoppingcart controller to add product to shopping cart

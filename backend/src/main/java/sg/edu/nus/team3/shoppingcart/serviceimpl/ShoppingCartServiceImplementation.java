@@ -28,6 +28,9 @@ public class ShoppingCartServiceImplementation implements ShoppingCartService {
 	@Autowired
 	ShoppingCartItemRepository scItemRepo;
 
+	@Autowired
+	ProductRepository productRepo;
+
 	@Override
 	@Transactional
 	public ShoppingCart findShoppingCartById(int id) {
@@ -61,11 +64,11 @@ public class ShoppingCartServiceImplementation implements ShoppingCartService {
 		// delete all items in the cart from the database
 		for (int i = 0; i < listCartItems.size(); i++) {
 			// get each shopping cart item id and delete from the database
-			ShoppingCartItem shopping_cart_item = listCartItems.get(i);
+			ShoppingCartItem cartItem = listCartItems.get(i);
 			// after getting each shopping cart item, delete each item from the database of
 			// shopping cart item
-			int shopping_cart_item_id = shopping_cart_item.getId();
-			scItemRepo.deleteById(shopping_cart_item_id);
+			int cartItemId = cartItem.getId();
+			scItemRepo.deleteById(cartItemId);
 		}
 
 		// clear memory of the list after removing from database
@@ -73,21 +76,67 @@ public class ShoppingCartServiceImplementation implements ShoppingCartService {
 
 	}
 
-	public ShoppingCart addItemToCart(int shoppingCartId, int productId, int quantity){
-	// find shopping cart by cart id 
-	ShoppingCart userCart = findShoppingCartById(shoppingCartId); 
-	// check if the product id exists in the database 
-	Product product = ProductRepository.findProductById(productId);
-	// get shopping cart , then get the list of the items in cart
-	// if the list contains the product, update quantity of the product in the cart
-	// else, add the product to the cart and set the quantity 
-	
+	public ShoppingCart addItemToCart(int shoppingCartId, int productId, int quantity) {
 
+		// check if cart exists before proceeding
+		ShoppingCart userCart = findShoppingCartById(shoppingCartId);
 
+		// check if the product id entered exists in the database
+		// assign product to validProduct variable if the product exists
+		Product validProduct;
+		// use the product repository to find the product by id
+		Optional<Product> product = productRepo.findProductById(productId);
+		if (!(product.isPresent())) {
+			throw new RuntimeException("Product not found for product id:" + productId);
+		} else {
+			// assign existing product to the validProduct variable to be used later in the
+			// code
+			validProduct = product.get();
 
+		}
 
+		// assuming that product and shoppingcart are valid after going through checks
 
-return ShoppingCart updated_cart ; 
-}
+		// then get the list of the items in cart
+		// if the list contains the product, update quantity of the product in the cart
+		// else, add the product to the cart and set the quantity
+		List<ShoppingCartItem> listCartItems = userCart.getItems();
+
+		// boolean condition to check if product match with cart items
+		boolean productMatch = false;
+		// loop through list of cart items to check if product entered matches cart
+		// items
+		// if yes, then save the new quantity of the cart item
+		for (int i = 0; i < listCartItems.size(); i++) {
+			ShoppingCartItem cartItem = listCartItems.get(i);
+			Product productInCart = cartItem.getProduct();
+			// if product already in cart, update quantity
+			if (productInCart.getId() == productId) {
+				int newQuantity = cartItem.getQuantity() + quantity;
+				cartItem.setQuantity(newQuantity);
+				scItemRepo.save(cartItem);
+				scRepo.save(userCart);
+				productMatch = true;
+
+			}
+			; // end of if statement
+
+		} // end of for loop that loops through the cart items to find a match
+
+		// if there is no match with product and items in cart, then need to manually
+		// add product into shopping cart
+		if (productMatch = false) {
+			ShoppingCartItem newCartItem = new ShoppingCartItem();
+			newCartItem.setProduct(validProduct);
+			newCartItem.setQuantity(quantity);
+			newCartItem.setShoppingCart(userCart);
+			scItemRepo.save(newCartItem);
+			userCart.getItems().add(newCartItem);
+			scRepo.save(userCart);
+
+		} // end of if statemnent for no product match
+
+		return userCart;
+	}// end of method addItemToCart
 
 }
