@@ -5,6 +5,7 @@ import java.util.Optional;
 import sg.edu.nus.team3.shoppingcart.model.User;
 import sg.edu.nus.team3.shoppingcart.model.dto.LoginRequest;
 import sg.edu.nus.team3.shoppingcart.model.dto.RegisterRequest;
+import sg.edu.nus.team3.shoppingcart.model.dto.UpdateUserRequest;
 
 /**
 @author diony
@@ -25,4 +26,8 @@ public interface UserService {
 	public User registerCustomer(RegisterRequest request);
 	
 	public User registerStaff(RegisterRequest request);
+	
+	public User updateUser(int userId, UpdateUserRequest request);
+	
+	public void deleteUser(int userId);
 }
