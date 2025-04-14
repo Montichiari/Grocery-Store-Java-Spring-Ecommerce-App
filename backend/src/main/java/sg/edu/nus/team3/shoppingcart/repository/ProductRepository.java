@@ -29,4 +29,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Transactional
     @Query("DELETE FROM Product p WHERE p.id = :productId")
     public void deleteProductById(@Param("productId") int product_id);
+
+    @Query("SELECT p FROM Product p WHERE p.unitPrice BETWEEN :min AND :max")
+    public List<Product> findByPriceBetween(Double min, Double max);
 }

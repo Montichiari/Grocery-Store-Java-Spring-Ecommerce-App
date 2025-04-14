@@ -1,8 +1,7 @@
 package sg.edu.nus.team3.shoppingcart.serviceimpl;
 
-import java.util.ArrayList;
+import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,7 +35,7 @@ public class ProductServiceImplementation implements ProductService {
 
   public void editProductById(int product_id, Product product) {
     productRepo.updateProductById(product_id, product.getName(), product.getStock(), product.getUnitPrice(),
-        product.getCategory());
+            product.getCategory());
   }
 
   public void deleteProductById(int product_id) {
@@ -47,4 +46,19 @@ public class ProductServiceImplementation implements ProductService {
     List<Product> productInfo = productRepo.findByProductName(product_name).stream().toList();
     return productInfo;
   }
+
+  public List<Product> getProductsByPriceRange(double min,double max) {
+    if (min < 0 || max > 0) {
+      throw new IllegalArgumentException("The price can't be less than zero!");
+    }
+    if (min > max) {
+      throw new IllegalArgumentException("The price can't be greater than zero!");
+    }
+    return productRepo.findByPriceBetween(min, max);
+  }
 }
+
+
+
+
+

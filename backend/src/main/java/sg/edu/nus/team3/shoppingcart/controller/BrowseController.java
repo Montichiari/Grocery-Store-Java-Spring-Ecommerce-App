@@ -9,10 +9,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/products")
-public class ProductController {
+public class BrowseController {
     @Autowired
     private ProductService productService;
-    public ProductController(ProductService productService) {
+    public BrowseController(ProductService productService) {
         this.productService = productService;
     }
 
@@ -22,8 +22,8 @@ public class ProductController {
     }
 
     @GetMapping("/search")
-    public List<Product> searchProducts(@RequestParam String id) {
-        return productService.searchProducts(id);
+    public List<Product> searchProducts(@RequestParam int id) {
+        return productService.searchProductById(id);
     }
 
     @GetMapping("/filter")
