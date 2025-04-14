@@ -25,8 +25,8 @@ public class WebAppConfig implements WebMvcConfigurer {
 		// Current interceptor implementation redirects to login from cart and admin urls except Login itself, if not logged in.
 		registry.addInterceptor(loginInterceptor).addPathPatterns("/cart/**", "/admin/**").excludePathPatterns("/login");
 		
-		// This interceptor prevents non-staff from accessing admin panel and staff registration
-		registry.addInterceptor(roleInterceptor).addPathPatterns("/admin/**", "/user/register/staff").excludePathPatterns("/login");
+		// This interceptor prevents non-staff from accessing admin panel and staff registration and all users
+		registry.addInterceptor(roleInterceptor).addPathPatterns("/admin/**", "/user/register/staff", "/user/all").excludePathPatterns("/login");
 		
 		// This interceptor prevents access to login and customer registration if already logged in
 		registry.addInterceptor(guestOnlyInterceptor).addPathPatterns("/user/login/**", "/user/register/customer");

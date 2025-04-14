@@ -1,5 +1,6 @@
 package sg.edu.nus.team3.shoppingcart.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import sg.edu.nus.team3.shoppingcart.model.User;
@@ -30,4 +31,6 @@ public interface UserService {
 	public User updateUser(int userId, UpdateUserRequest request);
 	
 	public void deleteUser(int userId);
+	
+	public List<User> findAll();
 }

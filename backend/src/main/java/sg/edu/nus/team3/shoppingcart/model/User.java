@@ -3,7 +3,7 @@ package sg.edu.nus.team3.shoppingcart.model;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -16,6 +16,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 /**
@@ -31,6 +32,11 @@ public class User {
 	private int id;
 
 	@NotBlank(message = "Email is required")
+	// I looked up online for this email regex validation, because I knew it exists
+	@Pattern(
+		    regexp = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$",
+		    message = "Invalid email format"
+		)	
 	// Custom email validation to be created
 	@Column(length = 320)
 	private String email;
@@ -41,7 +47,6 @@ public class User {
 	private String handPhoneNo;
 
 	@NotBlank(message = "Address is required")
-	// Custom address validation to be created
 	private String address;
 
 	// Limit to 35 chars for first name and last name
@@ -61,14 +66,19 @@ public class User {
 	private List<Order> orders;
 
 	@NotBlank(message = "Password is required")
-	@Size(min = 8, max = 128, message = "Password must be at least 8 characters long")
-	// Custom password validation to be created
+	// Looked up online for classic password regex validation
+	@Pattern(
+		    regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
+		    message = "Password must be at least 8 characters long, include uppercase and lowercase letters, a number, and a special character"
+		)
+	@JsonIgnore
 	private String password;
 
 	private String role;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "shopping_cart_id", referencedColumnName = "id")
+	@JsonIgnore
 	private ShoppingCart shoppingCart;
 
 	// Constructors

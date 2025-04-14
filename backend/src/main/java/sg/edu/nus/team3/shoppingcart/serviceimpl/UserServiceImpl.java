@@ -1,5 +1,6 @@
 package sg.edu.nus.team3.shoppingcart.serviceimpl;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -108,7 +109,9 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User registerStaff(RegisterRequest request) {
 
+		// UserMapper turns the Dto into a User object
 		User staffToRegister = userMap.toUser(request);
+		
 		// Hashing the user input password with PasswordEncoder
 		String hashedPassword = passwordEncoder.encode(staffToRegister.getPassword());
 
@@ -133,18 +136,20 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User updateUser(int userId, UpdateUserRequest request) {
 		
-		User user = userRepo.findById(userId).orElseThrow();
-
-		user.setFirstName(request.getFirstName());
-		user.setLastName(request.getLastName());
-		user.setAddress(request.getAddress());
-		user.setHandPhoneNo(request.getHandPhoneNo());
+		// UserMapper turns the Dto into a User first, BUT not password
+		User user = userMap.toUser(userId, request);
 
 		if (request.getPassword() != null && !request.getPassword().isEmpty()) {
 			user.setPassword(passwordEncoder.encode(request.getPassword()));
 		}
 
 		return userRepo.save(user);
+	}
+
+	@Override
+	public List<User> findAll() {
+		// TODO Auto-generated method stub
+		return userRepo.findAll();
 	}
 
 }

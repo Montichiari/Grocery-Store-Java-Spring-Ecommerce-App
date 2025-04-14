@@ -1,5 +1,6 @@
 package sg.edu.nus.team3.shoppingcart.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,7 @@ public class LoginController {
 	 */
 	
 	@PostMapping("/login")
-	public ResponseEntity<?> handleLogin(@Valid @RequestBody LoginRequest request, HttpSession session) {
+	public ResponseEntity<?> login(@Valid @RequestBody LoginRequest request, HttpSession session) {
 		
 		Optional<User> userOpt = userService.findUserByEmail(request.getEmail());
 		
@@ -138,6 +139,26 @@ public class LoginController {
 	    User user = userService.findUserById(accountId);
 	    return new ResponseEntity<>(user, HttpStatus.OK);
 	}
+	
+	@GetMapping("/all")
+	public ResponseEntity<?> getAllUsers(HttpSession session) {
+	    int userId = (int) session.getAttribute("id");
+	    String role = (String) session.getAttribute("role");
+	    
+	    if (userId == 0) {
+	        return new ResponseEntity<>("You must be logged in to acccess this page", HttpStatus.UNAUTHORIZED);
+	    }
+	    
+	    // Check if user is staff
+	    boolean isStaff = role.equalsIgnoreCase("staff");
+	    
+	    if (isStaff == false) {
+	    	return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+	    }
+
+	    List<User> user = userService.findAll();
+	    return new ResponseEntity<>(user, HttpStatus.OK);
+	}
 
 	
 	@PutMapping("/{id}")
@@ -185,11 +206,15 @@ public class LoginController {
 	    	return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 	    }
 	    
-	    // User deleted and session invalidated
-	    userService.deleteUser(accountId);
-	    session.invalidate();
-
-	    return new ResponseEntity<>("User deleted successfully", HttpStatus.OK);
+	    // User deleted and session invalidated. Put in a try-catch for security
+	    try {
+	    	userService.deleteUser(accountId);
+	    	session.invalidate();
+		    return new ResponseEntity<>("User deleted successfully", HttpStatus.NO_CONTENT);
+	    } catch (Exception e) {
+	    	return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+	    }
+	    
 	}
 	
 }

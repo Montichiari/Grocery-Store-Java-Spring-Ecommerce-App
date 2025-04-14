@@ -1,6 +1,8 @@
 package sg.edu.nus.team3.shoppingcart.model.dto;
 
 public class UpdateUserRequest {
+	
+	private String email;
 	private String firstName;
 	private String lastName;
 	private String address;
@@ -10,6 +12,16 @@ public class UpdateUserRequest {
 	
 	public UpdateUserRequest() {
 		
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 
@@ -61,6 +73,9 @@ public class UpdateUserRequest {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+
+	
 	
 	
 }
