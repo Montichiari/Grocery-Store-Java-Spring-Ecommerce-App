@@ -24,7 +24,7 @@ import sg.edu.nus.team3.shoppingcart.service.ShoppingCartService;
 
 // @Authored by @thina
 @RestController
-@RequestMapping("/shoppingcart")
+@RequestMapping("/cart")
 public class ShoppingCartController {
 
     @Autowired
@@ -40,7 +40,7 @@ public class ShoppingCartController {
         return new ResponseEntity<List<ShoppingCartItem>>(list_items, HttpStatus.OK);
     }
 
-    @PostMapping("/add-item/{product_item}")
+    @PostMapping("/add/{product_item}")
     public ResponseEntity<List<ShoppingCartItem>> addItemToCart(@PathVariable Product product_item, int quantity,
             HttpSession session) {
         // get shopping cart id, product id, and quantity before can use addItemToCart
@@ -62,13 +62,13 @@ public class ShoppingCartController {
         return new ResponseEntity<List<ShoppingCartItem>>(listCartItems, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete-item/")
-    public ResponseEntity<Void> clearShoppingCart(HttpSession session) {
+    @DeleteMapping("/clear")
+    public ResponseEntity<?> clearShoppingCart(HttpSession session) {
 
         // user id from session object
         int cartId = (int) session.getAttribute("cartId");
         if (session.getAttribute("cartId") == null) {
-            return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
 
         // call method from service class to delete all items in cart
@@ -96,7 +96,7 @@ public class ShoppingCartController {
         // clear memory of the list after removing from database
         // shoppingcart_items.removeAll(shoppingcart_items);
 
-        return ResponseEntity.noContent().build();
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
     }
 
