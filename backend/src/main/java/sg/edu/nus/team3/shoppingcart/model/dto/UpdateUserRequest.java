@@ -1,5 +1,9 @@
 package sg.edu.nus.team3.shoppingcart.model.dto;
 
+/**
+ * @authored Dion Yao
+ */
+
 public class UpdateUserRequest {
 	
 	private String email;

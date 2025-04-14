@@ -30,15 +30,15 @@ public class OrderController {
 	@PostMapping("/checkout")
 	public ResponseEntity<Order> checkoutCartAndSaveOrder(HttpSession session, @RequestParam String paymentMethod) {
 		
-		Integer userId = (Integer) session.getAttribute("userId");//is it "id" or "userId"?
-		Integer cartId = (Integer) session.getAttribute("cartId");
+		int userId = (int) session.getAttribute("Id");
+		int cartId = (int) session.getAttribute("cartId");
 		
 		//check with hard coded values
 		//userId = 1;
 		//cartId = 1;
 		
 		// Throw an error if the user or the cart doesn't exist
-		if (userId == null || cartId == null) {
+		if (userId == 0 || cartId == 0) {
 			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 		}
 		
@@ -57,10 +57,10 @@ public class OrderController {
 	// Display order confirmation
 	@GetMapping("/confirmation")
 	public ResponseEntity<?> getOrderConfirmation(@RequestParam int orderId, HttpSession session) {
-		Integer userId = (Integer) session.getAttribute("userId");
+		int userId = (int) session.getAttribute("Id");
 		// Make sure the user is logged in
-		if (userId == null) {
-			return new ResponseEntity<>(Map.of("error", "User not logged in"),HttpStatus.UNAUTHORIZED);
+		if (userId == 0) {
+			return new ResponseEntity<>("You must be logged in to view this page", HttpStatus.UNAUTHORIZED);
 		}
 		
 		Order order = orderService.getOrderById(orderId);

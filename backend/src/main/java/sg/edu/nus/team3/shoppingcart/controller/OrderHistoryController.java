@@ -66,7 +66,7 @@ public class OrderHistoryController {
 	    boolean isOwner = (order.getUser().getId() == userId);
 	    
 	    // Allow only staff or order owner to view order details
-	    if (!isStaff && !isOwner) {
+	    if ((isStaff == false) && (isOwner == false)) {
 	        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 	    }
 

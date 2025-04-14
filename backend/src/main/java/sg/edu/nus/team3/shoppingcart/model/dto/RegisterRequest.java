@@ -4,6 +4,10 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
+/**
+ * @authored Dion Yao
+ */
+
 public class RegisterRequest {
 	//All validations copy and pasted from User entity
 	

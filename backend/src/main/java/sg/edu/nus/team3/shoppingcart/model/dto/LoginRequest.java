@@ -3,6 +3,10 @@ package sg.edu.nus.team3.shoppingcart.model.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
+/**
+ * @authored Dion Yao
+ */
+
 public class LoginRequest {
 
 	@NotBlank(message = "Email is required")
