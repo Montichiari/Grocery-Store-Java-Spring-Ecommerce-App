@@ -21,7 +21,6 @@ public interface ShoppingCartRepository extends JpaRepository<ShoppingCart, Inte
 	// find shopping cart by shopping_cart id
 	// session has shopping_cart id directly
 	// method is find shoppingcart by shoppingcart id
-	
 	@Query("SELECT s FROM ShoppingCart s WHERE s.id = :cartId")
 	Optional<ShoppingCart> findShoppingCartById(@Param("cartId") int cartId);
 
