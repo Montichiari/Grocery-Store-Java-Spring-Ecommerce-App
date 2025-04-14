@@ -1,6 +1,5 @@
 package sg.edu.nus.team3.shoppingcart.controller;
 
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,6 +35,12 @@ public class LoginController {
 	@Autowired
 	private UserService userService;
 	
+	
+	/* 
+	 * This section is for Login / Login status / Logout
+	 * 
+	 */
+	
 	@PostMapping("/login")
 	public ResponseEntity<?> handleLogin(@Valid @RequestBody LoginRequest request, HttpSession session) {
 		
@@ -53,7 +59,7 @@ public class LoginController {
 			return new ResponseEntity<User>(user, HttpStatus.OK);
 		}
 		
-		return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+		return new ResponseEntity<>("Incorrect username or password", HttpStatus.UNAUTHORIZED);
 	}
 	
 	
@@ -65,39 +71,9 @@ public class LoginController {
 			return new ResponseEntity<Integer>((Integer) session.getAttribute("id"), HttpStatus.OK);
 		}
 		
-		return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+		return new ResponseEntity<>("You must be logged in", HttpStatus.UNAUTHORIZED);
 	}
 	
-	
-	@PostMapping("/register/customer")
-	public ResponseEntity<User> registerCustomer(@Valid @RequestBody RegisterRequest request) {
-		
-		// Log users in if email exists in database, and associated password matches
-		// on successful login, updates session with "email" and "role" attributes
-		
-		try {
-			User newUser = userService.registerCustomer(request);
-			return new ResponseEntity<User> (newUser, HttpStatus.CREATED);
-			
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
-		}
-	}
-	
-	@PostMapping("/register/staff")
-	public ResponseEntity<User> registerStaff(@Valid @RequestBody RegisterRequest request) {
-		
-		// Log users in if email exists in database, and associated password matches
-		// on successful login, updates session with "email" and "role" attributes
-		
-		try {
-			User newUser = userService.registerStaff(request);
-			return new ResponseEntity<User> (newUser, HttpStatus.CREATED);
-			
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
-		}
-	}
 	
 	@GetMapping("/logout")
 	public ResponseEntity<?> logout(HttpSession session) {
@@ -109,32 +85,111 @@ public class LoginController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-	@PutMapping
-	public ResponseEntity<?> updateUser(@RequestBody UpdateUserRequest request, HttpSession session) {
+	
+	/* 
+	 * This section is for CRUD functions for User accounts
+	 * 
+	 */
+	
+	
+	@PostMapping("/register/customer")
+	public ResponseEntity<?> registerCustomer(@Valid @RequestBody RegisterRequest request) {
+		
+		
+		try {
+			User newUser = userService.registerCustomer(request);
+			return new ResponseEntity<User> (newUser, HttpStatus.CREATED);
+			
+		} catch (Exception e) {
+			return new ResponseEntity<>("Unable to register account", HttpStatus.EXPECTATION_FAILED);
+		}
+	}
+	
+	@PostMapping("/register/staff")
+	public ResponseEntity<?> registerStaff(@Valid @RequestBody RegisterRequest request) {
+		
+		
+		try {
+			User newUser = userService.registerStaff(request);
+			return new ResponseEntity<User> (newUser, HttpStatus.CREATED);
+			
+		} catch (Exception e) {
+			return new ResponseEntity<>("Unable to register staff account", HttpStatus.EXPECTATION_FAILED);
+		}
+	}
+	
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<?> getAccountById(@PathVariable("id") int accountId, HttpSession session) {
 	    int userId = (int) session.getAttribute("id");
-
+	    String role = (String) session.getAttribute("role");
+	    
 	    if (userId == 0) {
-	        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+	        return new ResponseEntity<>("You must be logged in to acccess this page", HttpStatus.UNAUTHORIZED);
+	    }
+	    
+	    // Check if user is staff
+	    boolean isStaff = role.equalsIgnoreCase("staff");
+	    
+	    if (isStaff == false) {
+	    	return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 	    }
 
-	    User updatedUser = userService.updateUser(userId, request);
+	    User user = userService.findUserById(accountId);
+	    return new ResponseEntity<>(user, HttpStatus.OK);
+	}
+
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<?> updateUser(@PathVariable("id") int accountId, @RequestBody UpdateUserRequest request, HttpSession session) {
+	    
+		// Checking if user is logged in
+		int userId = (int) session.getAttribute("id");
+
+	    if (userId == 0) {
+	        return new ResponseEntity<>("You must be logged in to acccess this page", HttpStatus.UNAUTHORIZED);
+	    }
+	    
+	    // Checking if the user is staff or not
+	    String userRole = (String) session.getAttribute("role");
+	    boolean isStaff = userRole.equalsIgnoreCase("staff");
+	    
+	    // If not staff, they are not allowed to update account that isn't their own
+	    if (isStaff == false && accountId != userId) {
+	    	return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+	    }
+
+	    User updatedUser = userService.updateUser(accountId, request);
 	    return new ResponseEntity<>(updatedUser, HttpStatus.OK);
 	}
 	
 	
-	@DeleteMapping
-	public ResponseEntity<?> deleteUser(HttpSession session) {
-	    int userId = (int) session.getAttribute("id");
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> deleteUser(@PathVariable("id") int accountId, HttpSession session) {
+	    
+		// Check if user is logged in
+		int userId = (int) session.getAttribute("id");
 
+	    
+	    // Checking if the user is staff or not
+	    String userRole = (String) session.getAttribute("role");
+	    boolean isStaff = userRole.equalsIgnoreCase("staff");
+	    
+	    
 	    if (userId == 0) {
-	        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+	        return new ResponseEntity<>("You must be logged in to acccess this page", HttpStatus.UNAUTHORIZED);
+	    }
+	    
+	    // If not staff, they are not allowed to delete account that isn't their own
+	    if (isStaff == false && accountId != userId) {
+	    	return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 	    }
 	    
 	    // User deleted and session invalidated
-	    userService.deleteUser(userId);
+	    userService.deleteUser(accountId);
 	    session.invalidate();
 
-	    return new ResponseEntity<>(HttpStatus.OK);
+	    return new ResponseEntity<>("User deleted successfully", HttpStatus.OK);
 	}
 	
 }

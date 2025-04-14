@@ -15,7 +15,7 @@ public interface UserService {
 	
 	public Optional<User> findUserByEmail(String email);
 	
-	public Optional<User> findUserById(int id);
+	public User findUserById(int id);
 	
 	public boolean loginAttempt(LoginRequest request);
 	

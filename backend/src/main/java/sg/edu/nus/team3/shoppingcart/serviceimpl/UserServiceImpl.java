@@ -72,9 +72,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Optional<User> findUserById(int id) {
+	public User findUserById(int id) {
 		// TODO Auto-generated method stub
-		return userRepo.findUserById(id);
+		return userRepo.findUserById(id).orElseThrow();
 	}
 
 
@@ -114,16 +114,17 @@ public class UserServiceImpl implements UserService {
 
 		// Encrypted version of password is stored instead of original password in plaintext
 		staffToRegister.setPassword(hashedPassword);
+		
+		// Role set to staff. Will be able to access admin dashboard, and perform staff RUD functions on any account.
 		staffToRegister.setRole("staff");
 
-		// Role set to staff. Will be able to access admin dashboard.
+		
 		return userRepo.save(staffToRegister);
 	}
 
 	@Override
 	public void deleteUser(int userId) {
-		User user = userRepo.findById(userId).orElseThrow(() ->
-		new NoSuchElementException("User not found"));
+		User user = userRepo.findById(userId).orElseThrow();
 
 		userRepo.delete(user);
 
@@ -132,8 +133,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User updateUser(int userId, UpdateUserRequest request) {
 		
-		User user = userRepo.findById(userId).orElseThrow(() ->
-		new NoSuchElementException("User not found"));
+		User user = userRepo.findById(userId).orElseThrow();
 
 		user.setFirstName(request.getFirstName());
 		user.setLastName(request.getLastName());
@@ -141,7 +141,7 @@ public class UserServiceImpl implements UserService {
 		user.setHandPhoneNo(request.getHandPhoneNo());
 
 		if (request.getPassword() != null && !request.getPassword().isEmpty()) {
-			user.setPassword(passwordEncoder.encode(request.getPassword())); // encode again!
+			user.setPassword(passwordEncoder.encode(request.getPassword()));
 		}
 
 		return userRepo.save(user);
