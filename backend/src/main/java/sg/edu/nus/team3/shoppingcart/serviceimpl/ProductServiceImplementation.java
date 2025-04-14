@@ -2,6 +2,7 @@ package sg.edu.nus.team3.shoppingcart.serviceimpl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,37 +21,30 @@ public class ProductServiceImplementation implements ProductService {
   public ProductRepository productRepo;
 
   public List<Product> searchProductById(int product_id) {
-    // TODO: Finish implementation of searchProductById
-    return new ArrayList<Product>();
+    List<Product> productInfo = productRepo.findById(product_id).stream().toList();
+    return productInfo;
   }
 
-  public double getProductPriceById(int product_id) {
-    // TODO: Finish implementation of getProductPriceById
-    return 0.0;
-  }
-
-  @Transactional
   public List<Product> getAllProducts() {
-    // TODO: Finish implementation of getAllProducts()
-    List<Product> productList = productRepo.retrieveProductListFromProduct();
+    List<Product> productList = productRepo.retrieveProductListFromProduct().get();
     return productList;
   }
 
   public void createProduct(Product product) {
-    // TODO: Finish implementation of createProduct()
+    productRepo.save(product);
   }
 
   public void editProductById(int product_id, Product product) {
-    // TODO: Finish implementation of editProductById()
-
+    productRepo.updateProductById(product_id, product.getName(), product.getStock(), product.getUnitPrice(),
+        product.getCategory());
   }
 
   public void deleteProductById(int product_id) {
-    // TODO: Finish implementation of deleteProductById()
+    productRepo.deleteProductById(product_id);
   }
 
   public List<Product> searchProductByName(String product_name) {
-    // TODO: Finish implementation of searchProductByName
-    return new ArrayList<Product>();
+    List<Product> productInfo = productRepo.findByProductName(product_name).stream().toList();
+    return productInfo;
   }
 }
