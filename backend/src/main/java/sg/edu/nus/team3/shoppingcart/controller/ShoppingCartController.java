@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
 import java.util.Optional;
 
-
 import sg.edu.nus.team3.shoppingcart.model.Product;
 import sg.edu.nus.team3.shoppingcart.model.ShoppingCart;
 import sg.edu.nus.team3.shoppingcart.model.ShoppingCartItem;
@@ -40,8 +39,9 @@ public class ShoppingCartController {
         return new ResponseEntity<List<ShoppingCartItem>>(list_items, HttpStatus.OK);
     }
 
-    @PostMapping("/add/{product_item}")
-    public ResponseEntity<List<ShoppingCartItem>> addItemToCart(@PathVariable Product product_item, int quantity,
+    @PostMapping("/add/{product_item}/{quantity}")
+    public ResponseEntity<List<ShoppingCartItem>> addItemToCart(@PathVariable("product_item") Product product_item,
+            @PathVariable("quantity") int quantity,
             HttpSession session) {
         // get shopping cart id, product id, and quantity before can use addItemToCart
         int cartId = (int) session.getAttribute("cartId");
