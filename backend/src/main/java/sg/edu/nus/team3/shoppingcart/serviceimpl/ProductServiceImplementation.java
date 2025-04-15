@@ -25,6 +25,13 @@ public class ProductServiceImplementation implements ProductService {
     return productInfo;
   }
 
+  // @author of this method : Thina
+  // this method is used to find the product by productId for the add to cart case
+  public Optional<Product> findById(int product_id) {
+    Optional<Product> product = productRepo.findProductById(product_id);
+    return product;
+  }
+
   public List<Product> getAllProducts() {
     List<Product> productList = productRepo.retrieveProductListFromProduct().get();
     return productList;

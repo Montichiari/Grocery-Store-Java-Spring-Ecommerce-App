@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import java.util.Optional;
 import sg.edu.nus.team3.shoppingcart.model.Product;
 import sg.edu.nus.team3.shoppingcart.model.ShoppingCart;
 import sg.edu.nus.team3.shoppingcart.model.ShoppingCartItem;
+import sg.edu.nus.team3.shoppingcart.service.ProductService;
 import sg.edu.nus.team3.shoppingcart.service.ShoppingCartItemService;
 import sg.edu.nus.team3.shoppingcart.service.ShoppingCartService;
 
@@ -32,6 +34,9 @@ public class ShoppingCartController {
     @Autowired
     private ShoppingCartItemService shoppingCartItem_service;
 
+    @Autowired
+    private ProductService product_service;
+
     @GetMapping("/items")
     public ResponseEntity<List<ShoppingCartItem>> getItemsInCart(HttpSession session) {
         int shoppingCartId = (int) session.getAttribute("cartId");
@@ -39,17 +44,24 @@ public class ShoppingCartController {
         return new ResponseEntity<List<ShoppingCartItem>>(list_items, HttpStatus.OK);
     }
 
-    @PostMapping("/add/{product_item}/{quantity}")
-    public ResponseEntity<List<ShoppingCartItem>> addItemToCart(@PathVariable("product_item") Product product_item,
-            @PathVariable("quantity") int quantity,
+    @PostMapping("/add/{productId}")
+    public ResponseEntity<List<ShoppingCartItem>> addItemToCart(@PathVariable("productId") int productId,
+            @RequestParam("quantity") int quantity,
             HttpSession session) {
         // get shopping cart id, product id, and quantity before can use addItemToCart
         int cartId = (int) session.getAttribute("cartId");
 
-        // once cart is confirmed to exist, use addItemToCart method to add items to
+        // find product by id
+        Optional<Product> product = product_service.findById(productId);
+        Product validProduct;
+        if (product.isPresent()) {
+            validProduct = product.get();
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        // once cart and product are confirmed to exist, call method to add product to
         // cart
-        // get product id from path variable
-        int productId = product_item.getId();
 
         ShoppingCart userCart = shoppingCart_service.addItemToCart(cartId, productId, quantity);
         // method returns a shopping cart

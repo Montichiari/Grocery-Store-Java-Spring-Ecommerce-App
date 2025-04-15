@@ -20,6 +20,11 @@ public interface ProductService {
 
   public List<Product> searchProductByName(String product_name);
 
+<<<<<<< Updated upstream
   public List<Product> getProductsByPriceRange(double min, double max);
+=======
+  // addded by @ Thina
+  public Optional<Product> findById(int product_id);
+>>>>>>> Stashed changes
 
 }
