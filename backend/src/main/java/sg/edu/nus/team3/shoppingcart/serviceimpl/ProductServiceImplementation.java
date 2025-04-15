@@ -47,4 +47,15 @@ public class ProductServiceImplementation implements ProductService {
     List<Product> productInfo = productRepo.findByProductName(product_name).stream().toList();
     return productInfo;
   }
+  
+  // Shengyi
+  public List<Product> getProductsByPriceRange(double min,double max) {
+	    if (min < 0 || max > 0) {
+	      throw new IllegalArgumentException("The price can't be less than zero!");
+	    }
+	    if (min > max) {
+	      throw new IllegalArgumentException("The price can't be greater than zero!");
+	    }
+	    return productRepo.findByPriceBetween(min, max);
+	  }
 }

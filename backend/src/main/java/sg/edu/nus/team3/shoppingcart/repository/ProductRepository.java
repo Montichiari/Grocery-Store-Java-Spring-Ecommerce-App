@@ -39,4 +39,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Transactional
     @Query("SELECT p FROM Product p WHERE p.id = :productId")
     public Optional<Product> findProductById(@Param("productId") int productId);
+    
+    // Shengyi
+    @Query("SELECT p FROM Product p WHERE p.unitPrice BETWEEN :min AND :max")
+    public List<Product> findByPriceBetween(Double min, Double max);
 }
