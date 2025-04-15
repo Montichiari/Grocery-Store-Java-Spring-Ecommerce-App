@@ -45,7 +45,7 @@ public class User {
 	private String email;
 
 	@NotBlank(message = "Handphone no. is required")
-	@Size(min = 8, max = 8, message = "Handphone no. must be 8 digits")
+	// @Size(min = 8, max = 8, message = "Handphone no. must be 8 digits")
 	@Column(name = "handphone_no", length = 8)
 	private String handPhoneNo;
 
@@ -70,10 +70,10 @@ public class User {
 
 	@NotBlank(message = "Password is required")
 	// Looked up online for classic password regex validation
-	@Pattern(
-		    regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
-		    message = "Password must be at least 8 characters long, include uppercase and lowercase letters, a number, and a special character"
-		)
+	//@Pattern(
+	//	    regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
+	//	    message = "Password must be at least 8 characters long, include uppercase and lowercase letters, a number, and a special character"
+	//	)
 	@JsonIgnore
 	private String password;
 

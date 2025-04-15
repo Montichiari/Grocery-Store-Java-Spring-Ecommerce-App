@@ -45,6 +45,6 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     public List<Product> findByPriceBetween(Double min, Double max);
     
     // @author Dion
-    @Query("SELECT p FROM Product p WHERE LOWER(p.name) LOWER(CONCAT('%', :search, '%'))")
+    @Query("SELECT p FROM Product p WHERE LOWER(p.name) LIKE LOWER(CONCAT('%', :search, '%'))")
     public List<Product> findByNameIgnoreCase(@Param("search")String input);
 }
