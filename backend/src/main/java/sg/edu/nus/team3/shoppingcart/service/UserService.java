@@ -33,7 +33,11 @@ public interface UserService {
 	public void deleteUser(int userId);
 	
 	public List<User> findAll();
-
+	
+	
+	// Only for testing
+	public User registerUser(User user);
+	
 /* Hiroyo's temp
 	public boolean loginAttempt(String email, String passwordInput);
 	

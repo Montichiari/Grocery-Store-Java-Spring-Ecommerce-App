@@ -20,4 +20,6 @@ public interface ProductService {
 
   public List<Product> searchProductByName(String product_name);
 
+  public List<Product> getProductsByPriceRange(double min, double max);
+
 }

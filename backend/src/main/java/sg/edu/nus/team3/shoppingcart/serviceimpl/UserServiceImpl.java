@@ -152,6 +152,13 @@ public class UserServiceImpl implements UserService {
 		return userRepo.findAll();
 	}
 	
+	// Only for testing
+	@Override
+	public User registerUser(User user) {
+		return userRepo.save(user);
+	}
+	
+	
 	/* Hiroyo's temp
 	//temporary method?
 	@Override
