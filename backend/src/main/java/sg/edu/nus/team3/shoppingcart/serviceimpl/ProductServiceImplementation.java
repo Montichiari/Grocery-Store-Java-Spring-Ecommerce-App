@@ -55,7 +55,7 @@ public class ProductServiceImplementation implements ProductService {
     return productInfo;
   }
   
-  // Shengyi
+  // @author Shengyi
   public List<Product> getProductsByPriceRange(double min,double max) {
 	    if (min < 0 || max > 0) {
 	      throw new IllegalArgumentException("The price can't be less than zero!");
@@ -65,4 +65,9 @@ public class ProductServiceImplementation implements ProductService {
 	    }
 	    return productRepo.findByPriceBetween(min, max);
 	  }
+  
+  // @author Dion Yao
+  public List<Product> searchProducts(String input) {
+	  return productRepo.findByNameIgnoreCase(input);
+  }
 }

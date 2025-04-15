@@ -40,7 +40,11 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Query("SELECT p FROM Product p WHERE p.id = :productId")
     public Optional<Product> findProductById(@Param("productId") int productId);
     
-    // Shengyi
+    // @author Shengyi
     @Query("SELECT p FROM Product p WHERE p.unitPrice BETWEEN :min AND :max")
     public List<Product> findByPriceBetween(Double min, Double max);
+    
+    // @author Dion
+    @Query("SELECT p FROM Product p WHERE LOWER(p.name) LOWER(CONCAT('%', :search, '%'))")
+    public List<Product> findByNameIgnoreCase(@Param("search")String input);
 }

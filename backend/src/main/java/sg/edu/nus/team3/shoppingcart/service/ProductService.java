@@ -21,10 +21,17 @@ public interface ProductService {
   public List<Product> searchProductByName(String product_name);
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+  // @author Shengyi
+>>>>>>> Stashed changes
   public List<Product> getProductsByPriceRange(double min, double max);
 =======
   // addded by @ Thina
   public Optional<Product> findById(int product_id);
 >>>>>>> Stashed changes
 
+  
+  // @author Dion Yao
+  public List<Product> searchProducts(String input);
 }
