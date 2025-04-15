@@ -33,14 +33,6 @@ public class OrderController {
 		int userId = (int) session.getAttribute("id");
 		int cartId = (int) session.getAttribute("cartId");
 		
-		//check with hard coded values
-		//userId = 1;
-		//cartId = 1;
-		
-		// Throw an error if the user or the cart doesn't exist
-		if (userId == 0 || cartId == 0) {
-			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-		}
 		
 		try {
 			// Create order from userId and cartId and paymentMethod
@@ -48,7 +40,7 @@ public class OrderController {
 			
 			return new ResponseEntity<>(order,HttpStatus.OK);
 			
-		} catch (IllegalStateException e) {
+		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 
@@ -59,9 +51,6 @@ public class OrderController {
 	public ResponseEntity<?> getOrderConfirmation(@RequestParam int orderId, HttpSession session) {
 		int userId = (int) session.getAttribute("id");
 		// Make sure the user is logged in
-		if (userId == 0) {
-			return new ResponseEntity<>("You must be logged in to view this page", HttpStatus.UNAUTHORIZED);
-		}
 		
 		Order order = orderService.getOrderById(orderId);
 		

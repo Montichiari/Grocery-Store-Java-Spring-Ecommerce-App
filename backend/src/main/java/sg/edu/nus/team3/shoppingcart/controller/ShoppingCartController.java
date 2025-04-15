@@ -70,9 +70,6 @@ public class ShoppingCartController {
 
         // user id from session object
         int cartId = (int) session.getAttribute("cartId");
-        if (session.getAttribute("cartId") == null) {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }
 
         // call method from service class to delete all items in cart
         shoppingCart_service.deleteAllItemsInCart(cartId);

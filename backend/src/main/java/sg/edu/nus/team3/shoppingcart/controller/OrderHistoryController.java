@@ -39,10 +39,6 @@ public class OrderHistoryController {
 
 		int userId = (int) session.getAttribute("id");
 
-		if (userId == 0) {
-			return new ResponseEntity<>("You must be logged in to view this page", HttpStatus.UNAUTHORIZED);
-		}
-
 		User user = userService.findUserById(userId);
 		List<Order> orders = user.getOrders();
 
@@ -54,10 +50,6 @@ public class OrderHistoryController {
 	public ResponseEntity<?> getOrderDetails(@PathVariable int id, HttpSession session) {
 	    int userId = (int) session.getAttribute("id");
 	    String role = (String) session.getAttribute("role");
-
-	    if (userId == 0) {
-	        return new ResponseEntity<>("You must be logged in to view this page", HttpStatus.UNAUTHORIZED);
-	    }
 
 	    Order order = orderService.getOrderById(id);
 

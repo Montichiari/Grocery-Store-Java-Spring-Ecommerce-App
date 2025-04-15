@@ -25,7 +25,6 @@ public class OrderItem {
     private double unitPrice;
 
     @ManyToOne
-    @JsonIgnore
     private Order order;
 
     @ManyToOne

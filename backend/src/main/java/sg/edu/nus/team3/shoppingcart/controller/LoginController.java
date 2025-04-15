@@ -66,13 +66,15 @@ public class LoginController {
 	
 	@GetMapping("/status")
 	public ResponseEntity<?> checkLoginStatus(HttpSession session) {
-		int userId = (int) session.getAttribute("id");
 		
-		if (userId != 0) {
-			return new ResponseEntity<Integer>((Integer) session.getAttribute("id"), HttpStatus.OK);
+		Object userId = session.getAttribute("id");
+		
+		if (userId == null) {
+			return new ResponseEntity<>("You are not logged in", HttpStatus.UNAUTHORIZED);
 		}
 		
-		return new ResponseEntity<>("You must be logged in", HttpStatus.UNAUTHORIZED);
+		return new ResponseEntity<>("You are logged in", HttpStatus.OK);
+		
 	}
 	
 	
@@ -86,13 +88,6 @@ public class LoginController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-	
-	/* 
-	 * This section is for CRUD functions for User accounts
-	 * 
-	 */
-	
-	
 	@PostMapping("/register/customer")
 	public ResponseEntity<?> registerCustomer(@Valid @RequestBody RegisterRequest request) {
 		
@@ -104,117 +99,6 @@ public class LoginController {
 		} catch (Exception e) {
 			return new ResponseEntity<>("Unable to register account", HttpStatus.EXPECTATION_FAILED);
 		}
-	}
-	
-	@PostMapping("/register/staff")
-	public ResponseEntity<?> registerStaff(@Valid @RequestBody RegisterRequest request) {
-		
-		
-		try {
-			User newUser = userService.registerStaff(request);
-			return new ResponseEntity<User> (newUser, HttpStatus.CREATED);
-			
-		} catch (Exception e) {
-			return new ResponseEntity<>("Unable to register staff account", HttpStatus.EXPECTATION_FAILED);
-		}
-	}
-	
-	
-	@GetMapping("/{id}")
-	public ResponseEntity<?> getAccountById(@PathVariable("id") int accountId, HttpSession session) {
-	    int userId = (int) session.getAttribute("id");
-	    String role = (String) session.getAttribute("role");
-	    
-	    if (userId == 0) {
-	        return new ResponseEntity<>("You must be logged in to acccess this page", HttpStatus.UNAUTHORIZED);
-	    }
-	    
-	    // Check if user is staff
-	    boolean isStaff = role.equalsIgnoreCase("staff");
-	    
-	    if (isStaff == false) {
-	    	return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-	    }
-
-	    User user = userService.findUserById(accountId);
-	    return new ResponseEntity<>(user, HttpStatus.OK);
-	}
-	
-	@GetMapping("/all")
-	public ResponseEntity<?> getAllUsers(HttpSession session) {
-	    int userId = (int) session.getAttribute("id");
-	    String role = (String) session.getAttribute("role");
-	    
-	    if (userId == 0) {
-	        return new ResponseEntity<>("You must be logged in to acccess this page", HttpStatus.UNAUTHORIZED);
-	    }
-	    
-	    // Check if user is staff
-	    boolean isStaff = role.equalsIgnoreCase("staff");
-	    
-	    if (isStaff == false) {
-	    	return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-	    }
-
-	    List<User> user = userService.findAll();
-	    return new ResponseEntity<>(user, HttpStatus.OK);
-	}
-
-	
-	@PutMapping("/{id}")
-	public ResponseEntity<?> updateUser(@PathVariable("id") int accountId, @RequestBody UpdateUserRequest request, HttpSession session) {
-	    
-		// Checking if user is logged in
-		int userId = (int) session.getAttribute("id");
-
-	    if (userId == 0) {
-	        return new ResponseEntity<>("You must be logged in to acccess this page", HttpStatus.UNAUTHORIZED);
-	    }
-	    
-	    // Checking if the user is staff or not
-	    String userRole = (String) session.getAttribute("role");
-	    boolean isStaff = userRole.equalsIgnoreCase("staff");
-	    
-	    // If not staff, they are not allowed to update account that isn't their own
-	    if (isStaff == false && accountId != userId) {
-	    	return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-	    }
-
-	    User updatedUser = userService.updateUser(accountId, request);
-	    return new ResponseEntity<>(updatedUser, HttpStatus.OK);
-	}
-	
-	
-	@DeleteMapping("/{id}")
-	public ResponseEntity<?> deleteUser(@PathVariable("id") int accountId, HttpSession session) {
-	    
-		// Check if user is logged in
-		int userId = (int) session.getAttribute("id");
-
-	    
-	    // Checking if the user is staff or not
-	    String userRole = (String) session.getAttribute("role");
-	    boolean isStaff = userRole.equalsIgnoreCase("staff");
-	    
-	    
-	    if (userId == 0) {
-	        return new ResponseEntity<>("You must be logged in to acccess this page", HttpStatus.UNAUTHORIZED);
-	    }
-	    
-	    // If not staff, they are not allowed to delete account that isn't their own
-	    if (isStaff == false && accountId != userId) {
-	    	return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-	    }
-	    
-	    // User deleted and session invalidated. Put in a try-catch for security
-	    try {
-	    	userService.deleteUser(accountId);
-	    	session.invalidate();
-		    return new ResponseEntity<>("User deleted successfully", HttpStatus.NO_CONTENT);
-	    } catch (Exception e) {
-	    	return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
-	    }
-	    
 	}
 	
 }
