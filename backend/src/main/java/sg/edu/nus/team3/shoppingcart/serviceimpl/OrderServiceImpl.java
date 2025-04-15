@@ -93,7 +93,7 @@ public class OrderServiceImpl implements OrderService {
 		}
 		
 		// Set the total price
-		order.setTotalAmount(total);
+		//order.setTotalAmount(total);
 		
 		// Payment method selected
 		order.setPaymentMethod(paymentMethod);//add validation?

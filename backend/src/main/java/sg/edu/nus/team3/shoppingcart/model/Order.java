@@ -39,7 +39,7 @@ public class Order {
 	@OneToMany(mappedBy = "order")
 	private List<OrderItem> orderItems;
 	
-	private double totalAmount;
+	//private double totalAmount;
 
 	// Empty constructor required by JPA
 	public Order() {
@@ -55,7 +55,7 @@ public class Order {
 		this.status = status;
 		this.paymentMethod = paymentMethod;
 		this.orderItems = new ArrayList<OrderItem>();
-		this.totalAmount = totalAmount;
+		//this.totalAmount = totalAmount;
 	}
 	
 
@@ -117,18 +117,22 @@ public class Order {
 		this.orderItems = orderItems;
 	}
 
-	public double getTotalAmount() {
-		return totalAmount;
-	}
+	//public double getTotalAmount() {
+	//	return totalAmount;
+	//}
 
-	public void setTotalAmount(double totalAmount) {
-		this.totalAmount = totalAmount;
-	}
+	//public void setTotalAmount(double totalAmount) {
+	//	this.totalAmount = totalAmount;
+	//}
 
 	@Override
+	//public String toString() {
+	//	return "Order [id=" + id + ", user=" + user + ", createAt=" + createAt + ", fulfilmentDate=" + fulfilmentDate
+	//			+ ", status=" + status + ", paymentMethod=" + paymentMethod + ", totalAmount=" + totalAmount + "]";
+	//}
 	public String toString() {
 		return "Order [id=" + id + ", user=" + user + ", createAt=" + createAt + ", fulfilmentDate=" + fulfilmentDate
-				+ ", status=" + status + ", paymentMethod=" + paymentMethod + ", totalAmount=" + totalAmount + "]";
+				+ ", status=" + status + ", paymentMethod=" + paymentMethod + "]";
 	}
 
 	
