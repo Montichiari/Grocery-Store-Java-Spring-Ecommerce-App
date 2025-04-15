@@ -62,7 +62,7 @@ public class BrowseController {
 	public ResponseEntity<?> getProductDetail(@PathVariable int id) {
 
 		try {
-			Product product = productService.findById(id);
+			Product product = productService.findProductById(id);
 			return new ResponseEntity<>(product, HttpStatus.OK);
 
 		} catch (Exception e) {

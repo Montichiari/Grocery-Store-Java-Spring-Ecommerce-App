@@ -51,15 +51,6 @@ public class ShoppingCartController {
         // get shopping cart id, product id, and quantity before can use addItemToCart
         int cartId = (int) session.getAttribute("cartId");
 
-        // find product by id
-        Optional<Product> product = product_service.findById(productId);
-        Product validProduct;
-        if (product.isPresent()) {
-            validProduct = product.get();
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
         // once cart and product are confirmed to exist, call method to add product to
         // cart
 
