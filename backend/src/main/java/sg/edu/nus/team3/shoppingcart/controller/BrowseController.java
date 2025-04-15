@@ -14,7 +14,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/product")
 public class BrowseController {
 
 

@@ -1,8 +1,16 @@
 package sg.edu.nus.team3.shoppingcart.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @JsonIgnoreProperties({"order"})		//Ignore "order" during serialization (i.e. prevent loops in json)
@@ -17,6 +25,7 @@ public class OrderItem {
     private double unitPrice;
 
     @ManyToOne
+    @JsonIgnore
     private Order order;
 
     @ManyToOne

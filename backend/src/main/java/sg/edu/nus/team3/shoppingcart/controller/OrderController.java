@@ -30,7 +30,7 @@ public class OrderController {
 	@PostMapping("/checkout")
 	public ResponseEntity<Order> checkoutCartAndSaveOrder(HttpSession session, @RequestParam String paymentMethod) {
 		
-		int userId = (int) session.getAttribute("Id");
+		int userId = (int) session.getAttribute("id");
 		int cartId = (int) session.getAttribute("cartId");
 		
 		//check with hard coded values
@@ -57,7 +57,7 @@ public class OrderController {
 	// Display order confirmation
 	@GetMapping("/confirmation")
 	public ResponseEntity<?> getOrderConfirmation(@RequestParam int orderId, HttpSession session) {
-		int userId = (int) session.getAttribute("Id");
+		int userId = (int) session.getAttribute("id");
 		// Make sure the user is logged in
 		if (userId == 0) {
 			return new ResponseEntity<>("You must be logged in to view this page", HttpStatus.UNAUTHORIZED);

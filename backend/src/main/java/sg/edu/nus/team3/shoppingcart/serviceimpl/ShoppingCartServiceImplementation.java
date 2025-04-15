@@ -114,9 +114,10 @@ public class ShoppingCartServiceImplementation implements ShoppingCartService {
 			if (productInCart.getId() == productId) {
 				int newQuantity = cartItem.getQuantity() + quantity;
 				cartItem.setQuantity(newQuantity);
-				scItemRepo.save(cartItem);
+				//scItemRepo.save(cartItem);
 				scRepo.save(userCart);
 				productMatch = true;
+				break;
 
 			}
 			; // end of if statement
@@ -125,12 +126,12 @@ public class ShoppingCartServiceImplementation implements ShoppingCartService {
 
 		// if there is no match with product and items in cart, then need to manually
 		// add product into shopping cart
-		if (productMatch = false) {
+		if (productMatch == false) {
 			ShoppingCartItem newCartItem = new ShoppingCartItem();
 			newCartItem.setProduct(validProduct);
 			newCartItem.setQuantity(quantity);
 			newCartItem.setShoppingCart(userCart);
-			scItemRepo.save(newCartItem);
+			//scItemRepo.save(newCartItem);
 			userCart.getItems().add(newCartItem);
 			scRepo.save(userCart);
 
