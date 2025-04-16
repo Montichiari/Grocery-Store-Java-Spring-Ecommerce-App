@@ -13,21 +13,22 @@ import jakarta.servlet.http.HttpSession;
  */
 
 @Component
-public class LoginInterceptor implements HandlerInterceptor {
+public class RoleInterceptor implements HandlerInterceptor {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
-		 //Looks for user id in session attributes. If null, returns 401 Unauthorized.
+		 //Looks for role in session attributes. If not "staff", returns 403 Forbidden.
 		 HttpSession session = request.getSession();
 
 		 Integer id = (Integer) session.getAttribute("id");
-
-		 if (id == null) {
-		 response.setStatus(401);
-		 response.getWriter().write("Please log in to continue");
-			return false;
+		 String role = (String) session.getAttribute("role");
+		 
+		 if (id == null || !(role.equalsIgnoreCase("staff"))) {
+			 response.setStatus(403);
+			 response.getWriter().write("Forbidden: Staff access required.");
+			 return false;
 		 }
 		 
 		return true;

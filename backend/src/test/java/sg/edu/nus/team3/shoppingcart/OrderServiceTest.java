@@ -34,7 +34,7 @@ public class OrderServiceTest {
     @DisplayName("Should return one order by their id")
     public void retrieveOrderByIdTest() {
         int orderIdToRetrieve = 1;
-        Optional<Order> orderToRetrieve = orderServiceImpl.getOrderById(orderIdToRetrieve);
+        Optional<Order> orderToRetrieve = orderServiceImpl.getOptOrderById(orderIdToRetrieve);
 
         assertTrue(orderToRetrieve.isPresent(), "There should be at least 1 order retrieved");
     }

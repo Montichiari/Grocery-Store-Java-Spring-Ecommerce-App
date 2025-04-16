@@ -20,4 +20,13 @@ public interface ProductService {
 
   public List<Product> searchProductByName(String product_name);
 
+
+  // @author Shengyi
+  public List<Product> getProductsByPriceRange(double min, double max);
+
+  // addded by @ Thina
+  public Product findProductById(int productId);
+
+  // @author Dion Yao
+  public List<Product> searchProducts(String input);
 }

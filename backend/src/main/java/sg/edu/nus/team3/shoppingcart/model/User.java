@@ -3,7 +3,9 @@ package sg.edu.nus.team3.shoppingcart.model;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -16,13 +18,15 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 /**
- * @author diony
+ * @author Dion Yao
  */
 
 @Entity
+@JsonIgnoreProperties({"order"})		//Ignore "order" during serialization (i.e. prevent loops in json)
 @Table(name = "users")
 public class User {
 
@@ -31,17 +35,21 @@ public class User {
 	private int id;
 
 	@NotBlank(message = "Email is required")
+	// I looked up online for this email regex validation, because I knew it exists
+	@Pattern(
+		    regexp = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$",
+		    message = "Invalid email format"
+		)	
 	// Custom email validation to be created
 	@Column(length = 320)
 	private String email;
 
 	@NotBlank(message = "Handphone no. is required")
-	@Size(min = 8, max = 8, message = "Handphone no. must be 8 digits")
+	// @Size(min = 8, max = 8, message = "Handphone no. must be 8 digits")
 	@Column(name = "handphone_no", length = 8)
 	private String handPhoneNo;
 
 	@NotBlank(message = "Address is required")
-	// Custom address validation to be created
 	private String address;
 
 	// Limit to 35 chars for first name and last name
@@ -61,25 +69,31 @@ public class User {
 	private List<Order> orders;
 
 	@NotBlank(message = "Password is required")
-	@Size(min = 8, max = 128, message = "Password must be at least 8 characters long")
-	// Custom password validation to be created
+	// Looked up online for classic password regex validation
+	//@Pattern(
+	//	    regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
+	//	    message = "Password must be at least 8 characters long, include uppercase and lowercase letters, a number, and a special character"
+	//	)
+	@JsonIgnore
 	private String password;
 
 	private String role;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "shopping_cart_id", referencedColumnName = "id")
+	@JsonIgnore
 	private ShoppingCart shoppingCart;
 
 	// Constructors
 
 	// Empty Constructor
 	public User() {
-
+		
+		this.shoppingCart = new ShoppingCart(this);
 	}
 
-	// Constructor for Customers to create Customer account
-	public User(String email, String handPhoneNo, String address, String firstName, String lastName, String password) {
+	// Constructor for new Users. Role is set by UserService, depending on creation URL.
+	public User(String email, String password, String firstName, String lastName, String handPhoneNo, String address) {
 		super();
 		this.email = email;
 		this.handPhoneNo = handPhoneNo;
@@ -88,22 +102,8 @@ public class User {
 		this.lastName = lastName;
 		this.password = password;
 		this.shoppingCart = new ShoppingCart(this);
-		this.role = "Customer";
 	}
 
-	// Constructor Staff to create Staff OR Customer account
-	public User(String email, String handPhoneNo, String address, String firstName, String lastName, String password,
-			String role, ShoppingCart shoppingCart) {
-		super();
-		this.email = email;
-		this.handPhoneNo = handPhoneNo;
-		this.address = address;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.password = password;
-		this.role = role;
-		this.shoppingCart = shoppingCart;
-	}
 
 	// Getters and setters
 
