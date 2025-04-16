@@ -1,86 +1,81 @@
-import { useState } from "react";
 import { AppShell, Box, Text } from "@mantine/core";
 import { IconLogout } from "@tabler/icons-react";
 import classes from "./AppShellSidebarNav.module.css";
+import { Link } from "react-router";
+import { useState } from "react";
 
 function AppShellSidebarNav() {
   const [active, setActive] = useState("Vegetables");
   const sampleDashboardCategories = [
     {
       label: "Shopping Cart",
-      link: "/",
+      link: "/shop/cart",
     },
     {
       label: "View order status",
-      link: "/",
+      link: "/shop/order-status",
     },
     {
       label: "View past orders",
-      link: "/",
+      link: "/shop/old-orders",
     },
   ];
   const sampleCategories = [
     {
       label: "View all",
-      link: "/",
+      link: "/shop/products",
     },
     {
       label: "Vegetables",
-      link: "/",
+      link: "/shop/products",
     },
     {
       label: "Frozen Meats",
-      link: "/",
+      link: "/shop/products",
     },
     {
       label: "Fruits",
-      link: "/",
+      link: "/shop/products",
     },
     {
       label: "Cereal",
-      link: "/",
+      link: "/shop/products",
     },
     {
       label: "Bread",
-      link: "/",
+      link: "/shop/products",
     },
     {
       label: "Party Supplies",
-      link: "/",
+      link: "/shop/products",
     },
     {
       label: "Baking Supplies",
-      link: "/",
+      link: "/shop/products",
     },
   ];
 
   const dashboardCategories = sampleDashboardCategories.map((category) => (
-    <a
+    <Link
+      to={category.link}
       className={classes.link}
       data-active={category.label === active || undefined}
-      href={category.link}
       key={category.label}
-      onClick={(event) => {
-        event.preventDefault();
-        setActive(category.label);
-      }}
+      onClick={() => setActive(category.label)}
     >
       <span>{category.label}</span>
-    </a>
+    </Link>
   ));
   const foodCategories = sampleCategories.map((category) => (
-    <a
+    <Link
+      to={category.link}
       className={classes.link}
       data-active={category.label === active || undefined}
-      href={category.link}
       key={category.label}
-      onClick={(event) => {
-        event.preventDefault();
-        setActive(category.label);
-      }}
+      onClick={() => setActive(category.label)}
     >
       <span>{category.label}</span>
-    </a>
+    </Link>
   ));
 
   return (
@@ -91,7 +86,7 @@ function AppShellSidebarNav() {
         </Text>
         {dashboardCategories}
         <Text py="md" fw={500} size="xs" color="dimmed">
-          Categories
+          Product Categories
         </Text>
         {foodCategories}
       </Box>

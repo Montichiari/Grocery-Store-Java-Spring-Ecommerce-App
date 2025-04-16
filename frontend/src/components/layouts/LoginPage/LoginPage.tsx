@@ -32,7 +32,7 @@ function LoginPage() {
           required
           mt="md"
         />
-        <Button fullWidth mt="xl" onClick={() => navigate("/listings")}>
+        <Button fullWidth mt="xl" onClick={() => navigate("/shop/products")}>
           Sign in
         </Button>
       </Paper>
