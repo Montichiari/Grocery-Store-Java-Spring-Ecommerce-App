@@ -14,9 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.servlet.http.HttpSession;
 import sg.edu.nus.team3.shoppingcart.model.Order;
 import sg.edu.nus.team3.shoppingcart.service.OrderService;
+import sg.edu.nus.team3.shoppingcart.util.APIResponse;
 
 @RestController
-@RequestMapping("/orders")
+@RequestMapping("/order")
 public class OrderController {
 	
 	//----------------------------------------------------------
@@ -28,7 +29,7 @@ public class OrderController {
 	
 	// Create order, ask for payment method, "pay", complete order
 	@PostMapping("/checkout")
-	public ResponseEntity<Order> checkoutCartAndSaveOrder(HttpSession session, @RequestParam String paymentMethod) {
+	public ResponseEntity<?> checkoutCartAndSaveOrder(HttpSession session, @RequestParam String paymentMethod) {
 		
 		int userId = (int) session.getAttribute("id");
 		int cartId = (int) session.getAttribute("cartId");
@@ -41,7 +42,8 @@ public class OrderController {
 			return new ResponseEntity<>(order,HttpStatus.OK);
 			
 		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			APIResponse resp = new APIResponse("Checkout failed");
+			return new ResponseEntity<>(resp, HttpStatus.BAD_REQUEST);
 		}
 
 	}

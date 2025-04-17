@@ -2,28 +2,36 @@ package sg.edu.nus.team3.shoppingcart.util;
 
 import java.util.HashMap;
 
+/**
+ * @author Jared Chua, Dion Yao
+ */
+
 public class APIResponse {
-    private String status;
     private String message;
 
     public APIResponse() {
-        this.status = "400";
-        this.message = "Something has gone wrong.";
+        this.message = "Something went wrong.";
     }
 
-    public HashMap<String, String> getResponse() {
-        HashMap<String, String> response = new HashMap<>();
-        response.put("status", this.status);
-        response.put("message", this.message);
-        return response;
+    public APIResponse(String message) {
+        this.message = message;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public String getMessage() {
+        return message;
     }
 
     public void setMessage(String message) {
         this.message = message;
     }
+
+    /*
+     * public HashMap<String, String> getResponse() {
+     * HashMap<String, String> response = new HashMap<>();
+     * response.put("status", this.messageHead);
+     * response.put("message", this.message);
+     * return response;
+     * }
+     */
 
 }

@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
 		Optional<User> userOpt = userRepo.findUserByEmail(email);
 
 		if (userOpt.isEmpty() || !passwordEncoder.matches(passwordInput, userOpt.get().getPassword())) {
-			throw new InvalidLoginException("Invalid email or password");
+			return false;
 		}
 
 		return true;
@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
 		Optional<User> userOpt = userRepo.findUserByEmail(email);
 
 		if (userOpt.isEmpty() || !passwordEncoder.matches(passwordInput, userOpt.get().getPassword())) {
-			throw new InvalidLoginException("Invalid email or password");
+			return false;
 		}
 
 		return true;
@@ -97,7 +97,7 @@ public class UserServiceImpl implements UserService {
 		// Hashing the user input password with PasswordEncoder
 		String hashedPassword = passwordEncoder.encode(custToRegister.getPassword());
 
-		// Encrypted version of password is stored instead of original password in plaintext
+		// Encrypted version of password replaces original plaintext password
 		custToRegister.setPassword(hashedPassword);
 
 		// Role set to customer

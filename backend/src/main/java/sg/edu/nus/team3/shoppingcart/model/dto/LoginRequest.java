@@ -17,7 +17,11 @@ public class LoginRequest {
 		)	
 	private String email;
 	
-	// I did not insert the password regex here, because we run tests with Users that were persisted before regex implementation
+	// Looked up online for classic password regex validation
+    @Pattern(
+            regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
+            message = "Password must be at least 8 characters long, include uppercase and lowercase letters, a number, and a special character"
+        )
 	private String password;
 	
 	public LoginRequest(String email, String password) {

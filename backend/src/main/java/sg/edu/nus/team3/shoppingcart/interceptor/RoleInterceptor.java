@@ -1,12 +1,17 @@
 package sg.edu.nus.team3.shoppingcart.interceptor;
 
+import java.io.PrintWriter;
+
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import sg.edu.nus.team3.shoppingcart.util.APIResponse;
 
 /**
  * @author diony
@@ -26,8 +31,14 @@ public class RoleInterceptor implements HandlerInterceptor {
 		String role = (String) session.getAttribute("role");
 
 		if (id == null || !(role.equalsIgnoreCase("staff"))) {
+			APIResponse resp = new APIResponse("Forbidden: Staff access required.");
+			String json = new Gson().toJson(resp);
+			PrintWriter out = response.getWriter();
+			response.setContentType("application/json");
+			response.setCharacterEncoding("utf-8");
 			response.setStatus(403);
-			response.getWriter().write("Forbidden: Staff access required.");
+			out.print(json);
+			out.flush();
 			return false;
 		}
 

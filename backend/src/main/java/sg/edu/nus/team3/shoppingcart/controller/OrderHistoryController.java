@@ -17,13 +17,14 @@ import sg.edu.nus.team3.shoppingcart.model.Order;
 import sg.edu.nus.team3.shoppingcart.model.User;
 import sg.edu.nus.team3.shoppingcart.service.OrderService;
 import sg.edu.nus.team3.shoppingcart.service.UserService;
+import sg.edu.nus.team3.shoppingcart.util.APIResponse;
 
 /**
  * @author Ma Li, Dion Yao
  */
 
 @RestController
-@RequestMapping("/orders")
+@RequestMapping("/order")
 public class OrderHistoryController {
 	
 	@Autowired
@@ -59,7 +60,8 @@ public class OrderHistoryController {
 	    
 	    // Allow only staff or order owner to view order details
 	    if ((isStaff == false) && (isOwner == false)) {
-	        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+			APIResponse resp = new APIResponse("You are not allowed to view this page");
+	        return new ResponseEntity<>(resp, HttpStatus.FORBIDDEN);
 	    }
 
 	    return new ResponseEntity<>(order, HttpStatus.OK);

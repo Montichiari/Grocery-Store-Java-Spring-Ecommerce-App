@@ -1,5 +1,9 @@
 package sg.edu.nus.team3.shoppingcart.interceptor;
 
+import java.io.PrintWriter;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -7,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import sg.edu.nus.team3.shoppingcart.util.APIResponse;
 
 /**
  * @author diony
@@ -25,8 +30,15 @@ public class LoginInterceptor implements HandlerInterceptor {
 		Integer id = (Integer) session.getAttribute("id");
 
 		if (id == null) {
+			APIResponse resp = new APIResponse("Please log in to continue");
+			String json = new Gson().toJson(resp);
+			PrintWriter out = response.getWriter();
+			response.setContentType("application/json");
+			response.setCharacterEncoding("utf-8");
 			response.setStatus(401);
-			response.getWriter().write("Please log in to continue");
+			out.print(json);
+			out.flush();
+
 			return false;
 		}
 
