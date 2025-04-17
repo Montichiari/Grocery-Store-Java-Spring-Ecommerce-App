@@ -3,92 +3,41 @@ import { IconLogout } from "@tabler/icons-react";
 import classes from "./AppShellSidebarNav.module.css";
 import { Link } from "react-router";
 import { useState } from "react";
+import { NavbarLink } from "@/types/AppShellSidebarNav.types";
 
-function AppShellSidebarNav() {
-  const [active, setActive] = useState("Vegetables");
-  const sampleDashboardCategories = [
-    {
-      label: "Shopping Cart",
-      link: "/shop/cart",
-    },
-    {
-      label: "View order status",
-      link: "/shop/order-status",
-    },
-    {
-      label: "View past orders",
-      link: "/shop/old-orders",
-    },
-  ];
-  const sampleCategories = [
-    {
-      label: "View all",
-      link: "/shop/products",
-    },
-    {
-      label: "Vegetables",
-      link: "/shop/products",
-    },
-    {
-      label: "Frozen Meats",
-      link: "/shop/products",
-    },
-    {
-      label: "Fruits",
-      link: "/shop/products",
-    },
-    {
-      label: "Cereal",
-      link: "/shop/products",
-    },
-    {
-      label: "Bread",
-      link: "/shop/products",
-    },
-    {
-      label: "Party Supplies",
-      link: "/shop/products",
-    },
-    {
-      label: "Baking Supplies",
-      link: "/shop/products",
-    },
-  ];
+type AppShellSidebarNavProps = {
+  navSection: {
+    sectionHeader: string;
+    links: NavbarLink[];
+  }[];
+  defaultSection?: string;
+};
 
-  const dashboardCategories = sampleDashboardCategories.map((category) => (
-    <Link
-      to={category.link}
-      className={classes.link}
-      data-active={category.label === active || undefined}
-      key={category.label}
-      onClick={() => setActive(category.label)}
-    >
-      <span>{category.label}</span>
-    </Link>
-  ));
-  const foodCategories = sampleCategories.map((category) => (
-    <Link
-      to={category.link}
-      className={classes.link}
-      data-active={category.label === active || undefined}
-      key={category.label}
-      onClick={() => setActive(category.label)}
-    >
-      <span>{category.label}</span>
-    </Link>
+function AppShellSidebarNav({ ...props }: AppShellSidebarNavProps) {
+  const [active, setActive] = useState(props.defaultSection);
+  const navbarCategories = props.navSection.map((category) => (
+    <>
+      <Text py="md" fw={500} size="xs" color="dimmed">
+        {category.sectionHeader}
+      </Text>
+      {category.links.map((link) => (
+        <Link
+          to={link.link}
+          className={classes.link}
+          data-active={link.label === active || undefined}
+          key={link.label}
+          onClick={() => setActive(link.label)}
+        >
+          <span>{link.label}</span>
+        </Link>
+      ))}
+    </>
   ));
 
   return (
     <AppShell.Navbar>
       <Box m="md" className={classes.navbarMain}>
-        <Text py="md" fw={500} size="xs" color="dimmed">
-          Dashboard
-        </Text>
-        {dashboardCategories}
-        <Text py="md" fw={500} size="xs" color="dimmed">
-          Product Categories
-        </Text>
-        {foodCategories}
+        {navbarCategories}
       </Box>
 
       <Box m="md" className={classes.footer}>

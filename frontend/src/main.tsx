@@ -2,7 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { MantineProvider } from "@mantine/core";
 import { BrowserRouter, Route, Routes } from "react-router";
-import { routes } from "@/routes/Routes.tsx";
+import { adminRoutes, mainRoutes, shopRoutes } from "@/routes/Routes.tsx";
 import "./index.css";
 import "@mantine/core/styles.css";
 import "mantine-datatable/styles.layer.css";
@@ -14,7 +14,7 @@ createRoot(document.getElementById("root")!).render(
     <BrowserRouter>
       <MantineProvider>
         <Routes>
-          {routes.map((route) => {
+          {[...adminRoutes, ...mainRoutes, ...shopRoutes].map((route) => {
             if (route.children)
               return (
                 <Route path={route.path} element={route.element}>

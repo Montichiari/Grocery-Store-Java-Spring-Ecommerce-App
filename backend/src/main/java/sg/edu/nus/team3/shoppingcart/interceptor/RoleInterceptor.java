@@ -18,19 +18,19 @@ public class RoleInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		
-		 //Looks for role in session attributes. If not "staff", returns 403 Forbidden.
-		 HttpSession session = request.getSession();
 
-		 Integer id = (Integer) session.getAttribute("id");
-		 String role = (String) session.getAttribute("role");
-		 
-		 if (id == null || !(role.equalsIgnoreCase("staff"))) {
-			 response.setStatus(403);
-			 response.getWriter().write("Forbidden: Staff access required.");
-			 return false;
-		 }
-		 
+		// Looks for role in session attributes. If not "staff", returns 403 Forbidden.
+		HttpSession session = request.getSession();
+
+		Integer id = (Integer) session.getAttribute("id");
+		String role = (String) session.getAttribute("role");
+
+		if (id == null || !(role.equalsIgnoreCase("staff"))) {
+			response.setStatus(403);
+			response.getWriter().write("Forbidden: Staff access required.");
+			return false;
+		}
+
 		return true;
 	}
 
