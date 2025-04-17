@@ -101,4 +101,56 @@ public class LoginController {
 		}
 	}
 	
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<?> updateUser(@PathVariable("id") int accountId, @RequestBody UpdateUserRequest request, HttpSession session) {
+	    
+		// Get userId
+		int userId = (int) session.getAttribute("id");
+
+	    
+	    // Checking if the user is staff or not
+	    String userRole = (String) session.getAttribute("role");
+	    boolean isStaff = userRole.equalsIgnoreCase("staff");
+	    
+	    // If not staff, they are not allowed to update account that isn't their own
+	    if (isStaff == false && accountId != userId) {
+	    	return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+	    }
+
+	    User updatedUser = userService.updateUser(accountId, request);
+	    return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+	}
+	
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> deleteUser(@PathVariable("id") int accountId, HttpSession session) {
+	    
+		// Get userId
+		int userId = (int) session.getAttribute("id");
+
+	    
+	    // Checking if the user is staff or not
+	    String userRole = (String) session.getAttribute("role");
+	    boolean isStaff = userRole.equalsIgnoreCase("staff");
+	    
+	    
+	    // If not staff, they are not allowed to delete account that isn't their own
+	    if (isStaff == false && accountId != userId) {
+	    	return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+	    }
+	    
+	    // User deleted and session invalidated. Put in a try-catch for security
+	    try {
+	    	userService.deleteUser(accountId);
+	    	if (accountId == userId) {
+	    		session.invalidate();
+	    	}
+		    return new ResponseEntity<>("User deleted successfully", HttpStatus.NO_CONTENT);
+	    } catch (Exception e) {
+	    	return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+	    }
+	    
+	}
+	
 }
