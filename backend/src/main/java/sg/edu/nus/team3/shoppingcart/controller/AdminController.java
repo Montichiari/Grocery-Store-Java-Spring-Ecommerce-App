@@ -1,5 +1,6 @@
 package sg.edu.nus.team3.shoppingcart.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,8 @@ import sg.edu.nus.team3.shoppingcart.model.Product;
 import sg.edu.nus.team3.shoppingcart.projections.OrderProjection;
 import sg.edu.nus.team3.shoppingcart.serviceimpl.OrderServiceImpl;
 import sg.edu.nus.team3.shoppingcart.serviceimpl.ProductServiceImplementation;
+import sg.edu.nus.team3.shoppingcart.util.APIResponse;
+
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -47,7 +50,7 @@ public class AdminController {
     }
 
     @PostMapping("/product")
-    public ResponseEntity<Product> createProduct(@RequestBody Map<String, Object> product) {
+    public ResponseEntity<HashMap<String, String>> createProduct(@RequestBody Map<String, Object> product) {
         String name = product.get("name").toString();
         double unitPrice = (double) product.get("unitPrice");
         int stock = (int) product.get("stock");
@@ -55,7 +58,11 @@ public class AdminController {
 
         Product productToSave = new Product(name, unitPrice, stock, category);
         productService.createProduct(productToSave);
-        return new ResponseEntity<>(HttpStatus.OK);
+
+        APIResponse response = new APIResponse();
+        response.setStatus("200");
+        response.setMessage("Product has been successfully created");
+        return new ResponseEntity<HashMap<String, String>>(response.getResponse(), HttpStatus.OK);
     }
 
     @PatchMapping("/product/{id}")
