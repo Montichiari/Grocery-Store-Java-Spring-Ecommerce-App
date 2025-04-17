@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sg.edu.nus.team3.shoppingcart.model.Product;
 import sg.edu.nus.team3.shoppingcart.service.ProductService;
+import sg.edu.nus.team3.shoppingcart.util.APIResponse;
 
 import java.util.List;
 
@@ -29,19 +30,11 @@ public class BrowseController {
 		try {
 			return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			APIResponse resp = new APIResponse("No products found");
+			return new ResponseEntity<>(resp, HttpStatus.NOT_FOUND);
 		}
 
 	}
-
-	// @author Shengyi
-	@GetMapping("/filter")
-	public List<Product> filterByPrice(
-			@RequestParam Double min,
-			@RequestParam Double max) {
-		return productService.getProductsByPriceRange(min, max);
-	}
-
 
 
 	// @author Dion Yao
@@ -51,7 +44,8 @@ public class BrowseController {
 		try {
 			return new ResponseEntity<>(productService.searchProducts(input), HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			APIResponse resp = new APIResponse("No matching products found");
+			return new ResponseEntity<>(resp, HttpStatus.NOT_FOUND);
 		}
 
 
@@ -66,7 +60,8 @@ public class BrowseController {
 			return new ResponseEntity<>(product, HttpStatus.OK);
 
 		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			APIResponse resp = new APIResponse("No matching product found");
+			return new ResponseEntity<>(resp, HttpStatus.NOT_FOUND);
 		}
 	}
 }
