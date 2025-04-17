@@ -131,10 +131,12 @@ public class AccountController {
 			if (userId == accountId) {
 				session.invalidate();
 			}
+			APIResponse resp = new APIResponse("Account deleted successfully");
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
 		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+			APIResponse resp = new APIResponse();
+			return new ResponseEntity<>(resp, HttpStatus.EXPECTATION_FAILED);
 		}
 
 	}

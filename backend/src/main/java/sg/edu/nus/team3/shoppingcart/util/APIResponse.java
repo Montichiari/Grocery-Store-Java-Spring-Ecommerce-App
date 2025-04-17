@@ -7,22 +7,22 @@ import java.util.HashMap;
  */
 
 public class APIResponse {
-    private String Error;
+    private String message;
 
     public APIResponse() {
-        this.Error = "Something has gone wrong.";
+        this.message = "Something went wrong.";
     }
     
     public APIResponse(String message) {
-        this.Error = message;
+        this.message = message;
     }
 
 	public String getError() {
-		return Error;
+		return message;
 	}
 
 	public void setError(String message) {
-		this.Error = message;
+		this.message = message;
 	}
 
     /*

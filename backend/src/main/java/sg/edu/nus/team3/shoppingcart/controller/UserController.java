@@ -76,7 +76,8 @@ public class UserController {
 			return new ResponseEntity<>(resp, HttpStatus.UNAUTHORIZED);
 		}
 
-		return new ResponseEntity<>("You are logged in", HttpStatus.OK);
+		APIResponse resp = new APIResponse("You are logged in");
+		return new ResponseEntity<>(resp, HttpStatus.OK);
 
 	}
 
@@ -87,8 +88,8 @@ public class UserController {
 		// Deletes all information in current session, and locks users out of application till next login
 		session.invalidate();
 
-
-		return new ResponseEntity<>(HttpStatus.OK);
+		APIResponse resp = new APIResponse("You have logged out successfully");
+		return new ResponseEntity<>(resp, HttpStatus.OK);
 	}
 
 	/*
@@ -142,8 +143,8 @@ public class UserController {
 		try {
 			userService.deleteUser(userId); 
 			session.invalidate();
-			
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			APIResponse resp = new APIResponse("Account deleted successfully");
+			return new ResponseEntity<>(resp, HttpStatus.NO_CONTENT);
 
 		} catch (Exception e) {
 			APIResponse resp = new APIResponse("Unable to delete account");
