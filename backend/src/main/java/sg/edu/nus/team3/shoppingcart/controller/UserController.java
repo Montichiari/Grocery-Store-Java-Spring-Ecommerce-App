@@ -122,7 +122,7 @@ public class UserController {
 
 
 	@PutMapping("/profile")
-	public ResponseEntity<?> updateMyProfile(@RequestBody UpdateUserRequest request, HttpSession session) {
+	public ResponseEntity<?> updateMyProfile(@Valid @RequestBody UpdateUserRequest request, HttpSession session) {
 
 		// Get userId
 		int userId = (int) session.getAttribute("id");
