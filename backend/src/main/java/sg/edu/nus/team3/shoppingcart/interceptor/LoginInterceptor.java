@@ -2,7 +2,6 @@ package sg.edu.nus.team3.shoppingcart.interceptor;
 
 import java.io.PrintWriter;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -25,22 +24,22 @@ public class LoginInterceptor implements HandlerInterceptor {
 			throws Exception {
 
 		// Looks for user id in session attributes. If null, returns 401 Unauthorized.
-		// HttpSession session = request.getSession();
+		HttpSession session = request.getSession();
 
-		// Integer id = (Integer) session.getAttribute("id");
+		Integer id = (Integer) session.getAttribute("id");
 
-		// if (id == null) {
-		// APIResponse resp = new APIResponse("Please log in to continue");
-		// String json = new Gson().toJson(resp);
-		// PrintWriter out = response.getWriter();
-		// response.setContentType("application/json");
-		// response.setCharacterEncoding("utf-8");
-		// response.setStatus(401);
-		// out.print(json);
-		// out.flush();
+		if (id == null) {
+			APIResponse resp = new APIResponse("Please log in to continue");
+			String json = new Gson().toJson(resp);
+			PrintWriter out = response.getWriter();
+			response.setContentType("application/json");
+			response.setCharacterEncoding("utf-8");
+			response.setStatus(401);
+			out.print(json);
+			out.flush();
 
-		// return false;
-		// }
+			return false;
+		}
 
 		return true;
 	}
@@ -50,13 +49,13 @@ public class LoginInterceptor implements HandlerInterceptor {
 			ModelAndView modelAndView) throws Exception {
 
 		// Looks for email address in session attributes. If null, redirect to login.
-		// HttpSession session = request.getSession();
+		HttpSession session = request.getSession();
 
-		// String username = (String) session.getAttribute("email");
+		String username = (String) session.getAttribute("email");
 
-		// if (username == null) {
-		// response.sendRedirect("/login");
-		// }
+		if (username == null) {
+			response.sendRedirect("/login");
+		}
 	}
 
 	@Override

@@ -36,7 +36,7 @@ public class ProductTest {
     int entryCount = getProduct.size();
 
     // Test for correct search index
-    assertTrue(getProduct.get(0).getName().equalsIgnoreCase("Laptop Pro X1"),
+    assertTrue(getProduct.get(0).getName().equalsIgnoreCase("Laptop Pro 15 inch"),
         "The product 'Laptop Pro X1' should've been returned, received: " + getProduct.get(0).getName());
     // Test for singular entry retrieval
     assertTrue(entryCount == 1, "Only 1 entry should've been returned.");
@@ -46,7 +46,7 @@ public class ProductTest {
   @Test
   @DisplayName("Should return a list of 1 product through searching of the product name")
   public void getOneProductByName() {
-    String productNameToSearch = "Laptop Pro X1";
+    String productNameToSearch = "Laptop Pro 15 inch";
     List<Product> getProductByName = productServiceImpl.searchProductByName(productNameToSearch);
     int entryCount = getProductByName.size();
 
