@@ -17,11 +17,11 @@ public class APIResponse {
         this.message = message;
     }
 
-	public String getError() {
+	public String getMessage() {
 		return message;
 	}
 
-	public void setError(String message) {
+	public void setMessage(String message) {
 		this.message = message;
 	}
 

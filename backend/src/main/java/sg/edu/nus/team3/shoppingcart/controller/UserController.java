@@ -122,7 +122,7 @@ public class UserController {
 
 
 	@PutMapping("/profile")
-	public ResponseEntity<?> updateUser(@RequestBody UpdateUserRequest request, HttpSession session) {
+	public ResponseEntity<?> updateMyProfile(@RequestBody UpdateUserRequest request, HttpSession session) {
 
 		// Get userId
 		int userId = (int) session.getAttribute("id");
@@ -133,7 +133,7 @@ public class UserController {
 
 
 	@DeleteMapping("/profile")
-	public ResponseEntity<?> deleteUser(HttpSession session) {
+	public ResponseEntity<?> deleteMyProfile(HttpSession session) {
 
 		// Get userId
 		int userId = (int) session.getAttribute("id");

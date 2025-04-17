@@ -1,13 +1,18 @@
 package sg.edu.nus.team3.shoppingcart.interceptor;
 
+import java.io.PrintWriter;
+
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import sg.edu.nus.team3.shoppingcart.util.APIResponse;
 
 @Component
 public class GuestOnlyInterceptor implements HandlerInterceptor {
@@ -21,8 +26,14 @@ public class GuestOnlyInterceptor implements HandlerInterceptor {
 		boolean loggedIn = (session != null && session.getAttribute("id") != null);
 		
 		if (loggedIn) {
+			APIResponse resp = new APIResponse("You are already logged in!");
+			String json = new Gson().toJson(resp);
+			PrintWriter out = response.getWriter();
+			response.setContentType("application/json");
+			response.setCharacterEncoding("utf-8");
 			response.setStatus(403);
-			response.getWriter().write("You are already logged in!");
+			out.print(json);
+			out.flush();
 			
 			return false;
 		}

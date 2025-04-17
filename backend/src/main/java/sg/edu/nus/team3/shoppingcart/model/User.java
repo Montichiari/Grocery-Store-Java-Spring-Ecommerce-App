@@ -70,10 +70,13 @@ public class User {
 
 	@NotBlank(message = "Password is required")
 	// Looked up online for classic password regex validation
-	//@Pattern(
-	//	    regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
-	//	    message = "Password must be at least 8 characters long, include uppercase and lowercase letters, a number, and a special character"
-	//	)
+	/*Commented out regex on entity because bugs -> Shift validation to Dto BEFORE encryption
+	 * @Pattern( regexp =
+	 * "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
+	 * message =
+	 * "Password must be at least 8 characters long, include uppercase and lowercase letters, a number, and a special character"
+	 * )
+	 */
 	@JsonIgnore
 	private String password;
 
