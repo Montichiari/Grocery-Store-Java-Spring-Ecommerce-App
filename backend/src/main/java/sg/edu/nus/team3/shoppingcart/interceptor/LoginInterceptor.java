@@ -25,22 +25,22 @@ public class LoginInterceptor implements HandlerInterceptor {
 			throws Exception {
 
 		// Looks for user id in session attributes. If null, returns 401 Unauthorized.
-		HttpSession session = request.getSession();
+		// HttpSession session = request.getSession();
 
-		Integer id = (Integer) session.getAttribute("id");
+		// Integer id = (Integer) session.getAttribute("id");
 
-		if (id == null) {
-			APIResponse resp = new APIResponse("Please log in to continue");
-			String json = new Gson().toJson(resp);
-			PrintWriter out = response.getWriter();
-			response.setContentType("application/json");
-			response.setCharacterEncoding("utf-8");
-			response.setStatus(401);
-			out.print(json);
-			out.flush();
+		// if (id == null) {
+		// APIResponse resp = new APIResponse("Please log in to continue");
+		// String json = new Gson().toJson(resp);
+		// PrintWriter out = response.getWriter();
+		// response.setContentType("application/json");
+		// response.setCharacterEncoding("utf-8");
+		// response.setStatus(401);
+		// out.print(json);
+		// out.flush();
 
-			return false;
-		}
+		// return false;
+		// }
 
 		return true;
 	}

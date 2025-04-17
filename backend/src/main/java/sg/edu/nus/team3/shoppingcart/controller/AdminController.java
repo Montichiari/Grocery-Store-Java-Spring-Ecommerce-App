@@ -50,7 +50,7 @@ public class AdminController {
     }
 
     @PostMapping("/product")
-    public ResponseEntity<HashMap<String, String>> createProduct(@RequestBody Map<String, Object> product) {
+    public ResponseEntity<?> createProduct(@RequestBody Map<String, Object> product) {
         String name = product.get("name").toString();
         double unitPrice = (double) product.get("unitPrice");
         int stock = (int) product.get("stock");
@@ -60,9 +60,8 @@ public class AdminController {
         productService.createProduct(productToSave);
 
         APIResponse response = new APIResponse();
-        response.setStatus("200");
         response.setMessage("Product has been successfully created");
-        return new ResponseEntity<HashMap<String, String>>(response.getResponse(), HttpStatus.OK);
+        return new ResponseEntity<>(response.getMessage(), HttpStatus.OK);
     }
 
     @PatchMapping("/product/{id}")

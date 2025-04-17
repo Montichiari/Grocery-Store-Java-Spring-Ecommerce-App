@@ -31,17 +31,16 @@ public class ShoppingcartApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ShoppingcartApplication.class, args);
 	}
-	
-	/*
-	@Bean
-	CommandLineRunner runMe(UserService uSc) {
-		return args -> {
-			User jimmy = new User("testy.johnson@email.com", "91112233", "123 Oak Street, Anytown", "Testy", "Johnson","password123");
-			uSc.registerUser(jimmy);
-		};
-	}
-	*/
-	
+
+	// @Bean
+	// CommandLineRunner runMe(UserService uSc) {
+	// return args -> {
+	// User jimmy = new User("testy.johnson@email.com", "91112233", "123 Oak Street,
+	// Anytown", "Testy", "Johnson",
+	// "password123");
+	// uSc.registerUser(jimmy);
+	// };
+	// }
 
 	// @Bean
 	// CommandLineRunner runMe(UserRepository userRepo, OrderRepository orderRepo,
