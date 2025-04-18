@@ -36,10 +36,10 @@ public class User {
 
 	@NotBlank(message = "Email is required")
 	// I looked up online for this email regex validation, because I knew it exists
-	@Pattern(
-		    regexp = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$",
-		    message = "Invalid email format"
-		)	
+	/*
+	 * @Pattern( regexp = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$",
+	 * message = "Invalid email format" )
+	 */	
 	// Custom email validation to be created
 	@Column(length = 320)
 	private String email;

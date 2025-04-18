@@ -17,6 +17,7 @@ import sg.edu.nus.team3.shoppingcart.model.Product;
 import sg.edu.nus.team3.shoppingcart.model.ShoppingCart;
 import sg.edu.nus.team3.shoppingcart.model.ShoppingCartItem;
 import sg.edu.nus.team3.shoppingcart.model.User;
+import sg.edu.nus.team3.shoppingcart.model.dto.RegisterRequest;
 import sg.edu.nus.team3.shoppingcart.repository.OrderItemRepository;
 import sg.edu.nus.team3.shoppingcart.repository.OrderRepository;
 import sg.edu.nus.team3.shoppingcart.repository.ProductRepository;
@@ -32,15 +33,22 @@ public class ShoppingcartApplication {
 		SpringApplication.run(ShoppingcartApplication.class, args);
 	}
 	
+	
 	/*
-	@Bean
-	CommandLineRunner runMe(UserService uSc) {
-		return args -> {
-			User jimmy = new User("testy.johnson@email.com", "91112233", "123 Oak Street, Anytown", "Testy", "Johnson","password123");
-			uSc.registerUser(jimmy);
-		};
-	}
-	*/
+	 * @Bean CommandLineRunner runMe(UserService uSc) { return args -> {
+	 * RegisterRequest jimmyreq = new RegisterRequest();
+	 * jimmyreq.setEmail("testy.staff@email.com");
+	 * jimmyreq.setPassword("Password123!"); jimmyreq.setFirstName("Testy");
+	 * jimmyreq.setLastName("Staff"); jimmyreq.setHandPhoneNo("12345678");
+	 * jimmyreq.setAddress("123 Lane Road"); uSc.registerStaff(jimmyreq);
+	 * 
+	 * RegisterRequest tomreq = new RegisterRequest();
+	 * tomreq.setEmail("testy.customer@email.com");
+	 * tomreq.setPassword("Password123!"); tomreq.setFirstName("Testy");
+	 * tomreq.setLastName("customer"); tomreq.setHandPhoneNo("12345678");
+	 * tomreq.setAddress("123 Lane Road"); uSc.registerCustomer(tomreq); }; }
+	 */
+	
 	
 
 	// @Bean
