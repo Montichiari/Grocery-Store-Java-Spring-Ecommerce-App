@@ -14,6 +14,9 @@ public interface ShoppingCartService {
 
 	public void deleteAllItemsInCart(int id);
 
+	// @author: Jared Chua
+	public void deleteProductFromCart(int id, int productId);
+
 	// public ShoppingCart findShoppingCartByUserId(int id);
 
 	public void saveShoppingCart(ShoppingCart shoppingCart);

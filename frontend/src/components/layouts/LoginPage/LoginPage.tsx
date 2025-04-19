@@ -4,11 +4,11 @@ import {
   TextInput,
   PasswordInput,
   Button,
-  Anchor,
   Text,
   Container,
 } from "@mantine/core";
 import useLogin from "./useLogin.hooks";
+import CustomerRegistrationModal from "./CustomerRegistrationModal";
 
 function LoginPage() {
   const { loginInfo, loginMutation, setLoginInfo } = useLogin();
@@ -16,12 +16,6 @@ function LoginPage() {
     <Container maw="480px" my={40}>
       <Text ta="center">
         <Logo size={62} />
-      </Text>
-      <Text c="dimmed" size="sm" ta="center" mt={5}>
-        Do not have an account yet?{" "}
-        <Anchor size="sm" component="button">
-          Create account
-        </Anchor>
       </Text>
 
       <Paper withBorder shadow="md" p={30} mt={30} radius="md">
@@ -56,6 +50,9 @@ function LoginPage() {
           </Button>
         </form>
       </Paper>
+      <Text c="dimmed" size="sm" ta="center" mt={5}>
+        Do not have an account yet? <CustomerRegistrationModal />
+      </Text>
     </Container>
   );
 }

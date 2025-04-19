@@ -1,5 +1,5 @@
 import { Paper, Stack, Group, Badge, Image, Text, Button } from "@mantine/core";
-import { useHover } from "@mantine/hooks";
+import AddToCartButton from "./AddToCartButton";
 
 type ProductCardProps = {
   id: number;
@@ -38,9 +38,7 @@ function Product({ ...props }: ProductCardProps) {
           </Stack>
         </Group>
         {props.stock > 0 ? (
-          <Button variant="light" fullWidth color="orange">
-            Add to cart
-          </Button>
+          <AddToCartButton id={props.id} name={props.name} />
         ) : (
           <Button variant="light" fullWidth disabled>
             Out of stock

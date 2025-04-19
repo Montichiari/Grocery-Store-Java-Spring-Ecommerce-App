@@ -65,6 +65,18 @@ public class ShoppingCartController {
         return new ResponseEntity<List<ShoppingCartItem>>(listCartItems, HttpStatus.OK);
     }
 
+    // @author: Jared Chua
+    @DeleteMapping("/remove/{productId}")
+    public ResponseEntity<?> removeItemFromCart(@PathVariable("productId") int productId, HttpSession session) {
+        // try {
+        int cartId = (int) session.getAttribute("cartId");
+        shoppingCart_service.deleteProductFromCart(cartId, productId);
+        return new ResponseEntity<>(HttpStatus.OK);
+        // } catch (Exception e) {
+        // return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        // }
+    }
+
     @DeleteMapping("/clear")
     public ResponseEntity<?> clearShoppingCart(HttpSession session) {
 

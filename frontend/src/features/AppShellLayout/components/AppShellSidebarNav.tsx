@@ -31,12 +31,12 @@ function AppShellSidebarNav({ ...props }: AppShellSidebarNavProps) {
       <Text py="md" fw={500} size="xs" color="dimmed">
         {category.sectionHeader}
       </Text>
-      {category.links.map((link) => (
+      {category.links.map((link, index) => (
         <Link
           to={link.link}
           className={classes.link}
           data-active={link.label === active || undefined}
-          key={link.label}
+          key={index}
           onClick={() => setActive(link.label)}
         >
           <span>{link.label}</span>

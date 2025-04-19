@@ -1,38 +1,13 @@
 import { BaseModal } from "@/components/BaseModal/BaseModal";
-import { AllowedPaymentMethods, CheckoutDetails } from "@/types/Checkout.types";
-import api from "@/utils/API";
-import notify from "@/utils/NotificationSystem";
+import { AllowedPaymentMethods } from "@/types/Checkout.types";
 import { Group, Button, Text, Select, Stack } from "@mantine/core";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
-import { useUserStore } from "@/stores/UserStore";
-import { useCheckoutStore } from "@/stores/OrderConfirmationStore";
-import { useNavigate } from "react-router";
+import usePayment from "./usePayment.hooks";
 
 type ShoppingCartPaymentModalProps = {
   totalCost: number;
 };
 function ShoppingCartPaymentModal({ ...props }: ShoppingCartPaymentModalProps) {
-  const { user } = useUserStore();
-  const queryClient = useQueryClient();
-  const navigate = useNavigate();
-  const { setCheckoutState } = useCheckoutStore();
-  const [paymentMethod, setPaymentMethod] = useState<string | null>("");
-  const { mutateAsync: checkoutMutation } = useMutation({
-    mutationFn: async () =>
-      await api.post<{}, CheckoutDetails>("order/checkout", {
-        paymentMethod: paymentMethod,
-      }),
-    onSuccess: async (data) => {
-      console.log(data);
-      notify.success("Payment Successful!", "Your payment has been completed!");
-      if (data.data !== undefined) setCheckoutState(data.data);
-      await queryClient.invalidateQueries({
-        queryKey: ["shopping-cart", user.id],
-      });
-      navigate("/shop/confirmation");
-    },
-  });
+  const { checkoutMutation, paymentMethod, setPaymentMethod } = usePayment();
   return (
     <Group>
       <BaseModal>

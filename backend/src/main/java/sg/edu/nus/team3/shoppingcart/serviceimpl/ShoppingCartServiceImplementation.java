@@ -114,7 +114,7 @@ public class ShoppingCartServiceImplementation implements ShoppingCartService {
 			if (productInCart.getId() == productId) {
 				int newQuantity = cartItem.getQuantity() + quantity;
 				cartItem.setQuantity(newQuantity);
-				//scItemRepo.save(cartItem);
+				// scItemRepo.save(cartItem);
 				scRepo.save(userCart);
 				productMatch = true;
 				break;
@@ -131,7 +131,7 @@ public class ShoppingCartServiceImplementation implements ShoppingCartService {
 			newCartItem.setProduct(validProduct);
 			newCartItem.setQuantity(quantity);
 			newCartItem.setShoppingCart(userCart);
-			//scItemRepo.save(newCartItem);
+			// scItemRepo.save(newCartItem);
 			userCart.getItems().add(newCartItem);
 			scRepo.save(userCart);
 
@@ -140,4 +140,16 @@ public class ShoppingCartServiceImplementation implements ShoppingCartService {
 		return userCart;
 	}// end of method addItemToCart
 
+	@Override
+	@Transactional
+	public void deleteProductFromCart(int cartId, int productId) {
+		ShoppingCart userCart = findShoppingCartById(cartId);
+		List<ShoppingCartItem> listCartItems = userCart.getItems();
+
+		ShoppingCartItem itemToDelete = listCartItems.stream().filter((item) -> item.getId() == productId).toList()
+				.get(0);
+		int cartItemId = itemToDelete.getId();
+		System.out.println("Cart Item ID to be deleted: " + cartItemId);
+		scItemRepo.deleteCartItemById(cartItemId);
+	}
 }

@@ -1,40 +1,23 @@
 import GenericTable from "@/components/GenericTable/GenericTable";
 import { ShoppingCartItem } from "@/types/ShoppingCart.types";
-import {
-  ActionIcon,
-  Box,
-  Button,
-  Group,
-  Image,
-  NumberInput,
-  Stack,
-  Text,
-  Title,
-} from "@mantine/core";
-import { IconEdit, IconTrash } from "@tabler/icons-react";
+import { Box, Button, Group, Image, Stack, Text, Title } from "@mantine/core";
 import useShoppingCart from "./useShoppingCart.hooks";
 import ComponentLoader from "@/components/ComponentLoader/ComponentLoader";
 import ShoppingCartPaymentModal from "./ShoppingCartPaymentModal";
+import RemoveFromCartButton from "./RemoveFromCartButton";
+import ProductQuantityButton from "./ProductQuantityButton";
+import ClearShoppingCartButton from "./ClearShoppingCartButton";
 
 function ShoppingCartPage() {
-  const { cartItems, setCartItems, isLoading } = useShoppingCart();
-  const handleInputChange = (cartItemId: number, value: number) => {
-    const newValues = [...cartItems];
-    newValues.map((item) => {
-      if (item.id === cartItemId) {
-        item.quantity = value;
-      }
-      return item;
-    });
-    setCartItems(newValues);
-  };
+  const { cartItems, isLoading } = useShoppingCart();
 
   if (isLoading) return <ComponentLoader />;
-  if (!cartItems || cartItems.length === 0)
-    return <Box>No items in shopping cart.</Box>;
+  if (!cartItems || !cartItems.data || cartItems.data.length === 0)
+    return <Box>No items found in shopping cart.</Box>;
 
   return (
-    <Box py="xl">
+    <Box pb="xl">
+      <ClearShoppingCartButton />
       <GenericTable
         columnData={[
           {
@@ -76,12 +59,10 @@ function ShoppingCartPage() {
             render: (record) => {
               const cartItem = record as ShoppingCartItem;
               return (
-                <NumberInput
-                  clampBehavior="strict"
-                  defaultValue={cartItem.quantity}
-                  onChange={(value) =>
-                    handleInputChange(cartItem.id, Number(value))
-                  }
+                <ProductQuantityButton
+                  id={cartItem.product.id}
+                  name={cartItem.product.name}
+                  defaultQuantity={cartItem.quantity}
                 />
               );
             },
@@ -108,25 +89,18 @@ function ShoppingCartPage() {
           },
           {
             accessor: "Actions",
-            render: () => (
-              <Group>
-                <ActionIcon variant="light" color="orange">
-                  <IconEdit
-                    style={{ width: "70%", height: "70%" }}
-                    stroke={1.5}
-                  />
-                </ActionIcon>
-                <ActionIcon variant="light" color="red">
-                  <IconTrash
-                    style={{ width: "70%", height: "70%" }}
-                    stroke={1.5}
-                  />
-                </ActionIcon>
-              </Group>
-            ),
+            render: (record) => {
+              const cartItem = record as ShoppingCartItem;
+              return (
+                <RemoveFromCartButton
+                  id={cartItem.id}
+                  name={cartItem.product.name}
+                />
+              );
+            },
           },
         ]}
-        tableData={cartItems}
+        tableData={cartItems.data}
       />
       <Stack gap={0}>
         <Group justify="flex-start" my="md">
@@ -135,7 +109,7 @@ function ShoppingCartPage() {
           </Title>
           <Text size="lg">
             $
-            {cartItems
+            {cartItems.data
               .reduce(
                 (grandTotal, currItem) =>
                   currItem.quantity * currItem.product.unitPrice + grandTotal,
@@ -145,7 +119,7 @@ function ShoppingCartPage() {
           </Text>
         </Group>
         <ShoppingCartPaymentModal
-          totalCost={cartItems.reduce(
+          totalCost={cartItems.data.reduce(
             (grandTotal, currItem) =>
               currItem.quantity * currItem.product.unitPrice + grandTotal,
             0
