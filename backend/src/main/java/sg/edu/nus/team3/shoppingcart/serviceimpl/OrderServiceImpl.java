@@ -1,30 +1,27 @@
 package sg.edu.nus.team3.shoppingcart.serviceimpl;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import sg.edu.nus.team3.shoppingcart.model.Order;
 import sg.edu.nus.team3.shoppingcart.model.OrderItem;
-import sg.edu.nus.team3.shoppingcart.projections.OrderProjection;
-import sg.edu.nus.team3.shoppingcart.repository.OrderRepository;
 import sg.edu.nus.team3.shoppingcart.model.Product;
 import sg.edu.nus.team3.shoppingcart.model.ShoppingCart;
 import sg.edu.nus.team3.shoppingcart.model.ShoppingCartItem;
 import sg.edu.nus.team3.shoppingcart.model.User;
-
-import sg.edu.nus.team3.shoppingcart.repository.UserRepository;
+import sg.edu.nus.team3.shoppingcart.projections.OrderProjection;
 import sg.edu.nus.team3.shoppingcart.repository.OrderRepository;
-import sg.edu.nus.team3.shoppingcart.repository.ShoppingCartRepository;
 import sg.edu.nus.team3.shoppingcart.repository.ProductRepository;
-
+import sg.edu.nus.team3.shoppingcart.repository.ShoppingCartRepository;
+import sg.edu.nus.team3.shoppingcart.repository.UserRepository;
 import sg.edu.nus.team3.shoppingcart.service.OrderService;
 import sg.edu.nus.team3.shoppingcart.util.DateUtil;
 
@@ -47,6 +44,9 @@ public class OrderServiceImpl implements OrderService {
 
 	@Autowired
 	private ShoppingCartRepository shoppingCartRepository;
+	
+	@Autowired
+	private ShoppingCartServiceImplementation scService;
 
 	@Override
 	public Order checkoutCart(int userId, int cartId, String paymentMethod) {
@@ -110,7 +110,7 @@ public class OrderServiceImpl implements OrderService {
 		orderRepository.save(order);
 
 		// Clear cart at the end
-		cart.getItems().clear();
+		scService.deleteAllItemsInCart(cartId);
 		shoppingCartRepository.save(cart);
 
 		return order;

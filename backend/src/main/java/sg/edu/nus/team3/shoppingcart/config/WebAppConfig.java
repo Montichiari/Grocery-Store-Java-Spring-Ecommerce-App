@@ -27,7 +27,7 @@ public class WebAppConfig implements WebMvcConfigurer {
 		// urls except Login itself, if not logged in.
 		registry.addInterceptor(loginInterceptor)
 				.addPathPatterns("/cart/**", "/admin/**", "/orders/**", "/account/**", "/user/**")
-				.excludePathPatterns("/user/login");
+				.excludePathPatterns("/user/login", "/user/register/customer");
 
 		// This interceptor prevents non-staff from accessing admin panel and staff
 		// registration and all users
