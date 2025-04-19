@@ -16,7 +16,7 @@ function PastOrdersPage() {
     return <Box>No past orders found.</Box>;
 
   return (
-    <Box>
+    <Box mb="xl">
       <GenericTable
         tableData={orderList}
         columnData={[

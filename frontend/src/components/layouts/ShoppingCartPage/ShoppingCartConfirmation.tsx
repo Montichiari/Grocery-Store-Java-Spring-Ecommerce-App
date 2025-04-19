@@ -1,8 +1,12 @@
-import { CheckoutDetails } from "@/types/Checkout.types";
+import { useCheckoutStore } from "@/stores/OrderConfirmationStore";
 import dateFormat from "@/utils/DateUtil";
 import { Box, Stack, Table, Text, Title } from "@mantine/core";
 
-function ShoppingCartConfirmation(checkoutDetails: CheckoutDetails) {
+function ShoppingCartConfirmation() {
+  const { checkoutDetails } = useCheckoutStore();
+
+  // console.log(checkoutDetails);
+  if (checkoutDetails === undefined) return;
   return (
     <Box>
       <Stack>

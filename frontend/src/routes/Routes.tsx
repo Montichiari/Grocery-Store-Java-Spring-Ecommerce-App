@@ -9,6 +9,7 @@ import ProductList from "@/features/ProductList/ProductList";
 import StaffListPage from "@/components/layouts/StaffListPage/StaffListPage";
 import ProductManagementPage from "@/components/layouts/ProductManagementPage/ProductManagementPage";
 import { JSX } from "react";
+import ShoppingCartConfirmation from "@/components/layouts/ShoppingCartPage/ShoppingCartConfirmation";
 
 type RouteInfo = {
   title: string;
@@ -77,6 +78,11 @@ export const shopRoutes: RouteInfo[] = [
         title: "Old Orders",
         path: "orders",
         element: <PastOrdersPage />,
+      },
+      {
+        title: "Order Confirmation",
+        path: "confirmation",
+        element: <ShoppingCartConfirmation />,
       },
     ],
   },

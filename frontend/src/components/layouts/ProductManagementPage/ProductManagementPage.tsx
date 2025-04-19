@@ -2,10 +2,12 @@ import ComponentLoader from "@/components/ComponentLoader/ComponentLoader";
 import GenericTable from "@/components/GenericTable/GenericTable";
 import { ProductInfo } from "@/types/Product.types";
 import api from "@/utils/API";
-import { ActionIcon, Box, Group, Image } from "@mantine/core";
-import { IconEdit, IconTrash } from "@tabler/icons-react";
+import { Box, Group, Image } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
+import AddProductButton from "./AddProductButton";
+import EditProductButton from "./EditProductButton";
+import DeleteProductButton from "./DeleteProductButton";
 
 function ProductManagementPage() {
   const { data, isLoading } = useQuery({
@@ -17,7 +19,8 @@ function ProductManagementPage() {
   );
   useEffect(() => {
     if (data?.data) setProductList(data.data);
-  }, [data]);
+    console.log("triggered");
+  }, [data, productList]);
 
   if (isLoading) return <ComponentLoader />;
   if (!productList || productList.length === 0)
@@ -25,6 +28,7 @@ function ProductManagementPage() {
 
   return (
     <Box>
+      <AddProductButton />
       <GenericTable
         tableData={productList}
         columnData={[
@@ -71,20 +75,10 @@ function ProductManagementPage() {
           },
           {
             accessor: "Actions",
-            render: () => (
+            render: (record) => (
               <Group>
-                <ActionIcon variant="light" color="orange">
-                  <IconEdit
-                    style={{ width: "70%", height: "70%" }}
-                    stroke={1.5}
-                  />
-                </ActionIcon>
-                <ActionIcon variant="light" color="red">
-                  <IconTrash
-                    style={{ width: "70%", height: "70%" }}
-                    stroke={1.5}
-                  />
-                </ActionIcon>
+                <EditProductButton {...(record as ProductInfo)} />
+                <DeleteProductButton id={record.id as number} />
               </Group>
             ),
           },
