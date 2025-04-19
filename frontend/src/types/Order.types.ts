@@ -12,5 +12,6 @@ export type OrderInfo = {
   fulfilmentDate: Date;
   status: string;
   paymentMethod: string;
+  totalAmount: number;
   orderItems: OrderItemInfo[];
 };

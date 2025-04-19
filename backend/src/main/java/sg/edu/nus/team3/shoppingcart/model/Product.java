@@ -29,6 +29,8 @@ public class Product {
 
   private String category;
 
+  private String image;
+
   public Product() {
   }
 
@@ -84,6 +86,14 @@ public class Product {
 
   public void setCategory(String category) {
     this.category = category;
+  }
+
+  public String getImage() {
+    return image;
+  }
+
+  public void setImage(String image) {
+    this.image = image;
   }
 
   @Override

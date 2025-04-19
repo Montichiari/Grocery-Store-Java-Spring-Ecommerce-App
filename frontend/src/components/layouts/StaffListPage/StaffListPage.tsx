@@ -1,51 +1,32 @@
+import ComponentLoader from "@/components/ComponentLoader/ComponentLoader";
 import GenericTable from "@/components/GenericTable/GenericTable";
 import { UserAccountDetails } from "@/types/User.types";
+import api from "@/utils/API";
 import { ActionIcon, Box, Group } from "@mantine/core";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
+import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 
 function StaffListPage() {
-  const sampleUserList: UserAccountDetails[] = [
-    {
-      id: 1,
-      firstName: "Mark",
-      lastName: "Jacobs",
-      address: "321 Street Near Me Singapore 548172",
-      email: "mark@gmail.com",
-      handPhoneNo: "91247821",
-      role: "customer",
-    },
-    {
-      id: 2,
-      firstName: "Mary",
-      lastName: "James",
-      address: "582 Not Near Me Singapore 458197",
-      email: "mary@gmail.com",
-      handPhoneNo: "91246721",
-      role: "staff",
-    },
-    {
-      id: 3,
-      firstName: "Paul",
-      lastName: "Winters",
-      address: "742 Telok Something Rd Singapore 758271",
-      email: "paul@gmail.com",
-      handPhoneNo: "8417247",
-      role: "staff",
-    },
-    {
-      id: 4,
-      firstName: "Alfred",
-      lastName: "Leer",
-      address: "Blk 45 Tampines Not Street Singapore 75426",
-      email: "Alfred@gmail.com",
-      handPhoneNo: "9214576",
-      role: "customer",
-    },
-  ];
+  const { data, isLoading } = useQuery({
+    queryKey: ["account-list"],
+    queryFn: async () => await api.get<UserAccountDetails[]>("account/all"),
+  });
+  const [accountList, setAccountList] = useState<UserAccountDetails[]>(
+    data?.data ? data.data : []
+  );
+  useEffect(() => {
+    if (data?.data) setAccountList(data.data);
+  }, [data]);
+
+  if (isLoading) return <ComponentLoader />;
+  if (!accountList || accountList.length === 0)
+    return <Box>Unable to retrieve full account list.</Box>;
+
   return (
     <Box>
       <GenericTable
-        tableData={sampleUserList}
+        tableData={accountList}
         columnData={[
           {
             accessor: "id",

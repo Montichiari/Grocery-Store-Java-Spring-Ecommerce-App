@@ -28,7 +28,7 @@ function ShoppingCartPage() {
 
   if (isLoading) return <ComponentLoader />;
   if (!cartItems || cartItems.length === 0)
-    return <Box>No past orders found.</Box>;
+    return <Box>No items in shopping cart.</Box>;
 
   return (
     <Box>

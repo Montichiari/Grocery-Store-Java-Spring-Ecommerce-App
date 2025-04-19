@@ -19,7 +19,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@JsonIgnoreProperties({"user"})		//Ignore "user" during serialization (i.e. prevent loops in json)
+@JsonIgnoreProperties({ "user" }) // Ignore "user" during serialization (i.e. prevent loops in json)
 @Table(name = "orders")
 public class Order {
 
@@ -32,15 +32,15 @@ public class Order {
 	private User user;
 
 	private LocalDateTime createAt;
-	//private LocalDateTime fulfilmentDate;
 	private LocalDate fulfilmentDate;
 	private String status;
 	private String paymentMethod;
+	private double totalAmount;
 
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
 	private List<OrderItem> orderItems;
-	
-	//private double totalAmount;
+
+	// private double totalAmount;
 
 	// Empty constructor required by JPA
 	public Order() {
@@ -48,7 +48,8 @@ public class Order {
 	}
 
 	// Constructors
-	public Order(User user, LocalDateTime createAt, LocalDate fulfilmentDate, String status, String paymentMethod, double totalAmount) {
+	public Order(User user, LocalDateTime createAt, LocalDate fulfilmentDate, String status, String paymentMethod,
+			double totalAmount) {
 		super();
 		this.user = user;
 		this.createAt = createAt;
@@ -56,11 +57,8 @@ public class Order {
 		this.status = status;
 		this.paymentMethod = paymentMethod;
 		this.orderItems = new ArrayList<OrderItem>();
-		//this.totalAmount = totalAmount;
+		this.totalAmount = totalAmount;
 	}
-	
-
-	
 
 	public int getId() {
 		return id;
@@ -110,6 +108,14 @@ public class Order {
 		this.paymentMethod = paymentMethod;
 	}
 
+	public double getTotalAmount() {
+		return totalAmount;
+	}
+
+	public void setTotalAmount(double totalAmount) {
+		this.totalAmount = totalAmount;
+	}
+
 	public List<OrderItem> getOrderItems() {
 		return orderItems;
 	}
@@ -118,25 +124,25 @@ public class Order {
 		this.orderItems = orderItems;
 	}
 
-	//public double getTotalAmount() {
-	//	return totalAmount;
-	//}
+	// public double getTotalAmount() {
+	// return totalAmount;
+	// }
 
-	//public void setTotalAmount(double totalAmount) {
-	//	this.totalAmount = totalAmount;
-	//}
+	// public void setTotalAmount(double totalAmount) {
+	// this.totalAmount = totalAmount;
+	// }
 
 	@Override
-	//public String toString() {
-	//	return "Order [id=" + id + ", user=" + user + ", createAt=" + createAt + ", fulfilmentDate=" + fulfilmentDate
-	//			+ ", status=" + status + ", paymentMethod=" + paymentMethod + ", totalAmount=" + totalAmount + "]";
-	//}
+	// public String toString() {
+	// return "Order [id=" + id + ", user=" + user + ", createAt=" + createAt + ",
+	// fulfilmentDate=" + fulfilmentDate
+	// + ", status=" + status + ", paymentMethod=" + paymentMethod + ",
+	// totalAmount=" + totalAmount + "]";
+	// }
 	public String toString() {
 		return "Order [id=" + id + ", user=" + user + ", createAt=" + createAt + ", fulfilmentDate=" + fulfilmentDate
 				+ ", status=" + status + ", paymentMethod=" + paymentMethod + "]";
 	}
-
-	
 
 	// methods
 

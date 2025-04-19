@@ -26,19 +26,17 @@ import sg.edu.nus.team3.shoppingcart.service.UserService;
 import sg.edu.nus.team3.shoppingcart.util.APIResponse;
 
 /**
-@author Dion Yao
+ * @author Dion Yao
  */
 
 @RestController
-@CrossOrigin()
 @RequestMapping("/user")
 public class UserController {
 
 	@Autowired
 	private UserService userService;
 
-
-	/* 
+	/*
 	 * This section is for Login / Login status / Logout
 	 * 
 	 */
@@ -49,7 +47,8 @@ public class UserController {
 		Optional<User> userOpt = userService.findUserByEmail(request.getEmail());
 
 		// Log users in if email exists in database, and associated password matches
-		// on successful login, updates session with "id", "role", and "cartId" attributes
+		// on successful login, updates session with "id", "role", and "cartId"
+		// attributes
 
 		if (userService.loginAttempt(request)) {
 			User user = userOpt.get();
@@ -64,7 +63,6 @@ public class UserController {
 		APIResponse resp = new APIResponse("Invalid email or password.");
 		return new ResponseEntity<>(resp, HttpStatus.UNAUTHORIZED);
 	}
-
 
 	@GetMapping("/status")
 	public ResponseEntity<?> checkLoginStatus(HttpSession session) {
@@ -81,11 +79,11 @@ public class UserController {
 
 	}
 
-
 	@GetMapping("/logout")
 	public ResponseEntity<?> logout(HttpSession session) {
 
-		// Deletes all information in current session, and locks users out of application till next login
+		// Deletes all information in current session, and locks users out of
+		// application till next login
 		session.invalidate();
 
 		APIResponse resp = new APIResponse("You have logged out successfully");
@@ -99,10 +97,9 @@ public class UserController {
 	@PostMapping("/register/customer")
 	public ResponseEntity<?> registerCustomer(@Valid @RequestBody RegisterRequest request) {
 
-
 		try {
 			User newUser = userService.registerCustomer(request);
-			return new ResponseEntity<User> (newUser, HttpStatus.CREATED);
+			return new ResponseEntity<User>(newUser, HttpStatus.CREATED);
 
 		} catch (Exception e) {
 			APIResponse resp = new APIResponse("Unable to register account");
@@ -115,11 +112,9 @@ public class UserController {
 
 		int userId = (int) session.getAttribute("id");
 
-
 		User user = userService.findUserById(userId);
 		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
-
 
 	@PutMapping("/profile")
 	public ResponseEntity<?> updateMyProfile(@Valid @RequestBody UpdateUserRequest request, HttpSession session) {
@@ -131,17 +126,15 @@ public class UserController {
 		return new ResponseEntity<>(updatedUser, HttpStatus.OK);
 	}
 
-
 	@DeleteMapping("/profile")
 	public ResponseEntity<?> deleteMyProfile(HttpSession session) {
 
 		// Get userId
 		int userId = (int) session.getAttribute("id");
 
-
 		// User deleted and session invalidated. Put in a try-catch for security
 		try {
-			userService.deleteUser(userId); 
+			userService.deleteUser(userId);
 			session.invalidate();
 			APIResponse resp = new APIResponse("Account deleted successfully");
 			return new ResponseEntity<>(resp, HttpStatus.NO_CONTENT);

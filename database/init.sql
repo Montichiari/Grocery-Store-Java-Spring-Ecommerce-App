@@ -76,26 +76,26 @@ INSERT INTO shoppingcart (id, updated_at) VALUES
 -- 2. Populate users (Requires shoppingcart)
 -- Generating 20 users
 INSERT INTO users (id, email, shopping_cart_id, handphone_no, address, first_name, last_name, password, role) VALUES
-(1, 'john.doe@email.com', 1, '91234567', '123 Apple St', 'John', 'Doe', 'pass123', 'customer'),
-(2, 'jane.smith@email.com', 2, '92345678', '456 Orange Ave', 'Jane', 'Smith', 'pass123', 'customer'),
-(3, 'alice.jones@email.com', 3, '93456789', '789 Banana Blvd', 'Alice', 'Jones', 'pass123', 'customer'),
-(4, 'bob.williams@email.com', 4, '94567890', '101 Pine Ln', 'Bob', 'Williams', 'pass123', 'customer'),
-(5, 'charlie.brown@email.com', 5, '95678901', '202 Maple Dr', 'Charlie', 'Brown', 'pass123', 'customer'),
-(6, 'diana.davis@email.com', 6, '96789012', '303 Oak Ct', 'Diana', 'Davis', 'pass123', 'customer'),
-(7, 'ethan.miller@email.com', 7, '97890123', '404 Cedar Rd', 'Ethan', 'Miller', 'pass123', 'customer'),
-(8, 'fiona.wilson@email.com', 8, '98901234', '505 Birch Way', 'Fiona', 'Wilson', 'pass123', 'customer'),
-(9, 'george.moore@email.com', 9, '99012345', '606 Elm Pl', 'George', 'Moore', 'pass123', 'customer'),
-(10, 'hannah.taylor@email.com', 10, '90123456', '707 Spruce Sq', 'Hannah', 'Taylor', 'pass123', 'customer'),
-(11, 'ian.anderson@email.com', 11, '91112233', '808 Ash Pass', 'Ian', 'Anderson', 'pass123', 'customer'),
-(12, 'judy.thomas@email.com', 12, '92223344', '909 Willow Bend', 'Judy', 'Thomas', 'pass123', 'customer'),
-(13, 'kevin.jackson@email.com', 13, '93334455', '111 Aspen Hill', 'Kevin', 'Jackson', 'pass123', 'customer'),
-(14, 'linda.white@email.com', 14, '94445566', '222 Redwood Cir', 'Linda', 'White', 'pass123', 'customer'),
-(15, 'mike.harris@email.com', 15, '95556677', '333 Poplar Loop', 'Mike', 'Harris', 'pass123', 'customer'),
-(16, 'nancy.martin@email.com', 16, '96667788', '444 Sycamore Path', 'Nancy', 'Martin', 'pass123', 'customer'),
-(17, 'admin.user@email.com', 17, '81234567', '1 Admin Way', 'Admin', 'User', 'adminpass', 'staff'),
-(18, 'support.staff@email.com', 18, '82345678', '2 Support Plaza', 'Support', 'Staff', 'staffpass', 'staff'),
-(19, 'manager.ops@email.com', 19, '83456789', '3 Ops Center', 'Manager', 'Ops', 'mgrpass', 'staff'),
-(20, 'oliver.clark@email.com', 20, '97778899', '555 Sequoia St', 'Oliver', 'Clark', 'pass123', 'customer');
+(1, 'john.doe@email.com', 1, '91234567', '123 Apple St', 'John', 'Doe', '$2a$10$PSibqY85sp8Sovn3PqDs9ORY8Lqoth.c6NW.HCD9oPWA5f50p2tee', 'customer'), -- Password: Password123!
+(2, 'jane.smith@email.com', 2, '92345678', '456 Orange Ave', 'Jane', 'Smith', '$2a$10$.pDIwSkwy4UYxwAeIeg5FeY6BDBPpZVbt.pApC9Lp1GSaYrJCtR8W', 'customer'), -- Password: 1Apple!
+(3, 'alice.jones@email.com', 3, '93456789', '789 Banana Blvd', 'Alice', 'Jones', '$2a$10$tzsZVFGjnfODf8MepsX7.uX.ngB90vHIMyRHhS8tXv2ityyEUQDEO', 'customer'), -- Password: 2Apples!
+(4, 'bob.williams@email.com', 4, '94567890', '101 Pine Ln', 'Bob', 'Williams', '$2a$10$5h19zNmxWe.8fd76ALVlU./Sf.wpExDkQVX.RbHrLHYLNL//Nx62C', 'customer'), -- Password: 3Apples!
+(5, 'charlie.brown@email.com', 5, '95678901', '202 Maple Dr', 'Charlie', 'Brown', '$2a$10$osZmqt0ObFZt68q1CtyZeeetkWf3MZGPa1zxsXNtX9LLX6mSDTtqq', 'customer'), -- Password: 4Apples!
+(6, 'diana.davis@email.com', 6, '96789012', '303 Oak Ct', 'Diana', 'Davis', '$2a$10$r8OrwlOXRkZFbuVA0rRfweH63M8ZY4xWGTxLBiklcRdLutyD1jQBi', 'customer'), -- Password: 5Apples!
+(7, 'ethan.miller@email.com', 7, '97890123', '404 Cedar Rd', 'Ethan', 'Miller', '$2a$10$tRmoFmZBPVvVOZwyKCtsr.7Du9GIEXvCmfyAbB.4VLI/UoYhcc/pO', 'customer'), -- Password: 6Apples!
+(8, 'fiona.wilson@email.com', 8, '98901234', '505 Birch Way', 'Fiona', 'Wilson', '$2a$10$e43BGTfflBrybURs8pt41uPm3NDtwlLvuRc03yUyg4yUaJwSyVoCi', 'customer'), -- Password: 7Apples!
+(9, 'george.moore@email.com', 9, '99012345', '606 Elm Pl', 'George', 'Moore', '$2a$10$05tC5snlrr8Er03x2VvVTOeun7MxPZmV/xsUkuXiw/9mgJU7ar.na', 'customer'), -- Password: 8Apples!
+(10, 'hannah.taylor@email.com', 10, '90123456', '707 Spruce Sq', 'Hannah', 'Taylor', '$2a$10$9mZ029Zw98tPvD7vlx6FPevf7NM.sQP22tBjt6sHhK2nIyVPGAd02', 'customer'), -- Password: 9Apples!
+(11, 'ian.anderson@email.com', 11, '91112233', '808 Ash Pass', 'Ian', 'Anderson', '$2a$10$8MQcL7XZgzYFm827r./8Xu1h7SW7V6n6uRjsL5oi.mXGDEjhmQdga', 'customer'), -- Password: 10Apples!
+(12, 'judy.thomas@email.com', 12, '92223344', '909 Willow Bend', 'Judy', 'Thomas', '$2a$10$Ed6s98INKntaVl8EInPSWuGw.Pnu9r/PbwHzZs3An0N9djbaesc2O', 'customer'), -- Password: 1Orange!
+(13, 'kevin.jackson@email.com', 13, '93334455', '111 Aspen Hill', 'Kevin', 'Jackson', '$2a$10$1/MyAVMHLNMZWQU7aZ1lfuCsaFfPxz0GfgO0.QSjzj.BWkHYWAm2S', 'customer'), -- Password: 2Orange!
+(14, 'linda.white@email.com', 14, '94445566', '222 Redwood Cir', 'Linda', 'White', '$2a$10$v.hYswSeTmJTgJ63p2iyPOiixEHlObOh1.KLWLiDwRo5Qp74xWsMG', 'customer'), -- Password: 3Orange!
+(15, 'mike.harris@email.com', 15, '95556677', '333 Poplar Loop', 'Mike', 'Harris', '$2a$10$Kw65ldAHkpDI7DGj60DiveT9dncpkYrWNFpK9441grqcvi.pTlyru', 'customer'), -- Password: 4Orange!
+(16, 'nancy.martin@email.com', 16, '96667788', '444 Sycamore Path', 'Nancy', 'Martin', '$2a$10$4pKpGVi6MiR1tce/rff1t.7olzZXFQlRjuRCGD3enHBvU1fRIsyj6', 'customer'), -- Password: 5Orange!
+(17, 'admin.user@email.com', 17, '81234567', '1 Admin Way', 'Admin', 'User', '$2a$10$YIFiMEyu7GVle877ff7vlea2FLQToWtczpEu3DqWIGjtVwez59MSa', 'staff'), -- Password: AdminPass123!
+(18, 'support.staff@email.com', 18, '82345678', '2 Support Plaza', 'Support', 'Staff', '$2a$10$wdzOwwbrlQj75/L9Wmdt2.W1ZyX4eR1CKVvopwygUZ7EsEeA4qThu', 'staff'), -- Password: Admin123!
+(19, 'manager.ops@email.com', 19, '83456789', '3 Ops Center', 'Manager', 'Ops', '$2a$10$Uozc4x31weqyGT2UARZFVe0ntcEb0Wg3vd/Vzh3F2LUeiTQx3stA2', 'staff'), -- Password: AdminPassword123!
+(20, 'oliver.clark@email.com', 20, '97778899', '555 Sequoia St', 'Oliver', 'Clark', 'pass123$2a$10$54WVP3JIhgI149qznr7R6Oo5kYaDPqpjrAMKLJ.qqwt4kqePP9lyS', 'customer');
 
 -- 3. Populate product (No dependencies other than table existence)
 INSERT INTO product (id, name, image, unit_price, category, stock) VALUES
@@ -139,30 +139,30 @@ INSERT INTO product (id, name, image, unit_price, category, stock) VALUES
 (38, 'Chicken Farmhouse Sausage Gluten and Preservative Free Frozen', 'https://ryansgrocery.com/wp-content/uploads/2023/10/Chicken-Farmhouse-Sausage-Gluten-_-Preservative-Free-1-300x300.png', 12.00, 'Meat and Poultry', 119),
 (39, 'Chicken Feet Frozen', 'https://ryansgrocery.com/wp-content/uploads/2023/10/Chicken-Feet-1-300x300.png', 6.90, 'Meat and Poultry', 133),
 (40, 'Chicken Golden Coin Frozen', 'https://ryansgrocery.com/wp-content/uploads/2024/01/Chicken-Golden-Coin-Frozen-1-300x300.jpg', 10.90, 'Prepared Meals', 96),
-(41, 'Agroaguiar Red Mixed Fruits 300g', 'https://ryansgrocery.com/wp-content/uploads/2023/10/mixed-fruit-1-300x300.jpg', 7.90, 'Produce Fruits', 145),
-(42, 'Agroaguiar Strawberries 300g', 'https://ryansgrocery.com/wp-content/uploads/2023/10/strawberry-1-300x300.jpg', 6.99, 'Produce Fruits', 160),
-(43, 'Baby Roasters Potatoes', 'https://ryansgrocery.com/wp-content/uploads/2023/10/Baby-Roasters-1-kg-1-1-300x300.jpg', 6.30, 'Produce Vegetables', 0),
-(44, 'Baby Spinach', 'https://ryansgrocery.com/wp-content/uploads/2023/10/RG-Online-SKU-image-600X600px-9-3-300x300.jpg', 6.90, 'Produce Vegetables', 185),
-(45, 'Banana Cavendish Philippines', 'https://ryansgrocery.com/wp-content/uploads/2023/10/Organic-Banana-Cavendish-Australia-1-300x300.png', 1.35, 'Produce Fruits', 0),
-(46, 'Broccoli Frozen', 'https://ryansgrocery.com/wp-content/uploads/2024/06/GELCAMPO-BROCCOLI-300g-300x300.jpg', 4.50, 'Produce Vegetables', 0),
-(47, 'Chives', 'https://ryansgrocery.com/wp-content/uploads/2023/10/Chives-Front-1-300x300.jpg', 3.90, 'Produce Vegetables', 170),
-(48, 'Coriander', 'https://ryansgrocery.com/wp-content/uploads/2023/10/1-1-1-300x300.png', 3.90, 'Produce Vegetables', 190),
-(49, 'Cut Leaf Spinach Frozen', 'https://ryansgrocery.com/wp-content/uploads/2023/10/OOB-Organic-Cut-Leaf-Spinach-Frozen-Front-1-300x300.png', 6.50, 'Produce Vegetables', 158),
-(50, 'Diced Mango', 'https://ryansgrocery.com/wp-content/uploads/2024/07/OOB-Diced-Mango-500g-300x300.jpg', 15.95, 'Produce Fruits', 132),
-(51, 'Dill Singapore', 'https://ryansgrocery.com/wp-content/uploads/2023/10/Dill_2500x2500-1-300x300.jpg', 3.90, 'Produce Vegetables', 183),
-(52, 'Dried Porcini Mushroom Extra', 'https://ryansgrocery.com/wp-content/uploads/2023/11/AR-Tartufi-Dried-Porcini-Mushrooms-300x300.jpg', 10.90, 'Produce Vegetables', 0),
-(53, 'Fresh Basil', 'https://ryansgrocery.com/wp-content/uploads/2023/10/Basil-Front-1-300x300.jpg', 3.90, 'Produce Vegetables', 195),
-(54, 'Frozen Blueberries', 'https://ryansgrocery.com/wp-content/uploads/2023/10/Sujon-Blueberries-Fruits-Frozen-Front-1-300x300.jpg', 15.90, 'Produce Fruits', 141),
-(55, 'Frozen Cranberries', 'https://ryansgrocery.com/wp-content/uploads/2023/10/Sujon-Cranberries-500g-Front-1-1-300x300.jpg', 15.90, 'Produce Fruits', 129),
-(56, 'Frozen Mixed Berries', 'https://ryansgrocery.com/wp-content/uploads/2023/10/90072271_XL1_20210423-1-300x300.webp', 17.90, 'Produce Fruits', 155),
-(57, 'Frozen Strawberries', 'https://ryansgrocery.com/wp-content/uploads/2023/10/sujon-strawberry-1-300x300.jpeg', 29.90, 'Produce Fruits', 113),
-(58, 'Gelcampo 3 Vegetables Mix 400G', 'https://ryansgrocery.com/wp-content/uploads/2023/10/Screenshot-2021-04-12-at-5.00.20-PM-1-291x300.png', 5.30, 'Produce Vegetables', 172),
-(59, 'Gelcampo Brussel Sprouts', 'https://ryansgrocery.com/wp-content/uploads/2024/03/Gelcampo-Brussel-Sprouts-300x300.jpg', 4.30, 'Produce Vegetables', 149),
-(60, 'Gelcampo Kaiser Mix 300G', 'https://ryansgrocery.com/wp-content/uploads/2023/10/Screenshot-2021-04-12-at-4.56.36-PM-1-300x300.png', 4.50, 'Produce Vegetables', 188),
-(61, 'Gelcampo Mushrooms Mix 400G', 'https://ryansgrocery.com/wp-content/uploads/2023/10/Screenshot-2021-04-12-at-4.55.05-PM-1-300x300.png', 8.30, 'Produce Vegetables', 165),
-(62, 'Gelcampo Organic Sweet Corn', 'https://ryansgrocery.com/wp-content/uploads/2024/03/Gelcampo-Organic-Sweet-Corn-300x300.jpg', 5.80, 'Produce Vegetables', 0),
-(63, 'Gelcampo Peas 300G', 'https://ryansgrocery.com/wp-content/uploads/2023/10/GelCampo-Peas-300g-300x300-1-1.jpeg', 4.50, 'Produce Vegetables', 0),
-(64, 'Gelcampo Spinach Leaf Portions 300G', 'https://ryansgrocery.com/wp-content/uploads/2023/10/gelcampo-spinach-leaf-portion-1-300x300.jpg', 4.50, 'Produce Vegetables', 198),
+(41, 'Agroaguiar Red Mixed Fruits 300g', 'https://ryansgrocery.com/wp-content/uploads/2023/10/mixed-fruit-1-300x300.jpg', 7.90, 'Fruits', 145),
+(42, 'Agroaguiar Strawberries 300g', 'https://ryansgrocery.com/wp-content/uploads/2023/10/strawberry-1-300x300.jpg', 6.99, 'Fruits', 160),
+(43, 'Baby Roasters Potatoes', 'https://ryansgrocery.com/wp-content/uploads/2023/10/Baby-Roasters-1-kg-1-1-300x300.jpg', 6.30, 'Vegetables', 0),
+(44, 'Baby Spinach', 'https://ryansgrocery.com/wp-content/uploads/2023/10/RG-Online-SKU-image-600X600px-9-3-300x300.jpg', 6.90, 'Vegetables', 185),
+(45, 'Banana Cavendish Philippines', 'https://ryansgrocery.com/wp-content/uploads/2023/10/Organic-Banana-Cavendish-Australia-1-300x300.png', 1.35, 'Fruits', 0),
+(46, 'Broccoli Frozen', 'https://ryansgrocery.com/wp-content/uploads/2024/06/GELCAMPO-BROCCOLI-300g-300x300.jpg', 4.50, 'Vegetables', 0),
+(47, 'Chives', 'https://ryansgrocery.com/wp-content/uploads/2023/10/Chives-Front-1-300x300.jpg', 3.90, 'Vegetables', 170),
+(48, 'Coriander', 'https://ryansgrocery.com/wp-content/uploads/2023/10/1-1-1-300x300.png', 3.90, 'Vegetables', 190),
+(49, 'Cut Leaf Spinach Frozen', 'https://ryansgrocery.com/wp-content/uploads/2023/10/OOB-Organic-Cut-Leaf-Spinach-Frozen-Front-1-300x300.png', 6.50, 'Vegetables', 158),
+(50, 'Diced Mango', 'https://ryansgrocery.com/wp-content/uploads/2024/07/OOB-Diced-Mango-500g-300x300.jpg', 15.95, 'Fruits', 132),
+(51, 'Dill Singapore', 'https://ryansgrocery.com/wp-content/uploads/2023/10/Dill_2500x2500-1-300x300.jpg', 3.90, 'Vegetables', 183),
+(52, 'Dried Porcini Mushroom Extra', 'https://ryansgrocery.com/wp-content/uploads/2023/11/AR-Tartufi-Dried-Porcini-Mushrooms-300x300.jpg', 10.90, 'Vegetables', 0),
+(53, 'Fresh Basil', 'https://ryansgrocery.com/wp-content/uploads/2023/10/Basil-Front-1-300x300.jpg', 3.90, 'Vegetables', 195),
+(54, 'Frozen Blueberries', 'https://ryansgrocery.com/wp-content/uploads/2023/10/Sujon-Blueberries-Fruits-Frozen-Front-1-300x300.jpg', 15.90, 'Fruits', 141),
+(55, 'Frozen Cranberries', 'https://ryansgrocery.com/wp-content/uploads/2023/10/Sujon-Cranberries-500g-Front-1-1-300x300.jpg', 15.90, 'Fruits', 129),
+(56, 'Frozen Mixed Berries', 'https://ryansgrocery.com/wp-content/uploads/2023/10/90072271_XL1_20210423-1-300x300.webp', 17.90, 'Fruits', 155),
+(57, 'Frozen Strawberries', 'https://ryansgrocery.com/wp-content/uploads/2023/10/sujon-strawberry-1-300x300.jpeg', 29.90, 'Fruits', 113),
+(58, 'Gelcampo 3 Vegetables Mix 400G', 'https://ryansgrocery.com/wp-content/uploads/2023/10/Screenshot-2021-04-12-at-5.00.20-PM-1-291x300.png', 5.30, 'Vegetables', 172),
+(59, 'Gelcampo Brussel Sprouts', 'https://ryansgrocery.com/wp-content/uploads/2024/03/Gelcampo-Brussel-Sprouts-300x300.jpg', 4.30, 'Vegetables', 149),
+(60, 'Gelcampo Kaiser Mix 300G', 'https://ryansgrocery.com/wp-content/uploads/2023/10/Screenshot-2021-04-12-at-4.56.36-PM-1-300x300.png', 4.50, 'Vegetables', 188),
+(61, 'Gelcampo Mushrooms Mix 400G', 'https://ryansgrocery.com/wp-content/uploads/2023/10/Screenshot-2021-04-12-at-4.55.05-PM-1-300x300.png', 8.30, 'Vegetables', 165),
+(62, 'Gelcampo Organic Sweet Corn', 'https://ryansgrocery.com/wp-content/uploads/2024/03/Gelcampo-Organic-Sweet-Corn-300x300.jpg', 5.80, 'Vegetables', 0),
+(63, 'Gelcampo Peas 300G', 'https://ryansgrocery.com/wp-content/uploads/2023/10/GelCampo-Peas-300g-300x300-1-1.jpeg', 4.50, 'Vegetables', 0),
+(64, 'Gelcampo Spinach Leaf Portions 300G', 'https://ryansgrocery.com/wp-content/uploads/2023/10/gelcampo-spinach-leaf-portion-1-300x300.jpg', 4.50, 'Vegetables', 198),
 (65, '5 Bar Christmas Selection 5pcs', 'https://ryansgrocery.com/wp-content/uploads/2024/12/724022266052_01-300x300.jpg', 59.90, 'Snacks and Pantry', 0),
 (66, '70 Cocoa Single Orgin', 'https://ryansgrocery.com/wp-content/uploads/2024/08/Majani-70-Cocoa-Single-Orgin-75G-1-300x300.png', 12.00, 'Snacks and Pantry', 147),
 (67, '75 Cocoa Single Origin', 'https://ryansgrocery.com/wp-content/uploads/2024/08/Majani-70-Cocoa-Single-Orgin-75G-300x300.png', 12.00, 'Snacks and Pantry', 138),

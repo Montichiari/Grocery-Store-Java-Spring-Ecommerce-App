@@ -44,18 +44,22 @@ public class LoginInterceptor implements HandlerInterceptor {
 		return true;
 	}
 
+	// ! @Montichiari removing this since there's no need for the interceptor to
+	// ! perform any sort of redirections
+	// ! Also interferes with the some of the API calls since this is an illegal
+	// ! operation
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 
 		// Looks for email address in session attributes. If null, redirect to login.
-		HttpSession session = request.getSession();
+		// HttpSession session = request.getSession();
 
-		String username = (String) session.getAttribute("email");
+		// String username = (String) session.getAttribute("email");
 
-		if (username == null) {
-			response.sendRedirect("/login");
-		}
+		// if (username == null) {
+		// response.sendRedirect("/login");
+		// }
 	}
 
 	@Override
