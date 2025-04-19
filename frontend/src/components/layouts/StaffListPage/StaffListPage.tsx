@@ -5,28 +5,25 @@ import api from "@/utils/API";
 import { ActionIcon, Box, Group } from "@mantine/core";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import AddStaffButton from "./AddStaffButton";
+import EditUserButton from "./EditUserButton";
+import DeleteUserButton from "./DeleteUserButton";
 
 function StaffListPage() {
-  const { data, isLoading } = useQuery({
+  const { data: accountList, isLoading } = useQuery({
     queryKey: ["account-list"],
     queryFn: async () => await api.get<UserAccountDetails[]>("account/all"),
   });
-  const [accountList, setAccountList] = useState<UserAccountDetails[]>(
-    data?.data ? data.data : []
-  );
-  useEffect(() => {
-    if (data?.data) setAccountList(data.data);
-  }, [data]);
 
   if (isLoading) return <ComponentLoader />;
-  if (!accountList || accountList.length === 0)
+  if (!accountList || !accountList.data)
     return <Box>Unable to retrieve full account list.</Box>;
 
   return (
     <Box>
+      <AddStaffButton />
       <GenericTable
-        tableData={accountList}
+        tableData={accountList.data}
         columnData={[
           {
             accessor: "id",
@@ -58,20 +55,13 @@ function StaffListPage() {
           },
           {
             accessor: "Actions",
-            render: () => (
+            render: (record) => (
               <Group>
-                <ActionIcon variant="light" color="orange">
-                  <IconEdit
-                    style={{ width: "70%", height: "70%" }}
-                    stroke={1.5}
-                  />
-                </ActionIcon>
-                <ActionIcon variant="light" color="red">
-                  <IconTrash
-                    style={{ width: "70%", height: "70%" }}
-                    stroke={1.5}
-                  />
-                </ActionIcon>
+                <EditUserButton {...(record as UserAccountDetails)} />
+                <DeleteUserButton
+                  id={record.id as number}
+                  name={record.firstName as string}
+                />
               </Group>
             ),
           },

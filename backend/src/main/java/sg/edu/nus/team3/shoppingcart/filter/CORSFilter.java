@@ -28,9 +28,12 @@ public class CORSFilter implements Filter {
         response.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
         response.setHeader("Access-Control-Allow-Credentials", "true");
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT, PATCH");
-        response.setHeader("Access-Control-Allow-Headers", "Content-Type");
-
-        chain.doFilter(req, res);
+        response.setHeader("Access-Control-Allow-Headers", "authorization, Content-Type, xsrf-token");
+        response.setHeader("Access-Control-Expose-Headers", "xsrf-token");
+        if ("OPTIONS".equals(request.getMethod()))
+            response.setStatus(HttpServletResponse.SC_OK);
+        else
+            chain.doFilter(req, res);
     }
 
     @Override

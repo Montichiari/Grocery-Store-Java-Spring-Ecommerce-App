@@ -41,11 +41,12 @@ public class Product {
     this.category = category;
   }
 
-  public Product(String name, double unitPrice, int stock, String category) {
+  public Product(String name, double unitPrice, int stock, String category, String image) {
     this.name = name;
     this.unitPrice = unitPrice;
     this.stock = stock;
     this.category = category;
+    this.image = image;
   }
 
   public int getId() {

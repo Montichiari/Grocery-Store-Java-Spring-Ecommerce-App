@@ -5,24 +5,23 @@ import { ActionIcon, Button, Code, Stack, Text } from "@mantine/core";
 import { IconTrash } from "@tabler/icons-react";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 
-// Not used, as deleting products are not allowed in this app
-function DeleteProductButton({ id, name }: { id: number; name: string }) {
+function DeleteUserButton({ id, name }: { id: number; name: string }) {
   const queryClient = useQueryClient();
-  const { mutateAsync: deleteProductMutation } = useMutation({
-    mutationFn: async () => await api.delete<void>(`admin/product/${id}`),
+  const { mutateAsync: deleteUserMutation } = useMutation({
+    mutationFn: async () => await api.delete<void>(`account/${id}`),
     onSuccess: (data) => {
       if (!data.status || data.status >= 400)
         notify.error(
-          "Unable To Delete Product!",
-          "Something has gone wrong, the product was not added to the database."
+          "Unable To Delete User!",
+          "Something has gone wrong, the user has not been deleted from the database."
         );
       else {
         notify.success(
-          "Product Deleted!",
-          `Your product has successfully been deleted!`
+          `${name} has been deleted!`,
+          `${name} has successfully been deleted from the database!`
         );
         queryClient.invalidateQueries({
-          queryKey: ["admin-product-list"],
+          queryKey: ["account-list"],
         });
       }
     },
@@ -34,20 +33,20 @@ function DeleteProductButton({ id, name }: { id: number; name: string }) {
           <IconTrash style={{ width: "70%", height: "70%" }} stroke={1.5} />
         </ActionIcon>
       </BaseModal.ClickTarget>
-      <BaseModal.Content title={`Delete Product ${id} Confirmation`}>
+      <BaseModal.Content title={`Delete ${name} Confirmation`}>
         <Stack>
           <Text size="sm">Are you sure you want to delete:</Text>
           <Stack gap={0}>
-            <Code>Product Name: {name}</Code>
-            <Code>Product ID: {id}</Code>
+            <Code>Account Name: {name}</Code>
+            <Code>Account ID: {id}</Code>
           </Stack>
           <Button
             variant="light"
             color="red"
             fullWidth
-            onClick={() => deleteProductMutation()}
+            onClick={() => deleteUserMutation()}
           >
-            Delete Product {id}
+            Delete Account {id}
           </Button>
         </Stack>
       </BaseModal.Content>
@@ -55,4 +54,4 @@ function DeleteProductButton({ id, name }: { id: number; name: string }) {
   );
 }
 
-export default DeleteProductButton;
+export default DeleteUserButton;

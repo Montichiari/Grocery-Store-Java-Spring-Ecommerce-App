@@ -51,15 +51,16 @@ public class AdminController {
 
     @PostMapping("/product")
     public ResponseEntity<?> createProduct(@RequestBody Map<String, Object> product) {
+        APIResponse response = new APIResponse();
+
         String name = product.get("name").toString();
-        double unitPrice = (double) product.get("unitPrice");
+        double unitPrice = Double.parseDouble((String) product.get("unitPrice"));
         int stock = (int) product.get("stock");
         String category = product.get("category").toString();
-
-        Product productToSave = new Product(name, unitPrice, stock, category);
+        String image = product.get("image").toString();
+        Product productToSave = new Product(name, unitPrice, stock, category, image);
         productService.createProduct(productToSave);
 
-        APIResponse response = new APIResponse();
         response.setMessage("Product has been successfully created");
         return new ResponseEntity<>(response.getMessage(), HttpStatus.OK);
     }
@@ -67,21 +68,22 @@ public class AdminController {
     @PatchMapping("/product/{id}")
     public ResponseEntity<Product> updateProduct(@PathVariable int id, @RequestBody Map<String, Object> product) {
         String editedName = product.get("name").toString();
-        double editedUnitPrice = (double) product.get("unitPrice");
+        double editedUnitPrice = Double.parseDouble((String) product.get("unitPrice"));
         int editedStock = (int) product.get("stock");
         String editedCategory = product.get("category").toString();
+        String editedImage = product.get("image").toString();
 
-        Product editedProduct = new Product(editedName, editedUnitPrice, editedStock, editedCategory);
+        Product editedProduct = new Product(editedName, editedUnitPrice, editedStock, editedCategory, editedImage);
         productService.editProductById(id, editedProduct);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    // ! Delete not allowed, since there are old Orders tied to the products
-    // ! Consider performing a cascade action on affected orders to a placeholder
-    // ! product (e.g. "Product not available") before deletion
-    // @DeleteMapping("/product/{id}")
-    // public ResponseEntity<Product> deleteProduct(@PathVariable int id) {
-    // productService.deleteProductById(id);
-    // return new ResponseEntity<>(HttpStatus.OK);
-    // }
+    // ! Delete shouldn't be allowed, since there are old Orders tied to the
+    // ! products. Consider performing a cascade action on affected orders to a
+    // ! placeholder product (e.g. "Product not available") before deletion
+    @DeleteMapping("/product/{id}")
+    public ResponseEntity<Product> deleteProduct(@PathVariable int id) {
+        productService.deleteProductById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

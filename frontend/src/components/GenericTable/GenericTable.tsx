@@ -20,7 +20,7 @@ function GenericTable({ ...props }: GenericTableProps) {
   useEffect(() => {
     const data = sortBy(props.tableData, sortStatus.columnAccessor);
     setRecords(sortStatus.direction === "desc" ? data.reverse() : data);
-  }, [sortStatus]);
+  }, [props.tableData, sortStatus]);
 
   const [records, setRecords] = useState(sortBy(props.tableData, "name"));
   return (

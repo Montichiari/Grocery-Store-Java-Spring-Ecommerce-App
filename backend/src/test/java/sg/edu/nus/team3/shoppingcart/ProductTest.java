@@ -62,7 +62,7 @@ public class ProductTest {
   @Test
   @DisplayName("Should create a new product, with auto generated ID")
   public void createNewProduct() {
-    Product createdProduct = new Product("TestProduct", 999.99, 888, "Vegetables");
+    Product createdProduct = new Product("TestProduct", 999.99, 888, "Vegetables", "insertRandomImageUrl");
     productServiceImpl.createProduct(createdProduct);
     List<Product> getProductByName = productServiceImpl.searchProductByName("TestProduct");
     int getTestProductId = productServiceImpl.searchProductByName(createdProduct.getName()).get(0).getId();
@@ -76,9 +76,9 @@ public class ProductTest {
   @Test
   @DisplayName("Should edit an existing product based on their ID")
   public void updateProductById() {
-    Product createdProduct = new Product("TestProduct", 999.99, 888, "Vegetables");
+    Product createdProduct = new Product("TestProduct", 999.99, 888, "Vegetables", "insertRandomImageUrl");
     productServiceImpl.createProduct(createdProduct);
-    Product productToBeEdited = new Product("TestEditProduct", 2999.99, 2999, "Test");
+    Product productToBeEdited = new Product("TestEditProduct", 2999.99, 2999, "Test", "insertRandomImageUrl");
     int getTestProductId = productServiceImpl.searchProductByName(createdProduct.getName()).get(0).getId();
     productServiceImpl.editProductById(getTestProductId, productToBeEdited);
 
@@ -93,7 +93,7 @@ public class ProductTest {
   @Test
   @DisplayName("Should delete an existing product based on their ID")
   public void deleteProduct() {
-    Product createdProduct = new Product("TestProduct", 999.99, 888, "Vegetables");
+    Product createdProduct = new Product("TestProduct", 999.99, 888, "Vegetables", "insertRandomImageUrl");
     productServiceImpl.createProduct(createdProduct);
     int getTestProductId = productServiceImpl.searchProductByName(createdProduct.getName()).get(0).getId();
     List<Product> beforeDelete = productServiceImpl.searchProductById(getTestProductId);

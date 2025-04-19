@@ -4,33 +4,26 @@ import { ProductInfo } from "@/types/Product.types";
 import api from "@/utils/API";
 import { Box, Group, Image } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
-import { useState, useEffect } from "react";
 import AddProductButton from "./AddProductButton";
 import EditProductButton from "./EditProductButton";
 import DeleteProductButton from "./DeleteProductButton";
 
 function ProductManagementPage() {
-  const { data, isLoading } = useQuery({
+  const { data: productList, isLoading } = useQuery({
     queryKey: ["admin-product-list"],
     queryFn: async () => await api.get<ProductInfo[]>("admin/product-list"),
   });
-  const [productList, setProductList] = useState<ProductInfo[]>(
-    data?.data ? data.data : []
-  );
-  useEffect(() => {
-    if (data?.data) setProductList(data.data);
-    console.log("triggered");
-  }, [data, productList]);
 
   if (isLoading) return <ComponentLoader />;
-  if (!productList || productList.length === 0)
+
+  if (!productList || !productList.data)
     return <Box>Unable to retrieve full product list.</Box>;
 
   return (
     <Box>
       <AddProductButton />
       <GenericTable
-        tableData={productList}
+        tableData={productList.data}
         columnData={[
           {
             accessor: "pic",
@@ -39,7 +32,11 @@ function ProductManagementPage() {
               const productInfo = record as ProductInfo;
               return (
                 <Image
-                  src={productInfo.image}
+                  src={
+                    productInfo.image === ""
+                      ? "https://media.istockphoto.com/id/1055079680/vector/black-linear-photo-camera-like-no-image-available.jpg?s=612x612&w=0&k=20&c=P1DebpeMIAtXj_ZbVsKVvg-duuL0v9DlrOZUvPG6UJk="
+                      : productInfo.image
+                  }
                   radius="md"
                   fit="contain"
                   w={100}
@@ -78,7 +75,10 @@ function ProductManagementPage() {
             render: (record) => (
               <Group>
                 <EditProductButton {...(record as ProductInfo)} />
-                <DeleteProductButton id={record.id as number} />
+                <DeleteProductButton
+                  id={record.id as number}
+                  name={record.name as string}
+                />
               </Group>
             ),
           },

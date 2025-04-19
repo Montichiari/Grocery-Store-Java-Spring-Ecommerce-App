@@ -32,19 +32,19 @@ function EditProductButton(productInfo: ProductInfo) {
         productDetails
       ),
     onSuccess: (data) => {
-      queryClient.invalidateQueries({
-        queryKey: ["admin-product-list"],
-      });
-      if (!data.status || data.status >= 400) {
+      if (!data.status || data.status >= 400)
         notify.error(
           "Unable To Edit Product!",
           "Something has gone wrong, the product was not added to the database."
         );
-      } else {
+      else {
         notify.success(
           "New Product Added!",
           `Your product has successfully been edited!`
         );
+        queryClient.invalidateQueries({
+          queryKey: ["admin-product-list"],
+        });
       }
     },
   });
