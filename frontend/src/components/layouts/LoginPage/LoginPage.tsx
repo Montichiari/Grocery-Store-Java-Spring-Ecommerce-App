@@ -8,10 +8,10 @@ import {
   Text,
   Container,
 } from "@mantine/core";
-import { useNavigate } from "react-router";
+import useLogin from "./useLogin.hooks";
 
 function LoginPage() {
-  let navigate = useNavigate();
+  const { loginInfo, loginMutation, setLoginInfo } = useLogin();
   return (
     <Container maw="480px" my={40}>
       <Text ta="center">
@@ -25,16 +25,36 @@ function LoginPage() {
       </Text>
 
       <Paper withBorder shadow="md" p={30} mt={30} radius="md">
-        <TextInput label="Email" placeholder="you@mantine.dev" required />
-        <PasswordInput
-          label="Password"
-          placeholder="Your password"
-          required
-          mt="md"
-        />
-        <Button fullWidth mt="xl" onClick={() => navigate("/shop/products")}>
-          Sign in
-        </Button>
+        <form
+          onSubmit={(event) => {
+            event.preventDefault();
+            loginMutation();
+          }}
+        >
+          <TextInput
+            label="Email"
+            placeholder="you@mantine.dev"
+            required
+            onChange={(event) =>
+              setLoginInfo({ ...loginInfo, email: event.currentTarget.value })
+            }
+          />
+          <PasswordInput
+            label="Password"
+            placeholder="Your password"
+            required
+            mt="md"
+            onChange={(event) =>
+              setLoginInfo({
+                ...loginInfo,
+                password: event.currentTarget.value,
+              })
+            }
+          />
+          <Button fullWidth mt="xl" type="submit">
+            Sign in
+          </Button>
+        </form>
       </Paper>
     </Container>
   );

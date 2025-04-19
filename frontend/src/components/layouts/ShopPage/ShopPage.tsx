@@ -20,35 +20,39 @@ function ShopPage() {
   const sampleCategories: NavbarLink[] = [
     {
       label: "View all",
-      link: "/shop/products",
+      link: "/shop/products/all",
     },
     {
-      label: "Vegetables",
-      link: "/shop/products",
+      label: "Beverages",
+      link: "/shop/products/beverages",
     },
     {
-      label: "Frozen Meats",
-      link: "/shop/products",
+      label: "Household",
+      link: "/shop/products/household",
+    },
+    {
+      label: "Meat and Poultry",
+      link: "/shop/products/meat-and-poultry",
+    },
+    {
+      label: "Prepared Meals",
+      link: "/shop/products/prepared-meals",
     },
     {
       label: "Fruits",
-      link: "/shop/products",
+      link: "/shop/products/fruits",
     },
     {
-      label: "Cereal",
-      link: "/shop/products",
+      label: "Vegetables",
+      link: "/shop/products/vegetables",
     },
     {
-      label: "Bread",
-      link: "/shop/products",
+      label: "Seafood",
+      link: "/shop/products/seafood",
     },
     {
-      label: "Party Supplies",
-      link: "/shop/products",
-    },
-    {
-      label: "Baking Supplies",
-      link: "/shop/products",
+      label: "Snacks and Pantry",
+      link: "/shop/products/snacks-and-pantry",
     },
   ];
   return (

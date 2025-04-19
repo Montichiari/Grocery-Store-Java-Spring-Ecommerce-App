@@ -5,5 +5,5 @@ export type UserAccountDetails = {
   address: string;
   firstName: string;
   lastName: string;
-  role: string;
+  role: "customer" | "staff" | "";
 };

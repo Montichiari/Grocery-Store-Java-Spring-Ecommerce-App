@@ -1,42 +1,37 @@
 import GenericTable from "@/components/GenericTable/GenericTable";
+import dateFormat from "@/utils/DateUtil";
+import usePastOrders from "./usePastOrders.hooks";
+import { Box } from "@mantine/core";
+import ComponentLoader from "@/components/ComponentLoader/ComponentLoader";
 
 function PastOrdersPage() {
-  const sampleData = [
-    {
-      id: 10284,
-      order_date: "10/01/2025",
-      fulfilment_date: "21/01/2025",
-      status: "Completed",
-      payment_method: "Credit Card",
-    },
-    {
-      id: 10852,
-      order_date: "12/01/2025",
-      fulfilment_date: "26/01/2025",
-      status: "Completed",
-      payment_method: "Credit Card",
-    },
-    {
-      id: 12857,
-      order_date: "24/03/2025",
-      fulfilment_date: "27/03/2025",
-      status: "Completed",
-      payment_method: "Credit Card",
-    },
-  ];
+  const { orderList, isLoading } = usePastOrders();
   return (
-    <div>
+    <Box>
       <GenericTable
-        tableData={sampleData}
+        tableData={orderList}
         columnData={[
           { accessor: "id", sortable: true },
-          { accessor: "order_date", sortable: true },
-          { accessor: "fulfilment_date", sortable: true },
+          {
+            accessor: "createAt",
+            title: "Order Date",
+            sortable: true,
+            render: (record) => (
+              <>{dateFormat.formatter(record.createAt as string)}</>
+            ),
+          },
+          {
+            accessor: "fulfilmentDate",
+            sortable: true,
+            render: (record) => (
+              <>{dateFormat.formatter(record.fulfilmentDate as string)}</>
+            ),
+          },
           { accessor: "status", sortable: true },
-          { accessor: "payment_method", sortable: true },
+          { accessor: "paymentMethod", sortable: true },
         ]}
       />
-    </div>
+    </Box>
   );
 }
 

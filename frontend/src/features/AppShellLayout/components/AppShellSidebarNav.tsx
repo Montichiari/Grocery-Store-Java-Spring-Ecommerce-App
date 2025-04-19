@@ -4,6 +4,9 @@ import classes from "./AppShellSidebarNav.module.css";
 import { Link } from "react-router";
 import { useState } from "react";
 import { NavbarLink } from "@/types/AppShellSidebarNav.types";
+import { useMutation } from "@tanstack/react-query";
+import api from "@/utils/API";
+import notify from "@/utils/NotificationSystem";
 
 type AppShellSidebarNavProps = {
   navSection: {
@@ -14,6 +17,14 @@ type AppShellSidebarNavProps = {
 };
 
 function AppShellSidebarNav({ ...props }: AppShellSidebarNavProps) {
+  const { mutateAsync: logoutMutation } = useMutation({
+    mutationFn: async () => await api.get("user/logout"),
+    onSuccess: () =>
+      notify.success(
+        "Successfully Logged Out!",
+        "You have been successfully logged out of your account."
+      ),
+  });
   const [active, setActive] = useState(props.defaultSection);
   const navbarCategories = props.navSection.map((category) => (
     <>
@@ -41,14 +52,10 @@ function AppShellSidebarNav({ ...props }: AppShellSidebarNavProps) {
       </Box>
 
       <Box m="md" className={classes.footer}>
-        <a
-          href="#"
-          className={classes.link}
-          onClick={(event) => event.preventDefault()}
-        >
+        <Link to="/" className={classes.link} onClick={() => logoutMutation()}>
           <IconLogout className={classes.linkIcon} stroke={1.5} />
           <span>Logout</span>
-        </a>
+        </Link>
       </Box>
     </AppShell.Navbar>
   );

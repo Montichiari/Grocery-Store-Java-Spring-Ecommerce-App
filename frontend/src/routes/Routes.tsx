@@ -5,7 +5,7 @@ import ListingPage from "@/components/layouts/ShopPage/ShopPage";
 import LoginPage from "@/components/layouts/LoginPage/LoginPage";
 import ShoppingCartPage from "@/components/layouts/ShoppingCartPage/ShoppingCartPage";
 import PastOrdersPage from "@/components/layouts/PastOrdersPage/PastOrdersPage";
-import ProductList from "@/features/ProductList/components/ProductList";
+import ProductList from "@/features/ProductList/ProductList";
 import StaffListPage from "@/components/layouts/StaffListPage/StaffListPage";
 import ProductManagementPage from "@/components/layouts/ProductManagementPage/ProductManagementPage";
 import { JSX } from "react";
@@ -64,7 +64,7 @@ export const shopRoutes: RouteInfo[] = [
     children: [
       {
         title: "Product List",
-        path: "products",
+        path: "products/:category",
         element: <ProductList />,
         defaultPage: true,
       },
