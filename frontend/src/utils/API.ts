@@ -37,10 +37,10 @@ const api = {
   async post<T, K>(
     endpoint: string,
     params?: Record<string, any>,
-    body?: K
-  ): Promise<ApiResponse<T>> {
+    body?: T
+  ): Promise<ApiResponse<K>> {
     try {
-      const response: AxiosResponse<T> = await axios.post(
+      const response: AxiosResponse<K> = await axios.post(
         `${API_BASE_URL}/${endpoint}`,
         body,
         { ...DEFAULT_SETTINGS, params }
@@ -54,10 +54,10 @@ const api = {
   async put<T, K>(
     endpoint: string,
     params?: Record<string, any>,
-    body?: K
-  ): Promise<ApiResponse<T>> {
+    body?: T
+  ): Promise<ApiResponse<K>> {
     try {
-      const response: AxiosResponse<T> = await axios.put(
+      const response: AxiosResponse<K> = await axios.put(
         `${API_BASE_URL}/${endpoint}`,
         body,
         { ...DEFAULT_SETTINGS, params }
@@ -71,10 +71,10 @@ const api = {
   async patch<T, K>(
     endpoint: string,
     params?: Record<string, any>,
-    body?: K
-  ): Promise<ApiResponse<T>> {
+    body?: T
+  ): Promise<ApiResponse<K>> {
     try {
-      const response: AxiosResponse<T> = await axios.patch(
+      const response: AxiosResponse<K> = await axios.patch(
         `${API_BASE_URL}/${endpoint}`,
         body,
         { ...DEFAULT_SETTINGS, params }

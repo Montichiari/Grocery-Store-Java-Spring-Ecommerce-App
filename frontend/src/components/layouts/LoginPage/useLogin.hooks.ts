@@ -15,7 +15,7 @@ export default function useLogin() {
   });
   const { mutateAsync: loginMutation } = useMutation({
     mutationFn: async () =>
-      await api.post<UserAccountDetails, { email: string; password: string }>(
+      await api.post<{ email: string; password: string }, UserAccountDetails>(
         "user/login",
         {},
         loginInfo

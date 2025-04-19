@@ -3,15 +3,18 @@ import { ShoppingCartItem } from "@/types/ShoppingCart.types";
 import {
   ActionIcon,
   Box,
+  Button,
   Group,
   Image,
   NumberInput,
+  Stack,
   Text,
   Title,
 } from "@mantine/core";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
 import useShoppingCart from "./useShoppingCart.hooks";
 import ComponentLoader from "@/components/ComponentLoader/ComponentLoader";
+import ShoppingCartPaymentModal from "./ShoppingCartPaymentModal";
 
 function ShoppingCartPage() {
   const { cartItems, setCartItems, isLoading } = useShoppingCart();
@@ -31,7 +34,7 @@ function ShoppingCartPage() {
     return <Box>No items in shopping cart.</Box>;
 
   return (
-    <Box>
+    <Box py="xl">
       <GenericTable
         columnData={[
           {
@@ -125,21 +128,30 @@ function ShoppingCartPage() {
         ]}
         tableData={cartItems}
       />
-      <Group justify="flex-start" my="md">
-        <Title order={2} fw={700}>
-          Grand Total:
-        </Title>
-        <Text size="lg">
-          $
-          {cartItems
-            .reduce(
-              (grandTotal, currItem) =>
-                currItem.quantity * currItem.product.unitPrice + grandTotal,
-              0
-            )
-            .toFixed(2)}
-        </Text>
-      </Group>
+      <Stack gap={0}>
+        <Group justify="flex-start" my="md">
+          <Title order={2} fw={700}>
+            Grand Total:
+          </Title>
+          <Text size="lg">
+            $
+            {cartItems
+              .reduce(
+                (grandTotal, currItem) =>
+                  currItem.quantity * currItem.product.unitPrice + grandTotal,
+                0
+              )
+              .toFixed(2)}
+          </Text>
+        </Group>
+        <ShoppingCartPaymentModal
+          totalCost={cartItems.reduce(
+            (grandTotal, currItem) =>
+              currItem.quantity * currItem.product.unitPrice + grandTotal,
+            0
+          )}
+        />
+      </Stack>
     </Box>
   );
 }

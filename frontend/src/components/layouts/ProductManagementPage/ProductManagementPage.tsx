@@ -1,7 +1,6 @@
 import ComponentLoader from "@/components/ComponentLoader/ComponentLoader";
 import GenericTable from "@/components/GenericTable/GenericTable";
 import { ProductInfo } from "@/types/Product.types";
-import { UserAccountDetails } from "@/types/User.types";
 import api from "@/utils/API";
 import { ActionIcon, Box, Group, Image } from "@mantine/core";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
