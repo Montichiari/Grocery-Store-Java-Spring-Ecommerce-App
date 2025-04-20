@@ -7,7 +7,7 @@ import { useDisclosure } from "@mantine/hooks";
 
 function ShopPage() {
   const [opened, { toggle }] = useDisclosure();
-  const sampleDashboardCategories: NavbarLink[] = [
+  const dashboardCategories: NavbarLink[] = [
     {
       label: "Shopping Cart",
       link: "/shop/cart",
@@ -16,8 +16,12 @@ function ShopPage() {
       label: "View Orders",
       link: "/shop/orders",
     },
+    {
+      label: "Search Products",
+      link: "/shop/search",
+    },
   ];
-  const sampleCategories: NavbarLink[] = [
+  const productCategories: NavbarLink[] = [
     {
       label: "View all",
       link: "/shop/products/all",
@@ -66,9 +70,12 @@ function ShopPage() {
         navSection={[
           {
             sectionHeader: "Dashboard",
-            links: [...sampleDashboardCategories],
+            links: [...dashboardCategories],
           },
-          { sectionHeader: "Product Categories", links: [...sampleCategories] },
+          {
+            sectionHeader: "Product Categories",
+            links: [...productCategories],
+          },
         ]}
       />
       <AppShellContent />

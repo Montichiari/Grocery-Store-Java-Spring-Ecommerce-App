@@ -19,7 +19,6 @@ export default function usePayment() {
         paymentMethod: paymentMethod,
       }),
     onSuccess: async (data) => {
-      console.log(data);
       notify.success("Payment Successful!", "Your payment has been completed!");
       if (data.data !== undefined) setCheckoutState(data.data);
       await queryClient.invalidateQueries({

@@ -12,6 +12,8 @@ import { JSX } from "react";
 import ShoppingCartConfirmation from "@/components/layouts/ShoppingCartPage/ShoppingCartConfirmation";
 import CustomerProtectedRoute from "@/components/ProtectedRoutes/CustomerRoute/CustomerProtectedRoute";
 import StaffProtectedRoutes from "@/components/ProtectedRoutes/StaffRoute/StaffProtectedRoute";
+import SearchPage from "@/components/layouts/SearchPage/SearchPage";
+import LoginProtectedRoutes from "@/components/ProtectedRoutes/LoginRoute/LoginProtectedRoute";
 
 type RouteInfo = {
   title: string;
@@ -35,7 +37,11 @@ export const mainRoutes: RouteInfo[] = [
   {
     title: "Login",
     path: "/login",
-    element: <LoginPage />,
+    element: (
+      <LoginProtectedRoutes>
+        <LoginPage />
+      </LoginProtectedRoutes>
+    ),
   },
 ];
 
@@ -93,6 +99,11 @@ export const shopRoutes: RouteInfo[] = [
         title: "Order Confirmation",
         path: "confirmation",
         element: <ShoppingCartConfirmation />,
+      },
+      {
+        title: "Search Products",
+        path: "search",
+        element: <SearchPage />,
       },
     ],
   },

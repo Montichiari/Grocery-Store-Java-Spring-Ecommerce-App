@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import AddProductButton from "./AddProductButton";
 import EditProductButton from "./EditProductButton";
 import DeleteProductButton from "./DeleteProductButton";
+import SalesSummary from "./SalesSummary";
 
 function ProductManagementPage() {
   const { data: productList, isLoading } = useQuery({
@@ -21,6 +22,7 @@ function ProductManagementPage() {
 
   return (
     <Box>
+      <SalesSummary />
       <AddProductButton />
       <GenericTable
         tableData={productList.data}
@@ -68,6 +70,15 @@ function ProductManagementPage() {
             render: (record) => {
               const productInfo = record as ProductInfo;
               return `$${productInfo.unitPrice.toFixed(2)}`;
+            },
+          },
+          {
+            accessor: "stock",
+            sortable: true,
+            width: 100,
+            render: (record) => {
+              const productInfo = record as ProductInfo;
+              return `${productInfo.stock}x left`;
             },
           },
           {

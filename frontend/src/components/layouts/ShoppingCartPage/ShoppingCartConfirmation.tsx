@@ -5,7 +5,6 @@ import { Box, Stack, Table, Text, Title } from "@mantine/core";
 function ShoppingCartConfirmation() {
   const { checkoutDetails } = useCheckoutStore();
 
-  // console.log(checkoutDetails);
   if (checkoutDetails === undefined) return;
   return (
     <Box>
