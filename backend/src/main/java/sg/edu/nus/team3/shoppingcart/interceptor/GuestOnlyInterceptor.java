@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import sg.edu.nus.team3.shoppingcart.util.APIResponse;
 
+// @author: Dion Yao
 @Component
 public class GuestOnlyInterceptor implements HandlerInterceptor {
 
@@ -21,10 +22,10 @@ public class GuestOnlyInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		// TODO Auto-generated method stub
-		
+
 		HttpSession session = request.getSession(false);
 		boolean loggedIn = (session != null && session.getAttribute("id") != null);
-		
+
 		if (loggedIn) {
 			APIResponse resp = new APIResponse("You are already logged in!");
 			String json = new Gson().toJson(resp);
@@ -34,10 +35,10 @@ public class GuestOnlyInterceptor implements HandlerInterceptor {
 			response.setStatus(403);
 			out.print(json);
 			out.flush();
-			
+
 			return false;
 		}
-		
+
 		return true;
 	}
 
@@ -54,6 +55,5 @@ public class GuestOnlyInterceptor implements HandlerInterceptor {
 		// TODO Auto-generated method stub
 		HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
 	}
-	
-	
+
 }

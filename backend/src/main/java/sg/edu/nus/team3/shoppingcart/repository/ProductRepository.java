@@ -11,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 import jakarta.transaction.Transactional;
 import sg.edu.nus.team3.shoppingcart.model.Product;
 
+// @author: Jared Chua
 public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Query("SELECT p FROM Product p")
     public Optional<List<Product>> retrieveProductListFromProduct();
@@ -29,8 +30,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Transactional
     @Query("DELETE FROM Product p WHERE p.id = :productId")
     public void deleteProductById(@Param("productId") int product_id);
-    
-    
+
     // authored by @ Thina to be used in ShoppingCartService method as I need to
     // find the product by productId
     // for the add to cart case
@@ -39,12 +39,12 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Transactional
     @Query("SELECT p FROM Product p WHERE p.id = :productId")
     public Optional<Product> findProductById(@Param("productId") int productId);
-    
+
     // @author Shengyi
     @Query("SELECT p FROM Product p WHERE p.unitPrice BETWEEN :min AND :max")
     public List<Product> findByPriceBetween(Double min, Double max);
-    
+
     // @author Dion
     @Query("SELECT p FROM Product p WHERE LOWER(p.name) LIKE LOWER(CONCAT('%', :search, '%'))")
-    public List<Product> findByNameIgnoreCase(@Param("search")String input);
+    public List<Product> findByNameIgnoreCase(@Param("search") String input);
 }

@@ -1,6 +1,6 @@
-import AppShellContent from "@/features/AppShellLayout/components/AppShellContent";
-import AppShellHeader from "@/features/AppShellLayout/components/AppShellHeader";
-import AppShellSidebarNav from "@/features/AppShellLayout/components/AppShellSidebarNav";
+import AppShellContent from "@/components/AppShellLayout/AppShellContent";
+import AppShellHeader from "@/components/AppShellLayout/AppShellHeader";
+import AppShellSidebarNav from "@/components/AppShellLayout/AppShellSidebarNav";
 import { NavbarLink } from "@/types/AppShellSidebarNav.types";
 import { AppShell } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";

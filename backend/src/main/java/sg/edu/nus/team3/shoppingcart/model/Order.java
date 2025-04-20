@@ -124,26 +124,10 @@ public class Order {
 		this.orderItems = orderItems;
 	}
 
-	// public double getTotalAmount() {
-	// return totalAmount;
-	// }
-
-	// public void setTotalAmount(double totalAmount) {
-	// this.totalAmount = totalAmount;
-	// }
-
 	@Override
-	// public String toString() {
-	// return "Order [id=" + id + ", user=" + user + ", createAt=" + createAt + ",
-	// fulfilmentDate=" + fulfilmentDate
-	// + ", status=" + status + ", paymentMethod=" + paymentMethod + ",
-	// totalAmount=" + totalAmount + "]";
-	// }
 	public String toString() {
 		return "Order [id=" + id + ", user=" + user + ", createAt=" + createAt + ", fulfilmentDate=" + fulfilmentDate
 				+ ", status=" + status + ", paymentMethod=" + paymentMethod + "]";
 	}
-
-	// methods
 
 }

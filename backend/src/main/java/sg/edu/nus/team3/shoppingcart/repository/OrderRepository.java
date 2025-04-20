@@ -16,8 +16,4 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
     public Optional<List<OrderProjection>> findWeeklyOrders(@Param("startDate") LocalDateTime startDate,
             @Param("endDate") LocalDateTime endDate);
 
-    // @Query("SELECT o.id as id, o.createAt as createAt, o.fulfilmentDate as
-    // fulfilmentDate, o.status as status, o.paymentMethod as paymentMethod,
-    // o.user.id as userId FROM Order o")
-    // public Optional<List<OrderProjection>> findWeeklyOrders();
 }

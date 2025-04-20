@@ -1,13 +1,6 @@
 package sg.edu.nus.team3.shoppingcart.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import jakarta.transaction.Transactional;
-
-import sg.edu.nus.team3.shoppingcart.model.Product;
 import sg.edu.nus.team3.shoppingcart.model.ShoppingCart;
-import sg.edu.nus.team3.shoppingcart.model.ShoppingCartItem;
-import sg.edu.nus.team3.shoppingcart.model.User;
 
 // @author @ thina 
 public interface ShoppingCartService {
@@ -16,8 +9,6 @@ public interface ShoppingCartService {
 
 	// @author: Jared Chua
 	public void deleteProductFromCart(int id, int productId);
-
-	// public ShoppingCart findShoppingCartByUserId(int id);
 
 	public void saveShoppingCart(ShoppingCart shoppingCart);
 

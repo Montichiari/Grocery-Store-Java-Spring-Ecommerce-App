@@ -2,7 +2,6 @@ package sg.edu.nus.team3.shoppingcart.serviceimpl;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -44,7 +43,7 @@ public class OrderServiceImpl implements OrderService {
 
 	@Autowired
 	private ShoppingCartRepository shoppingCartRepository;
-	
+
 	@Autowired
 	private ShoppingCartServiceImplementation scService;
 
@@ -145,74 +144,5 @@ public class OrderServiceImpl implements OrderService {
 		List<OrderProjection> orderList = orderRepository.findWeeklyOrders(startDate, endDate).get();
 		return orderList;
 	}
-	// --------------------------------------------------------------
-
-	// Not used anymore --------------------------------------
-	/*
-	 * @Override
-	 * public Order saveOrder(Order order) {
-	 * return orderRepository.save(order);
-	 * }
-	 * 
-	 * @Override
-	 * public List<Order> findAllOrder() {
-	 * // return orderRepository.findAll();
-	 * }
-	 * 
-	 * @Override
-	 * public void updateProductStock(Order order) {
-	 * //Iterate through OrderItem list
-	 * for (OrderItem item : order.getOrderItems()) {
-	 * 
-	 * //Fetch the product by ID
-	 * Product checkProduct = productRepository.findById(item.getProduct().getId())
-	 * .orElseThrow(() -> new RuntimeException("Product not found: " +
-	 * item.getProduct().getId()));
-	 * 
-	 * //Check to make sure we have the product
-	 * if (checkProduct.getStock() < item.getQuantity()) {
-	 * throw new RuntimeException("Not enough stock: " + checkProduct.getId());
-	 * }
-	 * 
-	 * //Remove from product if there's enough stock
-	 * checkProduct.setStock(checkProduct.getStock() - item.getQuantity());
-	 * 
-	 * //Save updated product
-	 * productRepository.save(checkProduct);
-	 * }
-	 * }
-	 * 
-	 * @Override
-	 * public Order completeOrder(Order order) {
-	 * order.setStatus("COMPLETED");
-	 * 
-	 * LocalDateTime now = LocalDateTime.now();
-	 * order.setFulfilmentDate(now);
-	 * 
-	 * return orderRepository.save(order);
-	 * //return order;
-	 * }
-	 * 
-	 * @Override
-	 * public double calcTotal(List<OrderItem> orderItems) {
-	 * 
-	 * double totalPrice = 0.0;
-	 * 
-	 * //Iterate through OrderItem list
-	 * for (OrderItem item: orderItems) {
-	 * 
-	 * //Fetch the product by ID
-	 * Product checkProduct = productRepository.findById(item.getProduct().getId())
-	 * .orElseThrow(() -> new RuntimeException("Product not found: " +
-	 * item.getProduct().getId()));
-	 * 
-	 * totalPrice += checkProduct.getUnitPrice()*item.getQuantity();
-	 * 
-	 * }
-	 * return totalPrice;
-	 * }
-	 * 
-	 */
-	// --------------------------------------------------------------------
 
 }

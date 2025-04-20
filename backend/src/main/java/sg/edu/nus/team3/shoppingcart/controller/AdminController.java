@@ -1,6 +1,5 @@
 package sg.edu.nus.team3.shoppingcart.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,18 +14,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import sg.edu.nus.team3.shoppingcart.model.Order;
 import sg.edu.nus.team3.shoppingcart.model.Product;
 import sg.edu.nus.team3.shoppingcart.projections.OrderProjection;
 import sg.edu.nus.team3.shoppingcart.serviceimpl.OrderServiceImpl;
 import sg.edu.nus.team3.shoppingcart.serviceimpl.ProductServiceImplementation;
 import sg.edu.nus.team3.shoppingcart.util.APIResponse;
 
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 
 // @author: Jared Chua
-// TODO: Add validation rules for incorrect/empty parameters, with the appropriate http response
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -53,12 +49,15 @@ public class AdminController {
     public ResponseEntity<?> createProduct(@RequestBody Map<String, Object> product) {
         APIResponse response = new APIResponse();
 
+        // Extract and typecast body JSON for processing
         String name = product.get("name").toString();
         double unitPrice = Double.parseDouble((String) product.get("unitPrice"));
         int stock = (int) product.get("stock");
         String category = product.get("category").toString();
         String image = product.get("image").toString();
+        // Temporarily instantiate new Product object to be saved
         Product productToSave = new Product(name, unitPrice, stock, category, image);
+        // Create the product
         productService.createProduct(productToSave);
 
         response.setMessage("Product has been successfully created");
@@ -67,20 +66,20 @@ public class AdminController {
 
     @PatchMapping("/product/{id}")
     public ResponseEntity<Product> updateProduct(@PathVariable int id, @RequestBody Map<String, Object> product) {
+        // Extract and typecast body JSON for processing
         String editedName = product.get("name").toString();
         double editedUnitPrice = Double.parseDouble((String) product.get("unitPrice"));
         int editedStock = (int) product.get("stock");
         String editedCategory = product.get("category").toString();
         String editedImage = product.get("image").toString();
 
+        // Temporarily instantiate new Product object to be saved
         Product editedProduct = new Product(editedName, editedUnitPrice, editedStock, editedCategory, editedImage);
+        // Edit the product
         productService.editProductById(id, editedProduct);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    // ! Delete shouldn't be allowed, since there are old Orders tied to the
-    // ! products. Consider performing a cascade action on affected orders to a
-    // ! placeholder product (e.g. "Product not available") before deletion
     @DeleteMapping("/product/{id}")
     public ResponseEntity<Product> deleteProduct(@PathVariable int id) {
         productService.deleteProductById(id);

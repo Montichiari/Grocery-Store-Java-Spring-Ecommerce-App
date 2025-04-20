@@ -68,13 +68,9 @@ public class ShoppingCartController {
     // @author: Jared Chua
     @DeleteMapping("/remove/{productId}")
     public ResponseEntity<?> removeItemFromCart(@PathVariable("productId") int productId, HttpSession session) {
-        // try {
         int cartId = (int) session.getAttribute("cartId");
         shoppingCart_service.deleteProductFromCart(cartId, productId);
         return new ResponseEntity<>(HttpStatus.OK);
-        // } catch (Exception e) {
-        // return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        // }
     }
 
     @DeleteMapping("/clear")
@@ -85,28 +81,6 @@ public class ShoppingCartController {
 
         // call method from service class to delete all items in cart
         shoppingCart_service.deleteAllItemsInCart(cartId);
-
-        // the following code has been implemented into the service method
-        // deleteAllItemsInCart
-        // // find shopping cart by user id
-        // ShoppingCart user_shopping_cart =
-        // shoppingCart_service.findShoppingCartByUserId(userid_session);
-        // // get list of shopping cart items
-        // List<ShoppingCartItem> shoppingcart_items = user_shopping_cart.getItems();
-
-        // // delete all items in the cart from the database
-        // for (int i = 0; i < shoppingcart_items.size(); i++) {
-        // // get each shopping cart item id and delete from the database
-        // ShoppingCartItem shoppingcart_item = shoppingcart_items.get(i);
-        // // after getting each shopping cart item, delete each item from the database
-        // of
-        // // shopping cart item
-        // int shopping_cart_item_id = shoppingcart_item.getId();
-        // sc_itemrepo.deleteById(shopping_cart_item_id);
-        // }
-
-        // clear memory of the list after removing from database
-        // shoppingcart_items.removeAll(shoppingcart_items);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 

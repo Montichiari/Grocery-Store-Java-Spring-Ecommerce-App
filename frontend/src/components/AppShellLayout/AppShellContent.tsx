@@ -1,5 +1,6 @@
 import { AppShell, Title, useMantineTheme } from "@mantine/core";
 import { Outlet, useLocation } from "react-router";
+
 function AppShellContent() {
   const location = useLocation();
   const theme = useMantineTheme();

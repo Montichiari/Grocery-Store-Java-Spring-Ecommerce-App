@@ -1,7 +1,6 @@
 package sg.edu.nus.team3.shoppingcart.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import sg.edu.nus.team3.shoppingcart.model.Product;
 
@@ -19,7 +18,6 @@ public interface ProductService {
   public void deleteProductById(int product_id);
 
   public List<Product> searchProductByName(String product_name);
-
 
   // @author Shengyi
   public List<Product> getProductsByPriceRange(double min, double max);

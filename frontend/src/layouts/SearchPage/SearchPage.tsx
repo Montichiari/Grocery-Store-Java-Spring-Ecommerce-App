@@ -1,5 +1,5 @@
 import ComponentLoader from "@/components/ComponentLoader/ComponentLoader";
-import Product from "@/features/ProductList/Product";
+import Product from "@/components/ProductList/Product";
 import { Stack, Group, Input, SimpleGrid, Text } from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";
 import useSearch from "./useSearch";

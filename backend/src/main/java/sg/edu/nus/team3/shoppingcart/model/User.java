@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
@@ -18,7 +17,6 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 /**
@@ -26,7 +24,7 @@ import jakarta.validation.constraints.Size;
  */
 
 @Entity
-@JsonIgnoreProperties({"order"})		//Ignore "order" during serialization (i.e. prevent loops in json)
+@JsonIgnoreProperties({ "order" }) // Ignore "order" during serialization (i.e. prevent loops in json)
 @Table(name = "users")
 public class User {
 
@@ -39,7 +37,7 @@ public class User {
 	/*
 	 * @Pattern( regexp = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$",
 	 * message = "Invalid email format" )
-	 */	
+	 */
 	// Custom email validation to be created
 	@Column(length = 320)
 	private String email;
@@ -70,7 +68,10 @@ public class User {
 
 	@NotBlank(message = "Password is required")
 	// Looked up online for classic password regex validation
-	/*Commented out regex on entity because bugs -> Shift validation to Dto BEFORE encryption
+	/*
+	 * Commented out regex on entity because bugs -> Shift validation to Dto BEFORE
+	 * encryption
+	 * 
 	 * @Pattern( regexp =
 	 * "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
 	 * message =
@@ -91,11 +92,12 @@ public class User {
 
 	// Empty Constructor
 	public User() {
-		
+
 		this.shoppingCart = new ShoppingCart(this);
 	}
 
-	// Constructor for new Users. Role is set by UserService, depending on creation URL.
+	// Constructor for new Users. Role is set by UserService, depending on creation
+	// URL.
 	public User(String email, String password, String firstName, String lastName, String handPhoneNo, String address) {
 		super();
 		this.email = email;
@@ -106,7 +108,6 @@ public class User {
 		this.password = password;
 		this.shoppingCart = new ShoppingCart(this);
 	}
-
 
 	// Getters and setters
 

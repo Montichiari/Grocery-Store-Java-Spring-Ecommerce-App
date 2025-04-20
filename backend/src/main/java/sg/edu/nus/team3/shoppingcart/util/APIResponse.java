@@ -1,7 +1,5 @@
 package sg.edu.nus.team3.shoppingcart.util;
 
-import java.util.HashMap;
-
 /**
  * @author Jared Chua, Dion Yao
  */

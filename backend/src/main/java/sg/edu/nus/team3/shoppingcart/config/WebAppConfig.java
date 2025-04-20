@@ -2,7 +2,6 @@ package sg.edu.nus.team3.shoppingcart.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -10,6 +9,7 @@ import sg.edu.nus.team3.shoppingcart.interceptor.GuestOnlyInterceptor;
 import sg.edu.nus.team3.shoppingcart.interceptor.LoginInterceptor;
 import sg.edu.nus.team3.shoppingcart.interceptor.RoleInterceptor;
 
+// @author: Dion Yao
 @Component
 public class WebAppConfig implements WebMvcConfigurer {
 	@Autowired

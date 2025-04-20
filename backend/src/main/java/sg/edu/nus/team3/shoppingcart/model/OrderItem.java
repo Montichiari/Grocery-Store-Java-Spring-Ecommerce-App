@@ -1,6 +1,5 @@
 package sg.edu.nus.team3.shoppingcart.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
@@ -13,7 +12,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@JsonIgnoreProperties({"order"})		//Ignore "order" during serialization (i.e. prevent loops in json)
+@JsonIgnoreProperties({ "order" }) // Ignore "order" during serialization (i.e. prevent loops in json)
 @Table(name = "order_item")
 public class OrderItem {
     @Id
@@ -34,36 +33,32 @@ public class OrderItem {
     public OrderItem() {
 
     }
-    
-    
 
     public OrderItem(int quantity, double unitPrice, Order order, Product product) {
-		super();
-		this.quantity = quantity;
-		this.unitPrice = unitPrice;
-		this.order = order;
-		this.product = product;
-	}
-    
+        super();
+        this.quantity = quantity;
+        this.unitPrice = unitPrice;
+        this.order = order;
+        this.product = product;
+    }
+
     public OrderItem(ShoppingCartItem cartItem, Order order) {
-		super();
-		this.quantity = cartItem.getQuantity();
-		this.unitPrice = cartItem.getProduct().getUnitPrice();
-		this.order = order;
-		this.product = cartItem.getProduct();
-	}
-    
+        super();
+        this.quantity = cartItem.getQuantity();
+        this.unitPrice = cartItem.getProduct().getUnitPrice();
+        this.order = order;
+        this.product = cartItem.getProduct();
+    }
+
     // USE THIS IN CHECKOUT IMPLEMENTATION
     public OrderItem(ShoppingCartItem cartItem) {
-		super();
-		this.quantity = cartItem.getQuantity();
-		this.unitPrice = cartItem.getProduct().getUnitPrice();
-		this.product = cartItem.getProduct();
-	}
+        super();
+        this.quantity = cartItem.getQuantity();
+        this.unitPrice = cartItem.getProduct().getUnitPrice();
+        this.product = cartItem.getProduct();
+    }
 
-
-
-	public int getId() {
+    public int getId() {
         return id;
     }
 
@@ -103,15 +98,10 @@ public class OrderItem {
         this.product = product;
     }
 
-
-
-	@Override
-	public String toString() {
-		return "OrderItem [id=" + id + ", quantity=" + quantity + ", unitPrice=" + unitPrice + ", order=" + order
-				+ ", product=" + product + "]";
-	}
-    
-    
-    
+    @Override
+    public String toString() {
+        return "OrderItem [id=" + id + ", quantity=" + quantity + ", unitPrice=" + unitPrice + ", order=" + order
+                + ", product=" + product + "]";
+    }
 
 }

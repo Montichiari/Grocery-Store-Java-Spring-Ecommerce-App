@@ -49,14 +49,6 @@ public class RoleInterceptor implements HandlerInterceptor {
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 
-		// Looks for email address in session attributes. If null, redirect to login.
-		// HttpSession session = request.getSession();
-
-		// String username = (String) session.getAttribute("email");
-
-		// if (username == null) {
-		// response.sendRedirect("/login");
-		// }
 	}
 
 	@Override

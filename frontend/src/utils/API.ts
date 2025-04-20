@@ -26,6 +26,13 @@ const DEFAULT_SETTINGS: AxiosRequestConfig = {
   headers: DEFAULT_HEADERS,
 };
 
+// API wrapper that handles all the HTTP header parameters
+// and other necessary settings to keep the API fetching
+// functions cleaner in components
+// Supports: GET, POST, PATCH, PUT, DELETE
+//
+// Added in generics T,K to typecast the response and
+// body for more clarity
 const api = {
   async get<T>(
     endpoint: string,

@@ -8,8 +8,6 @@ import sg.edu.nus.team3.shoppingcart.model.Product;
 import sg.edu.nus.team3.shoppingcart.service.ProductService;
 import sg.edu.nus.team3.shoppingcart.util.APIResponse;
 
-import java.util.List;
-
 /**
  * @author Gao Shengyi, Dion Yao
  */
@@ -18,10 +16,8 @@ import java.util.List;
 @RequestMapping("/product")
 public class BrowseController {
 
-
 	@Autowired
 	private ProductService productService;
-
 
 	// @author Shengyi
 	@GetMapping("/all")
@@ -36,7 +32,6 @@ public class BrowseController {
 
 	}
 
-
 	// @author Dion Yao
 	@GetMapping("/search")
 	public ResponseEntity<?> searchProducts(@RequestParam String input) {
@@ -47,7 +42,6 @@ public class BrowseController {
 			APIResponse resp = new APIResponse("No matching products found");
 			return new ResponseEntity<>(resp, HttpStatus.NOT_FOUND);
 		}
-
 
 	}
 
@@ -65,5 +59,3 @@ public class BrowseController {
 		}
 	}
 }
-
-
