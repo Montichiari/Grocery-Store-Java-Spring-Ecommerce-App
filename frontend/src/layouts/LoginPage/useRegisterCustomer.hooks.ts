@@ -1,10 +1,11 @@
 import { UserRegistrationSchema, UserAccountDetails } from "@/types/User.types";
 import api from "@/utils/API";
 import notify from "@/utils/NotificationSystem";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 
 export default function useRegisterCustomer() {
+  const queryClient = useQueryClient();
   const { mutateAsync: createCustomerMutation } = useMutation({
     mutationFn: async () =>
       await api.post<UserRegistrationSchema, UserAccountDetails>(
@@ -30,6 +31,9 @@ export default function useRegisterCustomer() {
           handPhoneNo: "",
           lastName: "",
           password: "",
+        });
+        queryClient.invalidateQueries({
+          queryKey: ["account-list"],
         });
       }
     },
