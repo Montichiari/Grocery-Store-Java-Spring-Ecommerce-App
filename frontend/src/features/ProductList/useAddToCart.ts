@@ -1,4 +1,4 @@
-import { useUserStore } from "@/stores/UserStore";
+import { useUser } from "@/stores/UserStore";
 import api from "@/utils/API";
 import notify from "@/utils/NotificationSystem";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
@@ -11,15 +11,15 @@ export default function useAddToCart({
   name: string;
 }) {
   const queryClient = useQueryClient();
-  const { user } = useUserStore();
+  const user = useUser();
   const { mutateAsync: addToCartMutation } = useMutation({
     mutationFn: async () =>
       await api.post<void, void>(`cart/add/${id}`, { quantity: 1 }),
     onSuccess: (data) => {
       if (!data.data)
         notify.error(
-          "Unable to Cart",
-          `There seems to be an issue adding ${name} to the cart. Please try again later.`
+          "Unable to add to Cart",
+          `There seems to be an issue adding ${name} to your cart. Please try again later.`
         );
       else {
         notify.success(

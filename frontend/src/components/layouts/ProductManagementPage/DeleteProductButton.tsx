@@ -14,7 +14,7 @@ function DeleteProductButton({ id, name }: { id: number; name: string }) {
       if (!data.status || data.status >= 400)
         notify.error(
           "Unable To Delete Product!",
-          "Something has gone wrong, the product was not added to the database."
+          "Something has gone wrong, the product was not deleted from the database."
         );
       else {
         notify.success(

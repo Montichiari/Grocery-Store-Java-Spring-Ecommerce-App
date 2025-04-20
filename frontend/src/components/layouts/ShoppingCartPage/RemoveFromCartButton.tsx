@@ -1,4 +1,4 @@
-import { useUserStore } from "@/stores/UserStore";
+import { useUser } from "@/stores/UserStore";
 import api from "@/utils/API";
 import notify from "@/utils/NotificationSystem";
 import { ActionIcon } from "@mantine/core";
@@ -7,7 +7,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 function RemoveFromCartButton({ id, name }: { id: number; name: string }) {
   const queryClient = useQueryClient();
-  const { user } = useUserStore();
+  const user = useUser();
   const { mutateAsync: deleteCartItemMutation } = useMutation({
     mutationFn: async () => await api.delete(`cart/remove/${id}`),
     onSuccess: (data) => {

@@ -10,6 +10,8 @@ import StaffListPage from "@/components/layouts/StaffListPage/StaffListPage";
 import ProductManagementPage from "@/components/layouts/ProductManagementPage/ProductManagementPage";
 import { JSX } from "react";
 import ShoppingCartConfirmation from "@/components/layouts/ShoppingCartPage/ShoppingCartConfirmation";
+import CustomerProtectedRoute from "@/components/ProtectedRoutes/CustomerRoute/CustomerProtectedRoute";
+import StaffProtectedRoutes from "@/components/ProtectedRoutes/StaffRoute/StaffProtectedRoute";
 
 type RouteInfo = {
   title: string;
@@ -41,7 +43,11 @@ export const adminRoutes: RouteInfo[] = [
   {
     title: "",
     path: "/admin-panel",
-    element: <AdminPage />,
+    element: (
+      <StaffProtectedRoutes>
+        <AdminPage />
+      </StaffProtectedRoutes>
+    ),
     children: [
       {
         title: "Staff Management",
@@ -61,7 +67,11 @@ export const shopRoutes: RouteInfo[] = [
   {
     title: "",
     path: "/shop",
-    element: <ListingPage />,
+    element: (
+      <CustomerProtectedRoute>
+        <ListingPage />
+      </CustomerProtectedRoute>
+    ),
     children: [
       {
         title: "Product List",

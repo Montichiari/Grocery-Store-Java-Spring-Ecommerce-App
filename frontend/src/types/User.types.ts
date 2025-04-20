@@ -5,7 +5,7 @@ export type UserAccountDetails = {
   address: string;
   firstName: string;
   lastName: string;
-  role: "customer" | "staff" | "";
+  role: UserRoles;
 };
 
 export type UserRegistrationSchema = {
@@ -16,3 +16,5 @@ export type UserRegistrationSchema = {
   handPhoneNo: string;
   address: string;
 };
+
+export type UserRoles = "customer" | "staff" | "";

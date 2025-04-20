@@ -1,6 +1,6 @@
 import GenericTable from "@/components/GenericTable/GenericTable";
 import { ShoppingCartItem } from "@/types/ShoppingCart.types";
-import { Box, Button, Group, Image, Stack, Text, Title } from "@mantine/core";
+import { Box, Group, Image, Stack, Text, Title } from "@mantine/core";
 import useShoppingCart from "./useShoppingCart.hooks";
 import ComponentLoader from "@/components/ComponentLoader/ComponentLoader";
 import ShoppingCartPaymentModal from "./ShoppingCartPaymentModal";

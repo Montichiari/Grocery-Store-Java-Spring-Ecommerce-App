@@ -35,7 +35,7 @@ function EditProductButton(productInfo: ProductInfo) {
       if (!data.status || data.status >= 400)
         notify.error(
           "Unable To Edit Product!",
-          "Something has gone wrong, the product was not added to the database."
+          "Something has gone wrong, the product has not been modified."
         );
       else {
         notify.success(

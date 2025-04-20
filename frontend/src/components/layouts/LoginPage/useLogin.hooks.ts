@@ -22,16 +22,17 @@ export default function useLogin() {
       ),
     onSuccess: (data) => {
       // setUserState(userData)
-      if (data.error)
-        notify.error(
-          "Incorrect email/password",
-          "We were unable to find a record with your email or password."
-        );
+      if (data.error && data.error?.status >= 400) {
+        notify.error("An error has occurred", "Invalid email or password.");
+      }
 
       if (data.status === 200) {
         const userData = data.data as UserAccountDetails;
-        setUserState(userData);
-        navigate("/shop/products/all");
+        setUserState(userData, true);
+
+        if (data.data?.role === "customer") navigate("/shop/products/all");
+        else navigate("/admin-panel/staff-management");
+
         notify.success(
           "Login Successful",
           `Welcome back to GetFreshFood, ${userData.firstName}!`
@@ -40,5 +41,9 @@ export default function useLogin() {
     },
   });
 
-  return { loginMutation, loginInfo, setLoginInfo };
+  return {
+    loginMutation,
+    loginInfo,
+    setLoginInfo,
+  };
 }

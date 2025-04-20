@@ -82,7 +82,7 @@ function CustomerRegistrationModal() {
                 }
               />
             </Input.Wrapper>
-            <Input.Wrapper label="address" description="Enter your address">
+            <Input.Wrapper label="Address" description="Enter your address">
               <Input
                 placeholder="85 Jalan Jalan Merah Singapore 487521"
                 value={customerDetails.address}

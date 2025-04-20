@@ -1,5 +1,5 @@
 import { useCheckoutStore } from "@/stores/OrderConfirmationStore";
-import { useUserStore } from "@/stores/UserStore";
+import { useUser } from "@/stores/UserStore";
 import { CheckoutDetails } from "@/types/Checkout.types";
 import api from "@/utils/API";
 import notify from "@/utils/NotificationSystem";
@@ -8,7 +8,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 
 export default function usePayment() {
-  const { user } = useUserStore();
+  const user = useUser();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { setCheckoutState } = useCheckoutStore();

@@ -12,6 +12,10 @@ import CustomerRegistrationModal from "./CustomerRegistrationModal";
 
 function LoginPage() {
   const { loginInfo, loginMutation, setLoginInfo } = useLogin();
+
+  // logoutMutation();
+  // removeUserState();
+
   return (
     <Container maw="480px" my={40}>
       <Text ta="center">

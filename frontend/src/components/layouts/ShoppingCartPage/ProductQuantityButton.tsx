@@ -1,4 +1,4 @@
-import { useUserStore } from "@/stores/UserStore";
+import { useUser } from "@/stores/UserStore";
 import api from "@/utils/API";
 import notify from "@/utils/NotificationSystem";
 import { NumberInput } from "@mantine/core";
@@ -14,7 +14,7 @@ function ProductQuantityButton({
   defaultQuantity: number;
 }) {
   const queryClient = useQueryClient();
-  const { user } = useUserStore();
+  const user = useUser();
   const { mutateAsync: quantityMutation } = useMutation({
     mutationFn: async ({
       productId,

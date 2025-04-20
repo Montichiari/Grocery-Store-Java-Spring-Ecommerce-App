@@ -6,8 +6,16 @@ import axios, {
 interface ApiResponse<T> {
   data?: T;
   status?: number;
-  error?: string;
+  error?: ErrorObject;
 }
+
+type ErrorObject = {
+  data: {
+    message: string;
+  };
+  status: number;
+  statusText: string;
+};
 
 const API_BASE_URL = "http://localhost:8080";
 const DEFAULT_HEADERS: RawAxiosRequestHeaders = {

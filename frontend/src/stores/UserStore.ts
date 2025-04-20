@@ -10,7 +10,9 @@ export type User = {
 
 interface UserState {
   user: User;
-  setUserState: (user: User) => void;
+  setUserState: (user: User, isAuth: boolean) => void;
+  removeUserState: () => void;
+  isAuthenticated: boolean;
 }
 
 export const useUserStore = create<UserState>()((set) => ({
@@ -21,5 +23,21 @@ export const useUserStore = create<UserState>()((set) => ({
     email: "",
     role: "",
   },
-  setUserState: (user: User) => set(() => ({ user: user })),
+  isAuthenticated: false,
+  setUserState: (user: User, isAuth: boolean) =>
+    set(() => ({ user: user, isAuthenticated: isAuth })),
+  removeUserState: () =>
+    set(() => ({
+      user: {
+        email: "",
+        firstName: "",
+        id: 0,
+        lastName: "",
+        role: "",
+      },
+      isAuthenticated: false,
+    })),
 }));
+
+export const useUser = () => useUserStore((state) => state.user);
+export const useIsAuth = () => useUserStore((state) => state.isAuthenticated);
