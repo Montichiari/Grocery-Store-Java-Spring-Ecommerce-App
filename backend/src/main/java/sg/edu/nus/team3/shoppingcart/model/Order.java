@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -35,6 +36,7 @@ public class Order {
 	private LocalDate fulfilmentDate;
 	private String status;
 	private String paymentMethod;
+	@Column(name = "total_amount")
 	private double totalAmount;
 
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
