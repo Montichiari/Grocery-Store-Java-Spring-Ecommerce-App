@@ -1,21 +1,11 @@
 package sg.edu.nus.team3.shoppingcart;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
-import java.util.List;
-import java.util.Optional;
-
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import sg.edu.nus.team3.shoppingcart.repository.ShoppingCartItemRepository;
 import sg.edu.nus.team3.shoppingcart.repository.ShoppingCartRepository;
 import sg.edu.nus.team3.shoppingcart.service.ShoppingCartService;
-import sg.edu.nus.team3.shoppingcart.model.ShoppingCart;
-import sg.edu.nus.team3.shoppingcart.model.ShoppingCartItem;
 
 @SpringBootTest(classes = ShoppingcartApplicationTests.class)
 

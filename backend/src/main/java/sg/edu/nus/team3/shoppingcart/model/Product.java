@@ -4,15 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.validation.constraints.Negative;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
 
+// @author: Jared Chua
 @Entity
 public class Product {
 
@@ -28,6 +21,8 @@ public class Product {
 
   private String category;
 
+  private String image;
+
   public Product() {
   }
 
@@ -38,11 +33,12 @@ public class Product {
     this.category = category;
   }
 
-  public Product(String name, double unitPrice, int stock, String category) {
+  public Product(String name, double unitPrice, int stock, String category, String image) {
     this.name = name;
     this.unitPrice = unitPrice;
     this.stock = stock;
     this.category = category;
+    this.image = image;
   }
 
   public int getId() {
@@ -85,6 +81,14 @@ public class Product {
     this.category = category;
   }
 
+  public String getImage() {
+    return image;
+  }
+
+  public void setImage(String image) {
+    this.image = image;
+  }
+
   @Override
   public boolean equals(Object comparator) {
     if (!(comparator instanceof Product))
@@ -93,13 +97,12 @@ public class Product {
 
     return this.id == that.id && this.name == that.name && this.unitPrice == that.unitPrice && this.stock == that.stock
         && this.category == that.category;
-    
-    
+
   }
 
-@Override
-public String toString() {
-	return "Product [id=" + id + ", name=" + name + ", unitPrice=" + unitPrice + ", stock=" + stock + ", category="
-			+ category + "]";
-}
+  @Override
+  public String toString() {
+    return "Product [id=" + id + ", name=" + name + ", unitPrice=" + unitPrice + ", stock=" + stock + ", category="
+        + category + "]";
+  }
 }
