@@ -17,7 +17,7 @@ services:
     image: "mysql:9.2"
     env_file: "./database/.env"
     ports:
-      - "3308:3306"
+      - "3311:3306"
     volumes:
       - commercedb:/data/db
       - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
